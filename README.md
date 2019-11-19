@@ -1,9 +1,9 @@
 # CZKit
 
-[![CI Status](https://img.shields.io/travis/Pircate/CocoaChainKit.svg?style=flat)](https://github.com/lczalh/CZKit)
-[![Version](https://img.shields.io/cocoapods/v/CocoaChainKit.svg?style=flat)](https://github.com/lczalh/CZKit)
-[![License](https://img.shields.io/cocoapods/l/CocoaChainKit.svg?style=flat)](https://github.com/lczalh/CZKit)
-![iOS 10.0+](https://img.shields.io/badge/iOS-9.0%2B-blue.svg)
+[![CI Status](https://img.shields.io/travis/Pircate/CZKit.svg?style=flat)](https://github.com/lczalh/CZKit)
+[![Version](https://img.shields.io/cocoapods/v/CZKit.svg?style=flat)](https://github.com/lczalh/CZKit)
+[![License](https://img.shields.io/cocoapods/l/CZKit.svg?style=flat)](https://github.com/lczalh/CZKit)
+![iOS 10.0+](https://img.shields.io/badge/iOS-10.0%2B-blue.svg)
 
 ## Example
 
