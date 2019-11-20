@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import CZKit
 
 class ViewController: UIViewController {
 
@@ -15,7 +16,8 @@ class ViewController: UIViewController {
         let v = UIView(frame: CGRect(x: 50, y: 100, width: 100, height: 100))
         self.view.addSubview(v)
         v.backgroundColor = cz_hexColor("#108EE9")
-        cz_print(cz_lastWindow()?.windowScene?.statusBarManager?.statusBarFrame.height)
+        //cz_print(cz_lastWindow()?.windowScene?.statusBarManager?.statusBarFrame.height, CZ.randomColor)
+        
         // Do any additional setup after loading the view.
     }
     

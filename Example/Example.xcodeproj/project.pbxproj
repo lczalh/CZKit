@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,45 @@
 		FC5D30FC2384CBDD0010D77D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5D30FA2384CBDD0010D77D /* LaunchScreen.storyboard */; };
 		FC5D31072384CBDD0010D77D /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D31062384CBDD0010D77D /* ExampleTests.swift */; };
 		FC5D31122384CBDD0010D77D /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D31112384CBDD0010D77D /* ExampleUITests.swift */; };
+		FCFC479C23854142005199CC /* CZCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477123854142005199CC /* CZCommon.swift */; };
+		FCFC479D23854142005199CC /* UIActivityIndicatorView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477323854142005199CC /* UIActivityIndicatorView+CZKit.swift */; };
+		FCFC479E23854142005199CC /* NSMutableAttributedString+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477423854142005199CC /* NSMutableAttributedString+CZKit.swift */; };
+		FCFC479F23854142005199CC /* CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477523854142005199CC /* CZKit.swift */; };
+		FCFC47A023854142005199CC /* UISlider+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477623854142005199CC /* UISlider+CZKit.swift */; };
+		FCFC47A123854142005199CC /* UISegmentedControl+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477723854142005199CC /* UISegmentedControl+CZKit.swift */; };
+		FCFC47A223854142005199CC /* UITextField+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477823854142005199CC /* UITextField+CZKit.swift */; };
+		FCFC47A323854142005199CC /* UIControl+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477923854142005199CC /* UIControl+CZKit.swift */; };
+		FCFC47A423854142005199CC /* UILabel+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477A23854142005199CC /* UILabel+CZKit.swift */; };
+		FCFC47A523854142005199CC /* NotificationCenter+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477B23854142005199CC /* NotificationCenter+CZKit.swift */; };
+		FCFC47A623854142005199CC /* UIImage+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477C23854142005199CC /* UIImage+CZKit.swift */; };
+		FCFC47A723854142005199CC /* UINavigationBar+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477D23854142005199CC /* UINavigationBar+CZKit.swift */; };
+		FCFC47A823854142005199CC /* UITableView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477E23854142005199CC /* UITableView+CZKit.swift */; };
+		FCFC47A923854142005199CC /* UIPickerView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC477F23854142005199CC /* UIPickerView+CZKit.swift */; };
+		FCFC47AA23854142005199CC /* UIStepper+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478023854142005199CC /* UIStepper+CZKit.swift */; };
+		FCFC47AB23854142005199CC /* UIImageView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478123854142005199CC /* UIImageView+CZKit.swift */; };
+		FCFC47AC23854142005199CC /* HasText+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478223854142005199CC /* HasText+CZKit.swift */; };
+		FCFC47AD23854142005199CC /* HasFont+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478323854142005199CC /* HasFont+CZKit.swift */; };
+		FCFC47AE23854142005199CC /* UIResponder+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478423854142005199CC /* UIResponder+CZKit.swift */; };
+		FCFC47AF23854142005199CC /* UIScrollView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478523854142005199CC /* UIScrollView+CZKit.swift */; };
+		FCFC47B023854142005199CC /* UITextView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478623854142005199CC /* UITextView+CZKit.swift */; };
+		FCFC47B123854142005199CC /* UIProgressView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478723854142005199CC /* UIProgressView+CZKit.swift */; };
+		FCFC47B223854142005199CC /* UIDatePicker+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478823854142005199CC /* UIDatePicker+CZKit.swift */; };
+		FCFC47B323854142005199CC /* DateFormatter+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478923854142005199CC /* DateFormatter+CZKit.swift */; };
+		FCFC47B423854142005199CC /* UISwitch+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478A23854142005199CC /* UISwitch+CZKit.swift */; };
+		FCFC47B523854142005199CC /* UserDefaults+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478B23854142005199CC /* UserDefaults+CZKit.swift */; };
+		FCFC47B623854142005199CC /* UIBarButtonItem+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478C23854142005199CC /* UIBarButtonItem+CZKit.swift */; };
+		FCFC47B723854142005199CC /* UIButton+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478D23854142005199CC /* UIButton+CZKit.swift */; };
+		FCFC47B823854142005199CC /* CZHasText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478E23854142005199CC /* CZHasText.swift */; };
+		FCFC47B923854142005199CC /* UIView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC478F23854142005199CC /* UIView+CZKit.swift */; };
+		FCFC47BA23854142005199CC /* UICollectionView+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479023854142005199CC /* UICollectionView+CZKit.swift */; };
+		FCFC47BB23854142005199CC /* UIGestureRecognizer+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479123854142005199CC /* UIGestureRecognizer+CZKit.swift */; };
+		FCFC47BC23854142005199CC /* UIBarItem+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479223854142005199CC /* UIBarItem+CZKit.swift */; };
+		FCFC47BD23854142005199CC /* CZHasFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479323854142005199CC /* CZHasFont.swift */; };
+		FCFC47BE23854142005199CC /* UICollectionViewFlowLayout+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479423854142005199CC /* UICollectionViewFlowLayout+CZKit.swift */; };
+		FCFC47C023854142005199CC /* UINavigationItem+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479623854142005199CC /* UINavigationItem+CZKit.swift */; };
+		FCFC47C123854142005199CC /* CZDateSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479823854142005199CC /* CZDateSheetController.swift */; };
+		FCFC47C223854142005199CC /* CZDateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479923854142005199CC /* CZDateSheetView.swift */; };
+		FCFC47C923854A7D005199CC /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC47C823854A7D005199CC /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +92,45 @@
 		FC5D310D2384CBDD0010D77D /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D31112384CBDD0010D77D /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		FC5D31132384CBDD0010D77D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCFC477123854142005199CC /* CZCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZCommon.swift; sourceTree = "<group>"; };
+		FCFC477323854142005199CC /* UIActivityIndicatorView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477423854142005199CC /* NSMutableAttributedString+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477523854142005199CC /* CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZKit.swift; sourceTree = "<group>"; };
+		FCFC477623854142005199CC /* UISlider+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISlider+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477723854142005199CC /* UISegmentedControl+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477823854142005199CC /* UITextField+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477923854142005199CC /* UIControl+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477A23854142005199CC /* UILabel+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477B23854142005199CC /* NotificationCenter+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477C23854142005199CC /* UIImage+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477D23854142005199CC /* UINavigationBar+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477E23854142005199CC /* UITableView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC477F23854142005199CC /* UIPickerView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPickerView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478023854142005199CC /* UIStepper+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStepper+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478123854142005199CC /* UIImageView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478223854142005199CC /* HasText+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HasText+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478323854142005199CC /* HasFont+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HasFont+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478423854142005199CC /* UIResponder+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478523854142005199CC /* UIScrollView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478623854142005199CC /* UITextView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478723854142005199CC /* UIProgressView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIProgressView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478823854142005199CC /* UIDatePicker+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478923854142005199CC /* DateFormatter+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478A23854142005199CC /* UISwitch+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISwitch+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478B23854142005199CC /* UserDefaults+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478C23854142005199CC /* UIBarButtonItem+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478D23854142005199CC /* UIButton+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC478E23854142005199CC /* CZHasText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZHasText.swift; sourceTree = "<group>"; };
+		FCFC478F23854142005199CC /* UIView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC479023854142005199CC /* UICollectionView+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC479123854142005199CC /* UIGestureRecognizer+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC479223854142005199CC /* UIBarItem+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarItem+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC479323854142005199CC /* CZHasFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZHasFont.swift; sourceTree = "<group>"; };
+		FCFC479423854142005199CC /* UICollectionViewFlowLayout+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC479623854142005199CC /* UINavigationItem+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+CZKit.swift"; sourceTree = "<group>"; };
+		FCFC479823854142005199CC /* CZDateSheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZDateSheetController.swift; sourceTree = "<group>"; };
+		FCFC479923854142005199CC /* CZDateSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZDateSheetView.swift; sourceTree = "<group>"; };
+		FCFC47C823854A7D005199CC /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +179,7 @@
 		FC5D30E32384CBDB0010D77D = {
 			isa = PBXGroup;
 			children = (
+				FCFC476F23854142005199CC /* CZKit */,
 				FC5D30EE2384CBDB0010D77D /* Example */,
 				FC5D31052384CBDD0010D77D /* ExampleTests */,
 				FC5D31102384CBDD0010D77D /* ExampleUITests */,
@@ -152,6 +231,77 @@
 			path = ExampleUITests;
 			sourceTree = "<group>";
 		};
+		FCFC476F23854142005199CC /* CZKit */ = {
+			isa = PBXGroup;
+			children = (
+				FCFC477023854142005199CC /* Core */,
+				FCFC477223854142005199CC /* ChainKit */,
+				FCFC479723854142005199CC /* Date */,
+			);
+			name = CZKit;
+			path = ../CZKit;
+			sourceTree = "<group>";
+		};
+		FCFC477023854142005199CC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FCFC477523854142005199CC /* CZKit.swift */,
+				FCFC477123854142005199CC /* CZCommon.swift */,
+				FCFC47C823854A7D005199CC /* UIColorExtension.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FCFC477223854142005199CC /* ChainKit */ = {
+			isa = PBXGroup;
+			children = (
+				FCFC477323854142005199CC /* UIActivityIndicatorView+CZKit.swift */,
+				FCFC477423854142005199CC /* NSMutableAttributedString+CZKit.swift */,
+				FCFC477623854142005199CC /* UISlider+CZKit.swift */,
+				FCFC477723854142005199CC /* UISegmentedControl+CZKit.swift */,
+				FCFC477823854142005199CC /* UITextField+CZKit.swift */,
+				FCFC477923854142005199CC /* UIControl+CZKit.swift */,
+				FCFC477A23854142005199CC /* UILabel+CZKit.swift */,
+				FCFC477B23854142005199CC /* NotificationCenter+CZKit.swift */,
+				FCFC477C23854142005199CC /* UIImage+CZKit.swift */,
+				FCFC477D23854142005199CC /* UINavigationBar+CZKit.swift */,
+				FCFC477E23854142005199CC /* UITableView+CZKit.swift */,
+				FCFC477F23854142005199CC /* UIPickerView+CZKit.swift */,
+				FCFC478023854142005199CC /* UIStepper+CZKit.swift */,
+				FCFC478123854142005199CC /* UIImageView+CZKit.swift */,
+				FCFC478223854142005199CC /* HasText+CZKit.swift */,
+				FCFC478323854142005199CC /* HasFont+CZKit.swift */,
+				FCFC478423854142005199CC /* UIResponder+CZKit.swift */,
+				FCFC478523854142005199CC /* UIScrollView+CZKit.swift */,
+				FCFC478623854142005199CC /* UITextView+CZKit.swift */,
+				FCFC478723854142005199CC /* UIProgressView+CZKit.swift */,
+				FCFC478823854142005199CC /* UIDatePicker+CZKit.swift */,
+				FCFC478923854142005199CC /* DateFormatter+CZKit.swift */,
+				FCFC478A23854142005199CC /* UISwitch+CZKit.swift */,
+				FCFC478B23854142005199CC /* UserDefaults+CZKit.swift */,
+				FCFC478C23854142005199CC /* UIBarButtonItem+CZKit.swift */,
+				FCFC478D23854142005199CC /* UIButton+CZKit.swift */,
+				FCFC478E23854142005199CC /* CZHasText.swift */,
+				FCFC478F23854142005199CC /* UIView+CZKit.swift */,
+				FCFC479023854142005199CC /* UICollectionView+CZKit.swift */,
+				FCFC479123854142005199CC /* UIGestureRecognizer+CZKit.swift */,
+				FCFC479223854142005199CC /* UIBarItem+CZKit.swift */,
+				FCFC479323854142005199CC /* CZHasFont.swift */,
+				FCFC479423854142005199CC /* UICollectionViewFlowLayout+CZKit.swift */,
+				FCFC479623854142005199CC /* UINavigationItem+CZKit.swift */,
+			);
+			path = ChainKit;
+			sourceTree = "<group>";
+		};
+		FCFC479723854142005199CC /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				FCFC479823854142005199CC /* CZDateSheetController.swift */,
+				FCFC479923854142005199CC /* CZDateSheetView.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -163,7 +313,6 @@
 				FC5D30E82384CBDB0010D77D /* Sources */,
 				FC5D30E92384CBDB0010D77D /* Frameworks */,
 				FC5D30EA2384CBDB0010D77D /* Resources */,
-				4CFC9D331EA52DE93AC8A1C5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -281,23 +430,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4CFC9D331EA52DE93AC8A1C5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		881B9EC370E37F83C87C799C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,9 +459,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCFC47A023854142005199CC /* UISlider+CZKit.swift in Sources */,
+				FCFC47B223854142005199CC /* UIDatePicker+CZKit.swift in Sources */,
+				FCFC47B623854142005199CC /* UIBarButtonItem+CZKit.swift in Sources */,
+				FCFC47B323854142005199CC /* DateFormatter+CZKit.swift in Sources */,
+				FCFC47B123854142005199CC /* UIProgressView+CZKit.swift in Sources */,
+				FCFC47A723854142005199CC /* UINavigationBar+CZKit.swift in Sources */,
+				FCFC47BE23854142005199CC /* UICollectionViewFlowLayout+CZKit.swift in Sources */,
 				FC5D30F42384CBDB0010D77D /* ViewController.swift in Sources */,
+				FCFC47B723854142005199CC /* UIButton+CZKit.swift in Sources */,
+				FCFC47BA23854142005199CC /* UICollectionView+CZKit.swift in Sources */,
+				FCFC47B823854142005199CC /* CZHasText.swift in Sources */,
+				FCFC47C223854142005199CC /* CZDateSheetView.swift in Sources */,
+				FCFC47A823854142005199CC /* UITableView+CZKit.swift in Sources */,
+				FCFC47AD23854142005199CC /* HasFont+CZKit.swift in Sources */,
+				FCFC47AB23854142005199CC /* UIImageView+CZKit.swift in Sources */,
+				FCFC47A323854142005199CC /* UIControl+CZKit.swift in Sources */,
+				FCFC47BC23854142005199CC /* UIBarItem+CZKit.swift in Sources */,
 				FC5D30F02384CBDB0010D77D /* AppDelegate.swift in Sources */,
+				FCFC47AC23854142005199CC /* HasText+CZKit.swift in Sources */,
+				FCFC47A223854142005199CC /* UITextField+CZKit.swift in Sources */,
+				FCFC47A123854142005199CC /* UISegmentedControl+CZKit.swift in Sources */,
 				FC5D30F22384CBDB0010D77D /* SceneDelegate.swift in Sources */,
+				FCFC479C23854142005199CC /* CZCommon.swift in Sources */,
+				FCFC47A423854142005199CC /* UILabel+CZKit.swift in Sources */,
+				FCFC47C923854A7D005199CC /* UIColorExtension.swift in Sources */,
+				FCFC47A523854142005199CC /* NotificationCenter+CZKit.swift in Sources */,
+				FCFC47B023854142005199CC /* UITextView+CZKit.swift in Sources */,
+				FCFC47AF23854142005199CC /* UIScrollView+CZKit.swift in Sources */,
+				FCFC47BB23854142005199CC /* UIGestureRecognizer+CZKit.swift in Sources */,
+				FCFC47BD23854142005199CC /* CZHasFont.swift in Sources */,
+				FCFC47A923854142005199CC /* UIPickerView+CZKit.swift in Sources */,
+				FCFC47AA23854142005199CC /* UIStepper+CZKit.swift in Sources */,
+				FCFC47B523854142005199CC /* UserDefaults+CZKit.swift in Sources */,
+				FCFC479E23854142005199CC /* NSMutableAttributedString+CZKit.swift in Sources */,
+				FCFC47B923854142005199CC /* UIView+CZKit.swift in Sources */,
+				FCFC47C123854142005199CC /* CZDateSheetController.swift in Sources */,
+				FCFC47AE23854142005199CC /* UIResponder+CZKit.swift in Sources */,
+				FCFC47A623854142005199CC /* UIImage+CZKit.swift in Sources */,
+				FCFC47C023854142005199CC /* UINavigationItem+CZKit.swift in Sources */,
+				FCFC479D23854142005199CC /* UIActivityIndicatorView+CZKit.swift in Sources */,
+				FCFC479F23854142005199CC /* CZKit.swift in Sources */,
+				FCFC47B423854142005199CC /* UISwitch+CZKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

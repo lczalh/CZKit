@@ -8,51 +8,51 @@
 
 import UIKit
 
-class CZDateSheetController: UIViewController {
+public class CZDateSheetController: UIViewController {
     
     private var czDateSheetView: CZDateSheetView = CZDateSheetView()
     
     /// 展示的时间模式
-    public var datePickerMode: UIDatePicker.Mode? {
+    var datePickerMode: UIDatePicker.Mode? {
         didSet {
             czDateSheetView.datePicker.datePickerMode = datePickerMode!
         }
     }
     
     /// 设置最小可选日期
-    public var minimumDate: Date? {
+    var minimumDate: Date? {
         didSet {
             czDateSheetView.datePicker.minimumDate = minimumDate
         }
     }
     
     /// 设置最大可选日期
-    public var maximumDate: Date? {
+    var maximumDate: Date? {
         didSet {
             czDateSheetView.datePicker.maximumDate = maximumDate
         }
     }
     
     /// 设置日期选择器区域语言， 默认为中文
-    public var locale: Locale? = Locale(identifier: "zh_CN") {
+    var locale: Locale? = Locale(identifier: "zh_CN") {
         didSet {
             czDateSheetView.datePicker.locale = locale
         }
     }
     
     /// 动画时长
-    public var animateDuration: TimeInterval = 0.3
+    var animateDuration: TimeInterval = 0.3
     
     /// 日期视图高度
-    public var dateSheetViewHeight: CGFloat = 260.0
+    var dateSheetViewHeight: CGFloat = 260.0
     
     /// 返回选中的时间
-    public var returnSelectDate: ((_ date: Date) -> Void)?
+    var returnSelectDate: ((_ date: Date) -> Void)?
     
     /// 选中的时间
     private var selectDate: Date = Date()
     
-    override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.czDateSheetView.frame.origin = CGPoint(x: 0, y: cz_screenHeight)
         UIView.animate(withDuration: self.animateDuration, delay: 0, options: .curveLinear, animations: {
@@ -61,7 +61,7 @@ class CZDateSheetController: UIViewController {
         }, completion: nil)
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(czDateSheetView)
         czDateSheetView.confirmButton.addTarget(self, action: #selector(confirmAction), for: .touchUpInside)
@@ -89,7 +89,7 @@ class CZDateSheetController: UIViewController {
         self.selectDate = datePicker.date
     }
     
-    override func viewDidLayoutSubviews() {
+    override public func viewDidLayoutSubviews() {
         self.czDateSheetView.frame = CGRect(x: 0, y: cz_screenHeight - self.dateSheetViewHeight, width: cz_screenWidth, height: self.dateSheetViewHeight)
     }
     

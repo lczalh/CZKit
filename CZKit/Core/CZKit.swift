@@ -6,6 +6,7 @@
 //  Copyright © 2019 刘超正. All rights reserved.
 //
 import UIKit
+import Foundation
 
 public struct CZKit<Base> {
     
@@ -19,3 +20,19 @@ public struct CZKit<Base> {
         self.base = base
     }
 }
+
+public protocol CZKitCompatible {
+    // 占位符  空间命名
+    associatedtype CZKitCompatibleType
+    
+    var cz: CZKitCompatibleType { get }
+}
+
+public extension CZKitCompatible {
+    
+    var cz: CZKit<Self> {
+        return CZKit(self)
+    }
+}
+
+extension NSObject: CZKitCompatible {}
