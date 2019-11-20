@@ -35,7 +35,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'Date' do |date|
     date.source_files = 'CZKit/Date/*.swift'
     date.dependency 'CZKit/ChainKit'
-    ck.dependency 'CZKit/Core'
+    date.dependency 'CZKit/Core'
   end
   
   spec.frameworks = 'UIKit', 'Foundation'
