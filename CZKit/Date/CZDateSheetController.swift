@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwifterSwift
 
 public class CZDateSheetController: UIViewController {
     
@@ -56,7 +57,7 @@ public class CZDateSheetController: UIViewController {
         super.viewDidAppear(animated)
         self.czDateSheetView.frame.origin = CGPoint(x: 0, y: cz_screenHeight)
         UIView.animate(withDuration: self.animateDuration, delay: 0, options: .curveLinear, animations: {
-            self.view.backgroundColor = cz_rgbColor(0, 0, 0, 0.5)
+            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, transparency: 0.5)
             self.czDateSheetView.frame.origin = CGPoint(x: 0, y: cz_screenHeight - self.dateSheetViewHeight)
         }, completion: nil)
     }
@@ -95,7 +96,7 @@ public class CZDateSheetController: UIViewController {
     
     private func dismissAnimated() {
         UIView.animate(withDuration: self.animateDuration, delay: 0, options: .curveLinear, animations: {
-            self.view.backgroundColor = cz_rgbColor(0, 0, 0, 0)
+            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, transparency: 0)
             self.czDateSheetView.frame.origin = CGPoint(x: 0, y: cz_screenHeight)
         }, completion: { (state) in
             DispatchQueue.main.async {

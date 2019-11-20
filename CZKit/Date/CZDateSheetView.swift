@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwifterSwift
 
 class CZDateSheetView: UIView {
     
@@ -25,7 +26,7 @@ class CZDateSheetView: UIView {
             .cz
             .addSuperView(self)
             .title(" 确定 ", for: .normal)
-            .titleColor(cz_hexColor("#108EE9"), for: .normal)
+            .titleColor(UIColor(hexString: "#108EE9"), for: .normal)
             .font(cz_font(16))
             .build
         
@@ -33,7 +34,7 @@ class CZDateSheetView: UIView {
             .cz
             .addSuperView(self)
             .title(" 取消 ", for: .normal)
-            .titleColor(cz_hexColor("#999999"), for: .normal)
+            .titleColor(UIColor(hexString: "#999999"), for: .normal)
             .font(cz_font(16))
             .build
         

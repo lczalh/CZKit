@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		A625EFE1DAF35F64FDEF24EE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F63256617B25AEEDA2EBDF /* Pods_Example.framework */; };
+		D0226C21238572FC00D1748E /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0226C20238572FC00D1748E /* UIFontExtension.swift */; };
 		FC5D30F02384CBDB0010D77D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D30EF2384CBDB0010D77D /* AppDelegate.swift */; };
 		FC5D30F22384CBDB0010D77D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D30F12384CBDB0010D77D /* SceneDelegate.swift */; };
 		FC5D30F42384CBDB0010D77D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D30F32384CBDB0010D77D /* ViewController.swift */; };
@@ -54,7 +55,6 @@
 		FCFC47C023854142005199CC /* UINavigationItem+CZKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479623854142005199CC /* UINavigationItem+CZKit.swift */; };
 		FCFC47C123854142005199CC /* CZDateSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479823854142005199CC /* CZDateSheetController.swift */; };
 		FCFC47C223854142005199CC /* CZDateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC479923854142005199CC /* CZDateSheetView.swift */; };
-		FCFC47C923854A7D005199CC /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC47C823854A7D005199CC /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		71DDBF60B0F05FF7F9188F3B /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		D0226C20238572FC00D1748E /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		D5BE38168BBBCED051B7D133 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		F7F63256617B25AEEDA2EBDF /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D30EC2384CBDB0010D77D /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +131,6 @@
 		FCFC479623854142005199CC /* UINavigationItem+CZKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationItem+CZKit.swift"; sourceTree = "<group>"; };
 		FCFC479823854142005199CC /* CZDateSheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZDateSheetController.swift; sourceTree = "<group>"; };
 		FCFC479923854142005199CC /* CZDateSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CZDateSheetView.swift; sourceTree = "<group>"; };
-		FCFC47C823854A7D005199CC /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +247,7 @@
 			children = (
 				FCFC477523854142005199CC /* CZKit.swift */,
 				FCFC477123854142005199CC /* CZCommon.swift */,
-				FCFC47C823854A7D005199CC /* UIColorExtension.swift */,
+				D0226C20238572FC00D1748E /* UIFontExtension.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -313,6 +313,7 @@
 				FC5D30E82384CBDB0010D77D /* Sources */,
 				FC5D30E92384CBDB0010D77D /* Frameworks */,
 				FC5D30EA2384CBDB0010D77D /* Resources */,
+				FF478C503FF3FC6BBFB99ED8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,6 +453,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FF478C503FF3FC6BBFB99ED8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -483,7 +501,6 @@
 				FC5D30F22384CBDB0010D77D /* SceneDelegate.swift in Sources */,
 				FCFC479C23854142005199CC /* CZCommon.swift in Sources */,
 				FCFC47A423854142005199CC /* UILabel+CZKit.swift in Sources */,
-				FCFC47C923854A7D005199CC /* UIColorExtension.swift in Sources */,
 				FCFC47A523854142005199CC /* NotificationCenter+CZKit.swift in Sources */,
 				FCFC47B023854142005199CC /* UITextView+CZKit.swift in Sources */,
 				FCFC47AF23854142005199CC /* UIScrollView+CZKit.swift in Sources */,
@@ -498,6 +515,7 @@
 				FCFC47AE23854142005199CC /* UIResponder+CZKit.swift in Sources */,
 				FCFC47A623854142005199CC /* UIImage+CZKit.swift in Sources */,
 				FCFC47C023854142005199CC /* UINavigationItem+CZKit.swift in Sources */,
+				D0226C21238572FC00D1748E /* UIFontExtension.swift in Sources */,
 				FCFC479D23854142005199CC /* UIActivityIndicatorView+CZKit.swift in Sources */,
 				FCFC479F23854142005199CC /* CZKit.swift in Sources */,
 				FCFC47B423854142005199CC /* UISwitch+CZKit.swift in Sources */,
@@ -605,7 +623,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -659,7 +677,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

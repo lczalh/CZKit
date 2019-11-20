@@ -15,10 +15,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let v = UIView(frame: CGRect(x: 50, y: 100, width: 100, height: 100))
         self.view.addSubview(v)
-        v.backgroundColor = cz_hexColor("#108EE9")
-        //cz_print(cz_lastWindow()?.windowScene?.statusBarManager?.statusBarFrame.height, CZ.randomColor)
+        v.backgroundColor = UIColor(hexString: "#108EE9")
         
-        // Do any additional setup after loading the view.
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
