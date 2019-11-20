@@ -5,19 +5,20 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
+import UIKit
 
-public protocol CZCompatible {
+public protocol CZKitCompatible {
     // 占位符  空间命名
-    associatedtype CZCompatibleType
+    associatedtype CZKitCompatibleType
     
-    var cz: CZCompatibleType { get }
+    var cz: CZKitCompatibleType { get }
 }
 
-public extension CZCompatible {
+public extension CZKitCompatible {
     
-    var cz: CZ<Self> {
-        return CZ(self)
+    var cz: CZKit<Self> {
+        return CZKit(self)
     }
 }
 
-extension NSObject: CZCompatible {}
+extension NSObject: CZKitCompatible {}

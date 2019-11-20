@@ -5,8 +5,9 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
+import UIKit
 
-public protocol CZHasText {
+public protocol CZKitHasText {
     
     func set(text: String?)
     
@@ -17,7 +18,7 @@ public protocol CZHasText {
     func set(alignment: NSTextAlignment)
 }
 
-extension UILabel: CZHasText {
+extension UILabel: CZKitHasText {
     
     public func set(text: String?) {
         self.text = text
@@ -36,7 +37,7 @@ extension UILabel: CZHasText {
     }
 }
 
-extension UITextField: CZHasText {
+extension UITextField: CZKitHasText {
     
     public func set(text: String?) {
         self.text = text
@@ -55,7 +56,7 @@ extension UITextField: CZHasText {
     }
 }
 
-extension UITextView: CZHasText {
+extension UITextView: CZKitHasText {
     
     public func set(text: String?) {
         self.text = text

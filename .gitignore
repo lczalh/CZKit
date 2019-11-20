@@ -66,3 +66,62 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+Example/Pods/Manifest.lock
+Example/Pods/Pods.xcodeproj/project.pbxproj
+Example/Pods/SnapKit/LICENSE
+Example/Pods/SnapKit/README.md
+Example/Pods/SnapKit/Source/Constraint.swift
+Example/Pods/SnapKit/Source/ConstraintAttributes.swift
+Example/Pods/SnapKit/Source/ConstraintConfig.swift
+Example/Pods/SnapKit/Source/ConstraintConstantTarget.swift
+Example/Pods/SnapKit/Source/ConstraintDescription.swift
+Example/Pods/SnapKit/Source/ConstraintDirectionalInsets.swift
+Example/Pods/SnapKit/Source/ConstraintDirectionalInsetTarget.swift
+Example/Pods/SnapKit/Source/ConstraintDSL.swift
+Example/Pods/SnapKit/Source/ConstraintInsets.swift
+Example/Pods/SnapKit/Source/ConstraintInsetTarget.swift
+Example/Pods/SnapKit/Source/ConstraintItem.swift
+Example/Pods/SnapKit/Source/ConstraintLayoutGuide+Extensions.swift
+Example/Pods/SnapKit/Source/ConstraintLayoutGuide.swift
+Example/Pods/SnapKit/Source/ConstraintLayoutGuideDSL.swift
+Example/Pods/SnapKit/Source/ConstraintLayoutSupport.swift
+Example/Pods/SnapKit/Source/ConstraintLayoutSupportDSL.swift
+Example/Pods/SnapKit/Source/ConstraintMaker.swift
+Example/Pods/SnapKit/Source/ConstraintMakerEditable.swift
+Example/Pods/SnapKit/Source/ConstraintMakerExtendable.swift
+Example/Pods/SnapKit/Source/ConstraintMakerFinalizable.swift
+Example/Pods/SnapKit/Source/ConstraintMakerPriortizable.swift
+Example/Pods/SnapKit/Source/ConstraintMakerRelatable.swift
+Example/Pods/SnapKit/Source/ConstraintMultiplierTarget.swift
+Example/Pods/SnapKit/Source/ConstraintOffsetTarget.swift
+Example/Pods/SnapKit/Source/ConstraintPriority.swift
+Example/Pods/SnapKit/Source/ConstraintPriorityTarget.swift
+Example/Pods/SnapKit/Source/ConstraintRelatableTarget.swift
+Example/Pods/SnapKit/Source/ConstraintRelation.swift
+Example/Pods/SnapKit/Source/ConstraintView+Extensions.swift
+Example/Pods/SnapKit/Source/ConstraintView.swift
+Example/Pods/SnapKit/Source/ConstraintViewDSL.swift
+Example/Pods/SnapKit/Source/Debugging.swift
+Example/Pods/SnapKit/Source/LayoutConstraint.swift
+Example/Pods/SnapKit/Source/LayoutConstraintItem.swift
+Example/Pods/SnapKit/Source/Typealiases.swift
+Example/Pods/SnapKit/Source/UILayoutSupport+Extensions.swift
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-acknowledgements.markdown
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-acknowledgements.plist
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-dummy.m
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks-Debug-input-files.xcfilelist
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks-Debug-output-files.xcfilelist
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks-Release-input-files.xcfilelist
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks-Release-output-files.xcfilelist
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks.sh
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-Info.plist
+Example/Pods/Target Support Files/Pods-Example/Pods-Example-umbrella.h
+Example/Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig
+Example/Pods/Target Support Files/Pods-Example/Pods-Example.modulemap
+Example/Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig
+Example/Pods/Target Support Files/SnapKit/SnapKit-dummy.m
+Example/Pods/Target Support Files/SnapKit/SnapKit-Info.plist
+Example/Pods/Target Support Files/SnapKit/SnapKit-prefix.pch
+Example/Pods/Target Support Files/SnapKit/SnapKit-umbrella.h
+Example/Pods/Target Support Files/SnapKit/SnapKit.modulemap
+Example/Pods/Target Support Files/SnapKit/SnapKit.xcconfig

@@ -21,18 +21,16 @@ it, simply add the following line to your Podfile or Cartfile:
 
 #### Podfile
 ```ruby
-pod 'CZKit'
+pod 'CZKit' //all
+pod 'CZKit/Core'
+pod 'CZKit/ChainKit'
+pod 'CZKit/ChainKit+SnapKit'
+pod 'CZKit/Date'
 ```
 
 ## Usage
 
-### before
 
-![](https://github.com/Ginxx/CocoaChainKit/blob/master/Example/before.png)
-
-### use chain kit
-
-![](https://github.com/Ginxx/CocoaChainKit/blob/master/Example/cocoa_chain_kit.png)
 
 ## Author
 

@@ -5,34 +5,35 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
+import UIKit
 
-public protocol CZHasFont {
+public protocol CZKitHasFont {
     
     func set(font: UIFont)
 }
 
-extension UILabel: CZHasFont {
+extension UILabel: CZKitHasFont {
     
     public func set(font: UIFont) {
         self.font = font
     }
 }
 
-extension UIButton: CZHasFont {
+extension UIButton: CZKitHasFont {
     
     public func set(font: UIFont) {
         self.titleLabel?.font = font
     }
 }
 
-extension UITextField: CZHasFont {
+extension UITextField: CZKitHasFont {
     
     public func set(font: UIFont) {
         self.font = font
     }
 }
 
-extension UITextView: CZHasFont {
+extension UITextView: CZKitHasFont {
     
     public func set(font: UIFont) {
         self.font = font
