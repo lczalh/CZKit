@@ -22,6 +22,7 @@ Pod::Spec.new do |spec|
   # ChainKit
   spec.subspec 'ChainKit' do |ck|
     ck.source_files = 'CZKit/ChainKit/*.swift'
+    ck.dependency 'Core'
   end
   
   # ChainKit+SnapKit
@@ -35,14 +36,12 @@ Pod::Spec.new do |spec|
   spec.subspec 'Date' do |date|
     date.source_files = 'CZKit/Date/*.swift'
     date.dependency 'CZKit/ChainKit'
-    date.dependency 'CZKit/Core'
   end
   
   # UI
   spec.subspec 'UI' do |ui|
     ui.source_files = 'CZKit/UI/*.swift'
     ui.dependency 'CZKit/ChainKit'
-    ui.dependency 'CZKit/Core'
   end
   
   spec.frameworks = 'UIKit', 'Foundation'
