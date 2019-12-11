@@ -7,17 +7,20 @@
 //
 
 import UIKit
-import SwifterSwift
 
-class CZDateSheetView: UIView {
+public class CZDateSheetView: UIView {
     
-    public var datePicker: UIDatePicker!
+    /// 时间选择器
+    var datePicker: UIDatePicker!
     
     /// 确定
-    public var confirmButton: UIButton!
+    var confirmButton: UIButton!
     
     /// 取消
-    public var cancelbutton: UIButton!
+    var cancelbutton: UIButton!
+    
+    /// 分割线
+    var dividerView: UIView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,23 +28,28 @@ class CZDateSheetView: UIView {
         confirmButton = UIButton(type: .custom)
             .cz
             .addSuperView(self)
-            .title(" 确定 ", for: .normal)
-            .titleColor(UIColor(hexString: "#108EE9"), for: .normal)
-            .font(cz_font(16))
+            .title("确定", for: .normal)
+            .titleColor(UIColor.cz_hexColor("#108EE9"), for: .normal)
+            .font(UIFont.cz_systemFont(16))
             .build
         
         cancelbutton = UIButton(type: .custom)
             .cz
             .addSuperView(self)
-            .title(" 取消 ", for: .normal)
-            .titleColor(UIColor(hexString: "#999999"), for: .normal)
-            .font(cz_font(16))
+            .title("取消", for: .normal)
+            .titleColor(UIColor.cz_hexColor("#999999"), for: .normal)
+            .font(UIFont.cz_systemFont(16))
             .build
         
-        //创建日期选择器
         datePicker = UIDatePicker()
             .cz
             .addSuperView(self)
+            .build
+        
+        dividerView = UIView()
+            .cz
+            .addSuperView(self)
+            .backgroundColor(UIColor.cz_rgbColor(238, 238, 238))
             .build
     }
     
@@ -49,10 +57,12 @@ class CZDateSheetView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        confirmButton.frame = CGRect(x: cz_screenWidth - 70, y: 10, width: 60, height: 40)
-        cancelbutton.frame = CGRect(x: 15, y: 10, width: 60, height: 40)
-        datePicker.frame = CGRect(x: 0, y: confirmButton.frame.height + 10, width: cz_screenWidth, height: self.frame.size.height - confirmButton.frame.height + 10)
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        confirmButton.frame = CGRect(x: CZCommon.cz_screenWidth - 60, y: 5, width: 50, height: 40)
+        cancelbutton.frame = CGRect(x: 10, y: 5, width: 50, height: 40)
+        dividerView.frame = CGRect(x: 0, y: confirmButton.frame.size.height + 5, width: CZCommon.cz_screenWidth, height: 1)
+        datePicker.frame = CGRect(x: 0, y: confirmButton.frame.size.height + 10 + dividerView.frame.size.height, width: CZCommon.cz_screenWidth, height: self.frame.size.height - confirmButton.frame.size.height - 10 - dividerView.frame.size.height)
     }
 
 }

@@ -177,62 +177,6 @@ public extension CZKit where Base: UIView {
         return self
     }
     
-    /// 通过视图获取指定父控制器
-    ///
-    /// - Parameter seekViewController: 查找的父控制器类型
-    /// - Returns: 父控制器
-    @discardableResult
-    func superViewController<T: UIViewController>(seekViewController: T.Type) -> T? {
-        var view: UIView = base.superview!
-        while view.next!.isKind(of: T.self) != true {
-            guard view.superview != nil else {
-                return nil
-            }
-            view = view.superview!
-        }
-        return view.next as? T
-    }
-    
-    /// 通过视图获取指定父视图
-    ///
-    /// - Parameter seekSuperView: 查找的父视图类型
-    /// - Returns: 父视图
-    @discardableResult
-    func superView<T: UIView>(seekSuperView: T.Type) -> T? {
-        var view: UIView = base.superview!
-        while view.isKind(of: T.self) != true {
-            guard view.superview != nil else {
-                return nil
-            }
-            view = view.superview!
-        }
-        return view as? T
-    }
-    
-    /// 通过当前视图获取指定子视图
-    ///
-    /// - Parameter subView: 查找的子视图类型
-    /// - Returns: 子视图
-    @discardableResult
-    func subView<T: UIView>(seekSubView: T.Type) -> T? {
-        return selectSubView(currenView: base, superView: T.self)
-    }
-    @discardableResult
-    private func selectSubView<T: UIView>(currenView: UIView, superView: T.Type) -> T? {
-        // 遍历子视图
-        for view in currenView.subviews {
-            if view.isKind(of: T.self) == true {
-                return view as? T
-            } else {
-                // 递归查询
-                let v = selectSubView(currenView: view, superView: T.self)
-                if v != nil {
-                    return v
-                }
-            }
-        }
-        return nil
-    }
     
 }
 
