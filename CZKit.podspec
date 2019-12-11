@@ -22,7 +22,7 @@ Pod::Spec.new do |spec|
   # ChainKit
   spec.subspec 'ChainKit' do |ck|
     ck.source_files = 'CZKit/ChainKit/*.swift'
-    ck.dependency 'Core'
+    ck.dependency 'CZKit/Core'
   end
   
   # ChainKit+SnapKit
