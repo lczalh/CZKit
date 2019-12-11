@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
                         DESC
 
   spec.homepage     = "https://github.com/lczalh/CZKit"
-  spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  spec.license      = "MIT"
   spec.author             = { "lczalh" => "824092805@qq.com" }
 
   spec.ios.deployment_target = "10.0"
