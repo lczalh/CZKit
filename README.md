@@ -16,7 +16,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-CocoaChainKit is available through [CocoaPods](https://cocoapods.org). To install
+CZKit is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile or Cartfile:
 
 #### Podfile
