@@ -8,12 +8,6 @@
 
 import Foundation
 
-//抖动方向枚举
-public enum CZShakeDirection: Int {
-    case horizontal  //水平抖动
-    case vertical  //垂直抖动
-}
-
 public extension UIView {
     
     /// 通过视图获取指定父控制器

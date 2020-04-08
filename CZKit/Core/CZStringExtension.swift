@@ -10,6 +10,18 @@ import Foundation
 
 public extension String {
     
+    //将原始的url编码为合法的url
+    func cz_encoded() -> String {
+        let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters:
+            .urlQueryAllowed)
+        return encodeUrlString ?? ""
+    }
+     
+    //将编码后的url转换回原始的url
+    func cz_decoded() -> String {
+        return self.removingPercentEncoding ?? ""
+    }
+    
     /// 正则表达式替换
     /// - Parameters:
     ///   - pattern: 正则表达式字符串
@@ -40,6 +52,33 @@ public extension String {
     var cz_removeAllSapce: String {
         return self.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
     }
+    
+    /// 通过时间字符串获取日期（Date）
+    ///
+    /// - Parameters:
+    ///   - dateFormat: 日期格式
+    /// - Returns: 日期
+    func cz_conversionDate(dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> Date {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.init(identifier: "zh_CN")
+        formatter.dateFormat = dateFormat
+        let date = formatter.date(from: self)
+        return date!
+    }
+    
+    /// 通过时间字符串获取时间戳
+    ///
+    /// - Parameters:
+    ///   - time: 时间字符串
+    ///   - dateFormat: 时间格式
+    /// - Returns: 时间戳
+    func cz_toTimeStamp(dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> Double {
+        let dfmatter = DateFormatter()
+        dfmatter.dateFormat = dateFormat
+        let last = dfmatter.date(from: self)
+        let timeStamp = last?.timeIntervalSince1970
+        return timeStamp!
+    }
 }
 
 public extension NSString {
@@ -51,7 +90,7 @@ public extension NSString {
     ///   - size: 预估字符串大小
     ///   - text: 字符串
     /// - Returns: CGSize
-    func cz_TextWidth(font: UIFont, size: CGSize = CGSize(width: CGFloat(MAXFLOAT), height: CZCommon.cz_screenHeight)) -> CGSize {
+    func cz_textWidth(font: UIFont, size: CGSize = CGSize(width: CGFloat(MAXFLOAT), height: CZCommon.cz_screenHeight)) -> CGSize {
         var textSize:CGSize
         if __CGSizeEqualToSize(size,CGSize.zero){
             let attributes = NSDictionary(object: font, forKey: NSAttributedString.Key.font as NSCopying)
@@ -71,7 +110,7 @@ public extension NSString {
     ///   - size: 预估字符串大小
     ///   - text: 字符串
     /// - Returns: CGSize
-    func cz_TextHeight(font: UIFont, size: CGSize = CGSize(width: CZCommon.cz_screenWidth, height: CGFloat(MAXFLOAT))) -> CGSize {
+    func cz_textHeight(font: UIFont, size: CGSize = CGSize(width: CZCommon.cz_screenWidth, height: CGFloat(MAXFLOAT))) -> CGSize {
         var textSize:CGSize
         if __CGSizeEqualToSize(size,CGSize.zero){
             let attributes = NSDictionary(object: font, forKey: NSAttributedString.Key.font as NSCopying)

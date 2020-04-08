@@ -6,8 +6,8 @@
 //  Copyright © 2019 chaozheng. All rights reserved.
 //
 
-import SnapKit
 import UIKit
+import SnapKit
 
 // MARK: - snpkit
 public extension CZKit where Base: UIView  {

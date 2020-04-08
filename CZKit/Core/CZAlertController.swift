@@ -11,7 +11,7 @@ import Foundation
 public extension UIAlertController {
     
     /// 快速创建只带取消和确定的提示框
-    class func cz_ShowAlertController(_ title: String?,
+    class func cz_showAlertController(_ title: String?,
                                              _ message: String?,
                                              _ preferredStyle: UIAlertController.Style,
                                              _ viewController: UIViewController!,
@@ -28,7 +28,7 @@ public extension UIAlertController {
     }
     
     /// 快速创建只带确定的提示框
-    class func cz_ShowAlertController(_ title: String?,
+    class func cz_showAlertController(_ title: String?,
                                       _ message: String?,
                                       _ preferredStyle: UIAlertController.Style,
                                       _ viewController: UIViewController!,

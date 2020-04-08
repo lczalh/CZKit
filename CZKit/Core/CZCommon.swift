@@ -17,7 +17,7 @@ import UIKit
 ///   - line: 行数
 public func cz_print(_ items: Any..., file: String = #file, method: String = #function, line: Int = #line) {
     #if DEBUG
-    print("\n********** CZKit debug **********\n类名名称     :     \((file as NSString).lastPathComponent)\n方法名称     :     \(method)\n打印位置     :     第\(line)行\n内存地址     :     \(Unmanaged.passUnretained(items as AnyObject).toOpaque())\n打印内容     :     \(items)\n")
+    print("\n********** CZKit debug **********\n类名名称     :     \((file as NSString).lastPathComponent)\n方法名称     :     \(method)\n打印位置     :     第\(line)行\n打印内容     :     \(items)\n")
     #endif
 }
 
@@ -98,6 +98,15 @@ public class CZCommon: NSObject {
     public static func cz_removeAllUserDefaults() -> Void {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
     }
+    
+    /// 清理 LaunchScreen 缓存
+    public static func cz_clearLaunchScreenCache() {
+        do {
+            try FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
+        } catch {
+            print("Failed to delete launch screen cache: \(error)")
+        }
+    }
 
     /// 跳转到AppStore进行评分
     /// - Parameter appId: appId
@@ -162,17 +171,65 @@ public class CZCommon: NSObject {
     }
 
     /// 获取最上层的控制器
-    public static func cz_topController(_ viewController: UIViewController = (UIApplication.shared.delegate?.window?!.rootViewController)!) -> UIViewController {
+    public static func cz_topmostController(_ viewController: UIViewController = (UIApplication.shared.delegate?.window?!.rootViewController)!) -> UIViewController {
         if viewController.isKind(of: UINavigationController.self) {
-            return CZCommon.cz_topController((viewController as! UINavigationController).visibleViewController!)
+            return CZCommon.cz_topmostController((viewController as! UINavigationController).visibleViewController!)
         } else if viewController.isKind(of: UITabBarController.self) {
-            return CZCommon.cz_topController((viewController as! UITabBarController).selectedViewController!)
+            return CZCommon.cz_topmostController((viewController as! UITabBarController).selectedViewController!)
         } else {
             if (viewController.presentedViewController != nil) {
-                return CZCommon.cz_topController(viewController.presentedViewController!)
+                return CZCommon.cz_topmostController(viewController.presentedViewController!)
             } else {
                 return viewController
             }
         }
+    }
+    
+    /// 获取指定年月开始日期
+    public static func cz_specifiedYearStartDate(year: Int, month: Int) -> Date {
+        let calendar = NSCalendar.current
+        var startComps = DateComponents()
+        startComps.day = 1
+        startComps.month = month
+        startComps.year = year
+        let startDate = calendar.date(from: startComps)!
+        return startDate
+    }
+    
+    /// 获取指定年月结束日期 returnEndTime：true 则为23:59:59 false： 00:00:00
+    public static  func cz_specifiedYearEndDate(year: Int, month: Int, returnEndTime:Bool = false) -> Date {
+        let calendar = NSCalendar.current
+        var components = DateComponents()
+        components.month = 1
+        if returnEndTime {
+            components.second = -1
+        } else {
+            components.day = -1
+        }
+        
+        let endOfYear = calendar.date(byAdding: components,
+                                      to: CZCommon.cz_specifiedYearStartDate(year: year, month:month))!
+        return endOfYear
+    }
+    
+    
+    /// 检测是否开启了网络代理
+    /// - Parameter complete: false: 开启了代理  true：未开启代理
+    public static func cz_isProxyDetection() -> Bool {
+        let proxySettings = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
+        let arr = CFNetworkCopyProxiesForURL(URL(string: "https://www.baidu.com")! as CFURL, proxySettings).takeUnretainedValue()
+        let obj = (arr as [AnyObject]).first
+        return obj?.object(forKey: kCFProxyTypeKey) == kCFProxyTypeNone
+    }
+    
+    /// 通过字符串转类  cz_classFromString(className: model.moduleControllerName!, classType: UIViewController.self)!
+    /// - Parameters:
+    ///   - className: 字符串类名
+    ///   - classType: 类型
+    public static func cz_classFromString<T>(className: String, classType: T.Type) -> T.Type? {
+        guard let appName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String else { return nil }
+        let classStringName = appName + "." + className
+        guard let className = NSClassFromString(classStringName) as? T.Type else { return nil }
+        return className
     }
 }

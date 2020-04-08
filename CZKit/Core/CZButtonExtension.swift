@@ -18,7 +18,7 @@ public extension UIButton {
     ///   - titlePosition: 文字在图片的哪一边
     ///   - additionalSpacing: 间距
     ///   - state: 按钮状态
-    func cz_TextAndPictureLocation(image: UIImage?,
+    func cz_textAndPictureLocation(image: UIImage?,
                              title: String,
                              titlePosition: UIView.ContentMode,
                              additionalSpacing: CGFloat,
@@ -59,6 +59,5 @@ public extension UIButton {
         self.titleEdgeInsets = titleInsets
         self.imageEdgeInsets = imageInsets
     }
-   
     
 }

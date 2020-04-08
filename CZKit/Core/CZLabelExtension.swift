@@ -11,7 +11,7 @@ import Foundation
 public extension UILabel {
     
     /// 判断文本标签的内容是否被截断
-    var cz_IsTruncated: Bool {
+    var cz_isTruncated: Bool {
         guard let labelText = text else {
             return false
         }

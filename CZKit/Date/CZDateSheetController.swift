@@ -184,7 +184,7 @@ public class CZDateSheetController: UIViewController {
     /// - Parameter value: 选择的时间
     class func cz_show(_ controller: UIViewController,
                        datePickerMode: UIDatePicker.Mode = .date,
-                       confirmTitleString: String? = "确定1",
+                       confirmTitleString: String? = "确定",
                        confirmTitleColor: UIColor? = UIColor.cz_hexColor("#108EE9"),
                        confirmTitleFont: UIFont? = UIFont.cz_systemFont(16),
                        cancelTitleFont: UIFont? = UIFont.cz_systemFont(16),
@@ -212,6 +212,6 @@ public class CZDateSheetController: UIViewController {
         vc.cz_dateSheetViewHeight = dateSheetViewHeight
         vc.cz_locale = locale
         vc.cz_selectDateBlock = { value($0) }
-        controller.present(vc, animated: false, completion: nil)
+        DispatchQueue.main.async { controller.present(vc, animated: false, completion: nil) }
     }
 }
