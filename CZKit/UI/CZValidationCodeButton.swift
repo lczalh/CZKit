@@ -25,7 +25,7 @@ import UIKit
 
 public class CZValidationCodeButton: UIButton {
     
-    private var timer: Timer!
+    private var timer: Timer?
     
     /// 倒计时总秒数
     var totalTime: Int = 60 {
@@ -66,7 +66,7 @@ public class CZValidationCodeButton: UIButton {
     @objc func timerAction() {
         if remainTime == 0 {
             setTitle("获取验证码", for: .normal)
-            stopTimer()
+            removeTimer()
             remainTime = totalTime
             isEnabled = true
         } else {
@@ -78,13 +78,22 @@ public class CZValidationCodeButton: UIButton {
     
     /// 开启计时器
     func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            RunLoop.current.add(timer!, forMode: .common)
+        }
     }
     
-    /// 停止计时器
-    func stopTimer() {
-        timer.invalidate()
+    /// 删除计时器
+    func removeTimer() {
+        if timer != nil {
+            timer!.invalidate()
+            timer = nil
+        }
     }
-
+    
+    deinit {
+        removeTimer()
+    }
 }
 

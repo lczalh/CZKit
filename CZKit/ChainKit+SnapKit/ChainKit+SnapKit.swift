@@ -28,6 +28,14 @@ public extension CZKit where Base: UIView  {
         return self
     }
     
+    @discardableResult
+    func updateConstraints(_ constraintMaker: (ConstraintMaker) -> Void) -> CZKit {
+        base.snp.updateConstraints { (make) in
+            constraintMaker(make)
+        }
+        return self
+    }
+    
     /// 内容拉伸优先级
     @discardableResult
     func setContentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> CZKit {

@@ -146,4 +146,10 @@ public extension CZKit where Base: UITableView {
         base.register(aClass, forHeaderFooterViewReuseIdentifier: identifier)
         return self
     }
+    
+    @discardableResult
+    func keyboardDismissMode(_ keyboardDismissMode: UIScrollView.KeyboardDismissMode) -> CZKit {
+        base.keyboardDismissMode = keyboardDismissMode
+        return self
+    }
 }

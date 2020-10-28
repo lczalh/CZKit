@@ -10,6 +10,12 @@ import UIKit
 public extension CZKit where Base: UICollectionViewFlowLayout {
     
     @discardableResult
+    func layoutAlignment(_ alignment: NSTextAlignment) -> CZKit {
+        base.perform(Selector.init(("_setRowAlignmentsOptions:")),with:NSDictionary.init(dictionary:["UIFlowLayoutCommonRowHorizontalAlignmentKey":NSNumber.init(value:alignment.rawValue)]));
+        return self
+    }
+    
+    @discardableResult
     func minimumLineSpacing(_ minimumLineSpacing: CGFloat) -> CZKit {
         base.minimumLineSpacing = minimumLineSpacing
         return self

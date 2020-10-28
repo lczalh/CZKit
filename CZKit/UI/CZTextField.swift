@@ -76,7 +76,7 @@ public class CZTextField: UITextField {
             var str = self.text
             if cz_filterStringRegular != nil {
                 //替换后的字符串（过滤调非中文字符）
-                str = str!.cz_regularReplacement(pattern: cz_filterStringRegular!, with: "")
+                str = str!.cz_replacingCharacters(cz_filterStringRegular!, "")
             }
             if cz_textMaxCount != nil {
                 //如果长度超过限制则直接截断

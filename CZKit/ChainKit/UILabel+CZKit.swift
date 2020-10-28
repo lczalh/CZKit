@@ -11,19 +11,19 @@ public extension CZKit where Base: UILabel {
     
     @discardableResult
     func shadowColor(_ shadowColor: UIColor?) -> CZKit {
-        base.shadowColor = shadowColor
+        base.layer.shadowColor = shadowColor?.cgColor
         return self
     }
     
     @discardableResult
     func shadowOffset(_ shadowOffset: CGSize) -> CZKit {
-        base.shadowOffset = shadowOffset
+        base.layer.shadowOffset = shadowOffset
         return self
     }
     
     @discardableResult
     func shadowOffset(width: CGFloat, height: CGFloat) -> CZKit {
-        base.shadowOffset = CGSize(width: width, height: height)
+        base.layer.shadowOffset = CGSize(width: width, height: height)
         return self
     }
     

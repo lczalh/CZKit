@@ -31,5 +31,4 @@ public extension UILabel {
         return labelTextLines > labelShowLines
     }
     
-    
 }

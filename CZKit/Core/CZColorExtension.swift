@@ -18,18 +18,10 @@ public extension UIColor {
     /// 通过16进制数获取颜色
     static func cz_hexColor(_ hex: String, _ alpha: CGFloat = 1) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-
-        if (cString.hasPrefix("#")) {
-            cString.remove(at: cString.startIndex)
-        }
-
-        if ((cString.count) != 6) {
-            return UIColor.gray
-        }
-
+        if (cString.hasPrefix("#")) { cString.remove(at: cString.startIndex) }
+        if ((cString.count) != 6) { return UIColor.gray }
         var rgbValue:UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
-
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,

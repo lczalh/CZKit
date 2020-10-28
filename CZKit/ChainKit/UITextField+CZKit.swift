@@ -132,6 +132,20 @@ public extension CZKit where Base: UITextField {
         }
         return self
     }
+    
+    /// 首字母是否大写
+    @discardableResult
+    func autocapitalizationType(_ autocapitalizationType: UITextAutocapitalizationType) -> CZKit {
+        base.autocapitalizationType = autocapitalizationType
+        return self
+    }
+    
+    /// 是否自动纠错
+    @discardableResult
+    func autocorrectionType(_ autocorrectionType: UITextAutocorrectionType) -> CZKit {
+        base.autocorrectionType = autocorrectionType
+        return self
+    }
 }
 
 // Helper function inserted by Swift 4.2 migrator.
