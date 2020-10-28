@@ -63,23 +63,21 @@ public class CZValidationCodeButton: UIButton {
         startTimer()
     }
     
-    @objc func timerAction() {
-        if remainTime == 0 {
-            setTitle("获取验证码", for: .normal)
-            removeTimer()
-            remainTime = totalTime
-            isEnabled = true
-        } else {
-            remainTime -= 1
-            setTitle("\(remainTime)s", for: .normal)
-            isEnabled = false
-        }
-    }
-    
     /// 开启计时器
     func startTimer() {
         if timer == nil {
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {[weak self] (timer) in
+                if self?.remainTime == 0 {
+                    self?.setTitle("获取验证码", for: .normal)
+                    self?.removeTimer()
+                    self?.remainTime = self!.totalTime
+                    self?.isEnabled = true
+                } else {
+                    self?.remainTime -= 1
+                    self?.setTitle("\(self!.remainTime)s", for: .normal)
+                    self?.isEnabled = false
+                }
+            }
             RunLoop.current.add(timer!, forMode: .common)
         }
     }
