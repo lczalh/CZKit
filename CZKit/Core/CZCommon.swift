@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 /// 调试输出
 ///
@@ -271,7 +272,13 @@ public class CZCommon: NSObject {
     public static let cz_iphoneXR: Bool = cz_screenHeight == CGFloat(896) && cz_screenWidth == CGFloat(414)
     
     /// 安全区域高度
-    public static let cz_safeAreaHeight: CGFloat = CZCommon.cz_lastWindow()?.safeAreaInsets.bottom ?? 0.0
+    public static var cz_safeAreaHeight: CGFloat {
+        if #available(iOS 11.0, *) {
+            return CZCommon.cz_lastWindow()?.safeAreaInsets.bottom ?? 0.0
+        } else {
+            return 0.0
+        }
+    }
     
     /// 刘海屏设备
 //    public static let cz_bangScreenDevice: Bool = cz_iphoneX || cz_iphoneXR

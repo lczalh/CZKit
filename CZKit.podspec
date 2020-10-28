@@ -44,6 +44,6 @@ Pod::Spec.new do |spec|
     ui.dependency 'CZKit/ChainKit'
   end
   
-  spec.frameworks = 'UIKit', 'Foundation'
+  spec.frameworks = 'UIKit', 'Foundation', 'WebKit'
 
 end

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
+public extension UIViewController {
     
     /// 是否隐藏导航条
     /// - Parameters:
