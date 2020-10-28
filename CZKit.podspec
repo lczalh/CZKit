@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   spec.version      = "0.0.4"
   spec.summary      = "Swift 工具箱"
   spec.description  = <<-DESC
-                            TODO: Swift 开发组件.
+                            TODO: Swift 工具箱.
                         DESC
 
   spec.homepage     = "https://github.com/lczalh/CZKit"
