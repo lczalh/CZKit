@@ -5,6 +5,9 @@
 //  Created by udream3 on 2020/12/22.
 //
 
+import Foundation
+import UIKit
+
 public class CZPaddingLabel: UILabel {
     
     /// 控制label内容的padding，默认为UIEdgeInsetsZero

@@ -4,7 +4,8 @@
 //
 //  Created by udream3 on 2020/12/22.
 //
-
+import Foundation
+import UIKit
 import MJRefresh
 
 public extension UIScrollView {

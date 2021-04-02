@@ -5,7 +5,7 @@
 //  Created by udream3 on 2021/3/31.
 //  Copyright © 2021 chaozheng. All rights reserved.
 //
-
+import Foundation
 import UIKit
 
 class CZTextView: UIView {

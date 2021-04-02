@@ -6,6 +6,7 @@
 //  Copyright © 2021 chaozheng. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import Photos
 

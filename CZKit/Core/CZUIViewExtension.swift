@@ -5,6 +5,8 @@
 //  Created by yu mingming on 2019/11/28.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
+import Foundation
+import UIKit
 
 public extension UIView {
     
@@ -133,85 +135,6 @@ public extension UIView {
             layer.insertSublayer(shadowLayer, at: 0)
         }
     }
-    
-    
-//    var cz_cornerRadius: CGFloat {
-//        get {
-//            return layer.cornerRadius
-//        }
-//        set {
-//            layer.cornerRadius = newValue
-//        }
-//    }
-//
-//    var cz_borderWidth: CGFloat {
-//        get {
-//            return layer.borderWidth
-//        }
-//        set {
-//            layer.borderWidth = newValue
-//        }
-//    }
-//
-//    var cz_borderColor: UIColor? {
-//        get {
-//            if let color = layer.borderColor {
-//                return UIColor(cgColor: color)
-//            }
-//            return nil
-//        }
-//        set {
-//            if let color = newValue {
-//                layer.borderColor = color.cgColor
-//            } else {
-//                layer.borderColor = nil
-//            }
-//        }
-//    }
-//    
-//    var cz_shadowRadius: CGFloat {
-//        get {
-//            return layer.shadowRadius
-//        }
-//        set {
-//            layer.shadowRadius = newValue
-//        }
-//    }
-//    
-//    var cz_shadowOpacity: Float {
-//        get {
-//            return layer.shadowOpacity
-//        }
-//        set {
-//            layer.shadowOpacity = newValue
-//        }
-//    }
-//    
-//    var cz_shadowOffset: CGSize {
-//        get {
-//            return layer.shadowOffset
-//        }
-//        set {
-//            layer.shadowOffset = newValue
-//        }
-//    }
-//    
-//    var cz_shadowColor: UIColor? {
-//        get {
-//            if let color = layer.shadowColor {
-//                return UIColor(cgColor: color)
-//            }
-//            return nil
-//        }
-//        set {
-//            if let color = newValue {
-//                layer.shadowColor = color.cgColor
-//            } else {
-//                layer.shadowColor = nil
-//            }
-//        }
-//    }
-    
     
     /// 实现以下弯曲的UIView
     /// - Parameter desiredCurve: desiredCurve description

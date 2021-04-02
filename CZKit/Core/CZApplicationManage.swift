@@ -4,7 +4,7 @@
 //
 //  Created by chaozheng on 2021/4/1.
 //
-
+import Foundation
 import UIKit
 
 public struct CZApplicationManage {

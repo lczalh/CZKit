@@ -5,9 +5,9 @@
 //  Created by udream3 on 2021/3/31.
 //
 
+import Foundation
 import UIKit
 import AudioToolbox
-import CoreTelephony
 
 public struct CZDeviceManage {
     

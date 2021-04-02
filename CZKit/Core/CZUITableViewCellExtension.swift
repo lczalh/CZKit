@@ -4,6 +4,8 @@
 //
 //  Created by udream3 on 2020/12/24.
 //
+import Foundation
+import UIKit
 
 public extension UITableViewCell {
     
