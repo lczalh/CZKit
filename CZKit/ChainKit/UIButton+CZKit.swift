@@ -5,7 +5,6 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
-import UIKit
 
 public extension CZKit where Base: UIButton {
     
@@ -66,6 +65,30 @@ public extension CZKit where Base: UIButton {
     @discardableResult
     func adjustsImageWhenHighlighted(_ isAdjustsImageWhenHighlighted: Bool) -> CZKit {
         base.adjustsImageWhenHighlighted = isAdjustsImageWhenHighlighted
+        return self
+    }
+    
+    @discardableResult
+    func textAlignment(_ textAlignment: NSTextAlignment) -> CZKit {
+        base.titleLabel?.textAlignment = textAlignment
+        return self
+    }
+    
+    @discardableResult
+    func lineBreakMode(_ lineBreakMode: NSLineBreakMode) -> CZKit {
+        base.titleLabel?.lineBreakMode = lineBreakMode
+        return self
+    }
+    
+    @discardableResult
+    func numberOfLines(_ numberOfLines: Int) -> CZKit {
+        base.titleLabel?.numberOfLines = numberOfLines
+        return self
+    }
+    
+    @discardableResult
+    func contentEdgeInsets(_ contentEdgeInsets: UIEdgeInsets) -> CZKit {
+        base.contentEdgeInsets = contentEdgeInsets
         return self
     }
 }

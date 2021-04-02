@@ -6,8 +6,6 @@
 //  Copyright © 2019 刘超正. All rights reserved.
 //
 
-import Foundation
-
 public extension UIButton {
     
     /// 设置文字和图片的位置
@@ -18,20 +16,19 @@ public extension UIButton {
     ///   - titlePosition: 文字在图片的哪一边
     ///   - additionalSpacing: 间距
     ///   - state: 按钮状态
-    func cz_textAndPictureLocation(image: UIImage?,
+    func cz_titleImageDirection(image: UIImage?,
                              title: String,
                              titlePosition: UIView.ContentMode,
                              additionalSpacing: CGFloat,
                              state: UIControl.State){
         self.imageView?.contentMode = .center
         self.setImage(image, for: state)
-        positionLabelRespectToImage(title: title, position: titlePosition, spacing: additionalSpacing)
         self.titleLabel?.contentMode = .center
         self.setTitle(title, for: state)
+        positionLabelRespectToImage(imageSize: image?.size ?? CGSize(width: 0, height: 0), title: title, position: titlePosition, spacing: additionalSpacing)
     }
-    private func positionLabelRespectToImage(title: String, position: UIView.ContentMode,
+    private func positionLabelRespectToImage(imageSize: CGSize, title: String, position: UIView.ContentMode,
                                              spacing: CGFloat) {
-        let imageSize = self.imageRect(forContentRect: self.frame)
         let titleFont = self.titleLabel?.font!
         let titleSize = title.size(withAttributes: [NSAttributedString.Key.font: titleFont!])
         var titleInsets: UIEdgeInsets
@@ -60,4 +57,40 @@ public extension UIButton {
         self.imageEdgeInsets = imageInsets
     }
     
+    func cz_setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
+        self.setBackgroundImage(color.cz_drawImage(), for: state)
+    }
+    
+    /// 开启获取验证码计时器
+    func cz_startGetCodeTimer(totalTime: Int = 59, state: UIControl.State = .normal) {
+        var remainTime = totalTime
+        var timer: Timer?
+        setTitle("重新获取(\(remainTime)s)", for: state)
+        isEnabled = false
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {[weak self] (time) in
+            if remainTime == 1 {
+                timer?.invalidate()
+                timer = nil
+                self?.setTitle("获取验证码", for: state)
+                remainTime = 60
+                self?.isEnabled = true
+            } else {
+                remainTime -= 1
+                self?.setTitle("重新获取(\(remainTime)s)", for: state)
+                self?.isEnabled = false
+            }
+        }
+        RunLoop.current.add(timer!, forMode: .common)
+    }
+    
+}
+
+public extension CZKit where Base: UIButton {
+    
+    /// 设置文字和图片的位置
+    @discardableResult
+    func titleImageDirection(image: UIImage?, title: String, titlePosition: UIView.ContentMode, additionalSpacing: CGFloat, state: UIControl.State) -> CZKit {
+        base.cz_titleImageDirection(image: image, title: title, titlePosition: titlePosition, additionalSpacing: additionalSpacing, state: state)
+        return self
+    }
 }

@@ -6,8 +6,6 @@
 //  Copyright © 2019 刘超正. All rights reserved.
 //
 
-import Foundation
-
 public extension UIView {
     
     /// 通过视图获取指定父控制器
@@ -50,6 +48,7 @@ public extension UIView {
     func cz_subView<T: UIView>(seekSubView: T.Type) -> T? {
         return cz_selectSubView(currenView: self, superView: T.self)
     }
+    
     @discardableResult
     private func cz_selectSubView<T: UIView>(currenView: UIView, superView: T.Type) -> T? {
         // 遍历子视图
@@ -133,5 +132,105 @@ public extension UIView {
             layer.masksToBounds = false
             layer.insertSublayer(shadowLayer, at: 0)
         }
+    }
+    
+    
+//    var cz_cornerRadius: CGFloat {
+//        get {
+//            return layer.cornerRadius
+//        }
+//        set {
+//            layer.cornerRadius = newValue
+//        }
+//    }
+//
+//    var cz_borderWidth: CGFloat {
+//        get {
+//            return layer.borderWidth
+//        }
+//        set {
+//            layer.borderWidth = newValue
+//        }
+//    }
+//
+//    var cz_borderColor: UIColor? {
+//        get {
+//            if let color = layer.borderColor {
+//                return UIColor(cgColor: color)
+//            }
+//            return nil
+//        }
+//        set {
+//            if let color = newValue {
+//                layer.borderColor = color.cgColor
+//            } else {
+//                layer.borderColor = nil
+//            }
+//        }
+//    }
+//    
+//    var cz_shadowRadius: CGFloat {
+//        get {
+//            return layer.shadowRadius
+//        }
+//        set {
+//            layer.shadowRadius = newValue
+//        }
+//    }
+//    
+//    var cz_shadowOpacity: Float {
+//        get {
+//            return layer.shadowOpacity
+//        }
+//        set {
+//            layer.shadowOpacity = newValue
+//        }
+//    }
+//    
+//    var cz_shadowOffset: CGSize {
+//        get {
+//            return layer.shadowOffset
+//        }
+//        set {
+//            layer.shadowOffset = newValue
+//        }
+//    }
+//    
+//    var cz_shadowColor: UIColor? {
+//        get {
+//            if let color = layer.shadowColor {
+//                return UIColor(cgColor: color)
+//            }
+//            return nil
+//        }
+//        set {
+//            if let color = newValue {
+//                layer.shadowColor = color.cgColor
+//            } else {
+//                layer.shadowColor = nil
+//            }
+//        }
+//    }
+    
+    
+    /// 实现以下弯曲的UIView
+    /// - Parameter desiredCurve: desiredCurve description
+    func cz_addBottomRoundedEdge(desiredCurve: CGFloat) {
+        let offset: CGFloat = self.frame.width / desiredCurve
+        let bounds: CGRect = self.bounds
+        
+        let rectBounds: CGRect = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width, height: bounds.size.height / 2)
+        let rectPath: UIBezierPath = UIBezierPath(rect: rectBounds)
+        let ovalBounds: CGRect = CGRect(x: bounds.origin.x - offset / 2, y: bounds.origin.y, width: bounds.size.width + offset, height: bounds.size.height)
+        let ovalPath: UIBezierPath = UIBezierPath(ovalIn: ovalBounds)
+        rectPath.append(ovalPath)
+        
+        // Create the shape layer and set its path
+        let maskLayer: CAShapeLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = rectPath.cgPath
+        
+        // Set the newly created shape layer as the mask for the view's layer
+        self.layer.mask = maskLayer
     }
 }

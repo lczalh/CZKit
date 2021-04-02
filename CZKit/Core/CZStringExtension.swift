@@ -6,8 +6,6 @@
 //  Copyright © 2019 刘超正. All rights reserved.
 //
 
-import Foundation
-
 public extension String {
     
     //将原始的url编码为合法的url
@@ -19,26 +17,8 @@ public extension String {
      
     //将编码后的url转换回原始的url
     func cz_decoded() -> String {
-        return self.removingPercentEncoding ?? ""
+        return removingPercentEncoding ?? ""
     }
-    
-//    /// 正则表达式替换
-//    /// - Parameters:
-//    ///   - pattern: 正则表达式字符串
-//    ///   - with: 替换值
-//    ///   - options: 替换后的字符串
-//    func cz_regularReplacement(pattern: String,
-//                     with: String,
-//                     options: NSRegularExpression.Options = []) -> String {
-//        do {
-//            let regex = try NSRegularExpression(pattern: pattern, options: options)
-//            return regex.stringByReplacingMatches(in: self, options: [], range: NSMakeRange(0, self.count), withTemplate: with)
-//        } catch {
-//            return self
-//        }
-//
-//
-//    }
     
     /// 正则替换字符串
     func cz_replacingCharacters(_ pattern: String, _ template: String) -> String {
@@ -55,13 +35,13 @@ public extension String {
     var cz_removeHeadAndTailSpacePro: String { return trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) }
     
     /// 去除所有空格
-    var cz_removeAllSapce: String { return replacingOccurrences(of: " ", with: "", options: .literal, range: nil) }
+    var cz_removeAllSapce: String { return replacingOccurrences(of: " ", with: "") }
     
-    /// 去除所有换行
-    var cz_removeEnterAll: String { return replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "") }
+    /// 去除所有 \r \n \t
+    var cz_removeEnterAll: String { return replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\t", with: "") }
 
     /// 去除所有空格换行
-    var cz_removeSapceEnterAll: String { return cz_removeAllSapce.replacingOccurrences(of: "\n", with: "") }
+  //  var cz_removeSapceEnterAll: String { return cz_removeAllSapce.replacingOccurrences(of: "\n", with: "") }
     
     /// 通过时间字符串获取日期（Date）
     ///
@@ -102,26 +82,27 @@ public extension String {
         }
     }
     
-    /// 中文字符串转GBK字符串
-    var cz_chineseTurnGbkString: String {
-        let pattern = "[^\\u4E00-\\u9FA5，。！、……《》（）【】：；“‘”’？￥]"
-        let regex = try! CZRegex(pattern)
-        var str = ""
-        for i in self {
-            if regex.matches(String(i)){
-                str.append(i)
-            }else{
-                let data = String(i).data(using: .cz_gb_18030_2000)
-                let bytes = [UInt8](data!)
-                var string = ""
-                for val in bytes {
-                    string =  string + "%" + String(format: "%02X",val)
-                }
-                str.append(string)
-            }
-        }
-        return str
-    }
+//    /// 中文字符串转GBK字符串
+//    var cz_chineseTurnGbkString: String {
+//        let pattern = "[^\\u4E00-\\u9FA5，。！、……《》（）【】：；“‘”’？￥]"
+//        let regex = try? NSRegularExpression(pattern: pattern, options: [])
+//        var str = ""
+//        for i in self {
+//            
+//            if regex.firstMatch(in: String(i), options: [], range: NSRange(location: 0, length: String(i).utf16.count)) .map { Match(result: $0, in: String(i)) } {
+//                str.append(i)
+//            }else{
+//                let data = String(i).data(using: .cz_gb_18030_2000)
+//                let bytes = [UInt8](data!)
+//                var string = ""
+//                for val in bytes {
+//                    string =  string + "%" + String(format: "%02X",val)
+//                }
+//                str.append(string)
+//            }
+//        }
+//        return str
+//    }
     
     /// 去除百分比编码
     func cz_removingPercentEncoding(using encoding: String.Encoding) -> String? {
@@ -139,6 +120,57 @@ public extension String {
         }
         return String(data: bytes, encoding: encoding)
     }
+    
+    /// 计算字符串宽度
+    /// - Parameters:
+    ///   - text: 内容
+    ///   - font: 字体大小
+    ///   - height: 高度
+    /// - Returns: 宽度
+    func cz_textWidth(font : UIFont, height: CGFloat) -> CGFloat {
+        return self.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: height), options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font : font], context: nil).size.width
+    }
+    
+    /// 计算字符串高度
+    /// - Parameters:
+    ///   - text: 内容
+    ///   - font: 字体大小
+    ///   - width: 宽度
+    /// - Returns: 高度
+    func cz_textHeight(font : UIFont, width: CGFloat) -> CGFloat {
+        return self.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font : font], context: nil).size.height
+    }
+    
+    /// 字符串截取
+    /// - Parameters:
+    ///   - location: 起始位置
+    ///   - length: 长度
+    ///   - suffix: 后缀
+    /// - Returns: 截取后的字符串
+    func cz_subString(location: Int, length: Int, suffix: String? = nil) -> String {
+        guard length < count else {  return self }
+        let start = index(startIndex, offsetBy: location)
+        let end = index(start, offsetBy: length)
+        let result = String(self[start ..< end])
+        if let suffix = suffix {
+            return "\(result)\(suffix)"
+        } else {
+            return result
+        }
+    }
+    
+    /// 设置文字行间距
+    /// - Parameters:
+    ///   - lineSpacing: 间距
+    ///   - font: 字体
+    /// - Returns: NSAttributedString
+    func cz_setLineSpacing(lineSpacing: CGFloat, font: UIFont) -> NSAttributedString {
+        let paraph = NSMutableParagraphStyle()
+        paraph.lineSpacing = lineSpacing
+        let attributes = [NSAttributedString.Key.font: font,
+                  NSAttributedString.Key.paragraphStyle: paraph]
+        return NSAttributedString(string: self, attributes: attributes)
+    }
 }
 
 public extension String.Encoding {
@@ -155,7 +187,7 @@ public extension NSString {
     ///   - size: 预估字符串大小
     ///   - text: 字符串
     /// - Returns: CGSize
-    func cz_textWidth(font: UIFont, size: CGSize = CGSize(width: CGFloat(MAXFLOAT), height: CZCommon.cz_screenHeight)) -> CGSize {
+    func cz_textWidth(font: UIFont, size: CGSize = CGSize(width: CGFloat(MAXFLOAT), height: CZDeviceManage.screenHeight)) -> CGSize {
         var textSize:CGSize
         if __CGSizeEqualToSize(size,CGSize.zero){
             let attributes = NSDictionary(object: font, forKey: NSAttributedString.Key.font as NSCopying)
@@ -175,7 +207,7 @@ public extension NSString {
     ///   - size: 预估字符串大小
     ///   - text: 字符串
     /// - Returns: CGSize
-    func cz_textHeight(font: UIFont, size: CGSize = CGSize(width: CZCommon.cz_screenWidth, height: CGFloat(MAXFLOAT))) -> CGSize {
+    func cz_textHeight(font: UIFont, size: CGSize = CGSize(width: CZDeviceManage.screenWidth, height: CGFloat(MAXFLOAT))) -> CGSize {
         var textSize:CGSize
         if __CGSizeEqualToSize(size,CGSize.zero){
             let attributes = NSDictionary(object: font, forKey: NSAttributedString.Key.font as NSCopying)

@@ -5,7 +5,6 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
-import UIKit
 
 public extension CZKit where Base: UIControl {
     
@@ -32,4 +31,5 @@ public extension CZKit where Base: UIControl {
         base.addTarget(target, action: action, for: controlEvents)
         return self
     }
+    
 }

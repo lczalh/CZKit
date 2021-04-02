@@ -6,8 +6,6 @@
 //  Copyright © 2019 刘超正. All rights reserved.
 //
 
-import Foundation
-
 public extension UIImage {
      
     
@@ -66,8 +64,7 @@ public extension UIImage {
     /// 修改图片颜色
     /// - Parameter color: 颜色
     /// - Parameter blendMode: 模式
-    func cz_alterColor(color: UIColor, blendMode: CGBlendMode = .destinationIn) -> UIImage
-    {
+    func cz_alterColor(color: UIColor, blendMode: CGBlendMode = .destinationIn) -> UIImage {
         let drawRect = CGRect(x: 0.0, y: 0.0, width: self.size.width, height: self.size.height)
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         color.setFill()
@@ -76,5 +73,14 @@ public extension UIImage {
         let tintedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return tintedImage!
+    }
+    
+    /// 保存图片到相册
+    /// - Parameters:
+    ///   - completionTarget: self
+    ///   - completionSelector: #selector(image(image:didFinishSavingWithError:contextInfo:))
+    ///   - contextInfo: contextInfo description
+    func cz_savedPhotosAlbum(_ completionTarget: Any?, _ completionSelector: Selector?, _ contextInfo: UnsafeMutableRawPointer? = nil) {
+        UIImageWriteToSavedPhotosAlbum(self, completionTarget, completionSelector, contextInfo)
     }
 }

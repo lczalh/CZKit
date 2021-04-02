@@ -5,7 +5,6 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
-import UIKit
 
 public extension CZKit where Base: UIView {
     
@@ -177,7 +176,33 @@ public extension CZKit where Base: UIView {
         return self
     }
     
+    @discardableResult
+    func transform(_ transform: CGAffineTransform) -> CZKit {
+        base.transform = transform
+        return self
+    }
     
+    @discardableResult
+    func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) -> CZKit {
+        base.layer.shadowColor = color.cgColor
+        base.layer.shadowOffset = offset
+        base.layer.shadowRadius = radius
+        base.layer.shadowOpacity = opacity
+        base.layer.masksToBounds = false
+        return self
+    }
+    
+    @discardableResult
+    func addArrangedSuperView(_ stackView: UIStackView) -> CZKit {
+        stackView.addArrangedSubview(base)
+        return self
+    }
+    
+    @discardableResult
+    func autoresizingMask(autoresizingMask: UIView.AutoresizingMask) -> CZKit {
+        base.autoresizingMask = autoresizingMask
+        return self
+    }
     
 }
 

@@ -17,15 +17,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## Installation
 
 CZKit is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile or Cartfile:
+it, simply add the following line to your Podfile:
 
 #### Podfile
 ```ruby
-pod 'CZKit' //all
-pod 'CZKit/Core'
-pod 'CZKit/ChainKit'
-pod 'CZKit/ChainKit+SnapKit'
-pod 'CZKit/Date'
+pod 'CZKit' 
 ```
 
 ## Usage

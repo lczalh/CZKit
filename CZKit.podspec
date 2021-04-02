@@ -32,18 +32,30 @@ Pod::Spec.new do |spec|
     cksk.dependency 'SnapKit'
   end
   
-  # Date
-  spec.subspec 'Date' do |date|
-    date.source_files = 'CZKit/Date/*.swift'
-    date.dependency 'CZKit/ChainKit'
+  # Hud
+  spec.subspec 'Hud' do |hud|
+    hud.source_files = 'CZKit/Hud/*.swift'
+    hud.dependency 'SVProgressHUD'
   end
   
   # UI
-  spec.subspec 'UI' do |ui|
-    ui.source_files = 'CZKit/UI/*.swift'
-    ui.dependency 'CZKit/ChainKit'
-  end
+  #  spec.subspec 'Ui' do |ui|
+   #   ui.source_files = 'CZKit/Ui/*.swift'
+   #   ui.dependency 'CZKit/ChainKit'
+   # end
   
-  spec.frameworks = 'UIKit', 'Foundation', 'WebKit'
+  # UIImageView+Kingfisher
+   # spec.subspec 'UIImageView+Kingfisher' do |kf|
+  #    kf.source_files = 'CZKit/UIImageView+Kingfisher/*.swift'
+   #   kf.dependency 'Kingfisher'
+  #  end
+  
+  # UIScrollView+MJRefresh
+   # spec.subspec 'UIScrollView+MJRefresh' do |mj|
+   #     mj.source_files = 'CZKit/UIScrollView+MJRefresh/*.swift'
+   #     mj.dependency 'MJRefresh'
+  #  end
+  
+  spec.frameworks = 'UIKit', 'Foundation', 'WebKit', 'Photos', 'AudioToolbox'
 
 end

@@ -6,8 +6,6 @@
 //  Copyright © 2019 刘超正. All rights reserved.
 //
 
-import Foundation
-
 public extension UIAlertController {
     
     /// 快速创建只带取消和确定的提示框

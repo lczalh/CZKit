@@ -5,7 +5,6 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
-import UIKit
 
 public extension CZKit where Base: NSMutableAttributedString {
     
@@ -18,6 +17,18 @@ public extension CZKit where Base: NSMutableAttributedString {
     @discardableResult
     func addAttributes(_ attrs: [NSAttributedString.Key : Any] = [:], range: NSRange) -> CZKit {
         base.addAttributes(attrs, range: range)
+        return self
+    }
+    
+    @discardableResult
+    func append(_ attributedString: NSAttributedString) -> CZKit {
+        base.append(attributedString)
+        return self
+    }
+    
+    @discardableResult
+    func appends(_ attributedStrings: [NSAttributedString]) -> CZKit {
+        attributedStrings.forEach{ base.append($0) }
         return self
     }
     

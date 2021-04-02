@@ -6,7 +6,10 @@
 //  Copyright © 2020 glgs. All rights reserved.
 //
 
-import Foundation
+
+public extension Array {
+   
+}
 
 public extension Array where Element: NSCopying{
     var copy: [Element]{

@@ -5,7 +5,6 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
-import UIKit
 
 public extension CZKit where Base: UITextField {
     
@@ -24,6 +23,12 @@ public extension CZKit where Base: UITextField {
     @discardableResult
     func attributedPlaceholder(_ attributedPlaceholder: NSAttributedString?) -> CZKit {
         base.attributedPlaceholder = attributedPlaceholder
+        return self
+    }
+    
+    @discardableResult
+    func attributedPlaceholder(_ string: String, _ color: UIColor) -> CZKit {
+        base.attributedPlaceholder = NSMutableAttributedString.init(string: string, attributes: [NSAttributedString.Key.foregroundColor : color])
         return self
     }
     
@@ -146,6 +151,8 @@ public extension CZKit where Base: UITextField {
         base.autocorrectionType = autocorrectionType
         return self
     }
+    
+    
 }
 
 // Helper function inserted by Swift 4.2 migrator.

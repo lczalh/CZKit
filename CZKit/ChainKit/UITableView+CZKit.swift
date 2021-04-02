@@ -5,7 +5,6 @@
 //  Created by 刘超正 on 2019/9/20.
 //  Copyright © 2019 刘超正. All rights reserved.
 //
-import UIKit
 
 public extension CZKit where Base: UITableView {
     
@@ -150,6 +149,12 @@ public extension CZKit where Base: UITableView {
     @discardableResult
     func keyboardDismissMode(_ keyboardDismissMode: UIScrollView.KeyboardDismissMode) -> CZKit {
         base.keyboardDismissMode = keyboardDismissMode
+        return self
+    }
+    
+    @discardableResult
+    func setEditing(_ editing: Bool, animated: Bool) -> CZKit {
+        base.setEditing(editing, animated: animated)
         return self
     }
 }

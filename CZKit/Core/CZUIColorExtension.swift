@@ -6,8 +6,6 @@
 //  Copyright © 2019 刘超正. All rights reserved.
 //
 
-import Foundation
-
 public extension UIColor {
     
     /// 通过RGB获取颜色
@@ -36,5 +34,16 @@ public extension UIColor {
         let green = CGFloat(arc4random()%256)/255.0
         let blue = CGFloat(arc4random()%256)/255.0
         return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+    }
+    
+    func cz_drawImage() -> UIImage? {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(self.cgColor)
+        context?.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }
