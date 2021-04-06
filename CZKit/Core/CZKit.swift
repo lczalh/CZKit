@@ -35,3 +35,4 @@ public extension CZKitCompatible {
 }
 
 extension NSObject: CZKitCompatible {}
+extension String: CZKitCompatible {}

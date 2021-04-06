@@ -120,20 +120,22 @@ public extension CZKit where Base: NSMutableAttributedString {
         return self
     }
     
+    /// 设置删除线
     @discardableResult
-    func strikethroughStyle(_ strikethroughStyle: Int, range: NSRange? = nil) -> CZKit {
+    func strikethroughStyle(_ strikethroughStyle: NSUnderlineStyle, range: NSRange? = nil) -> CZKit {
         guard let range = range else {
-            base.addAttribute(.strikethroughStyle, value: strikethroughStyle, range: NSMakeRange(0, base.length))
+            base.addAttribute(.strikethroughStyle, value: strikethroughStyle.rawValue, range: NSMakeRange(0, base.length))
             return self
         }
         base.addAttribute(.strikethroughStyle, value: strikethroughStyle, range: range)
         return self
     }
     
+    /// 设置下划线
     @discardableResult
-    func underlineStyle(_ underlineStyle: Int, range: NSRange? = nil) -> CZKit {
+    func underlineStyle(_ underlineStyle: NSUnderlineStyle, range: NSRange? = nil) -> CZKit {
         guard let range = range else {
-            base.addAttribute(.underlineStyle, value: underlineStyle, range: NSMakeRange(0, base.length))
+            base.addAttribute(.underlineStyle, value: underlineStyle.rawValue, range: NSMakeRange(0, base.length))
             return self
         }
         base.addAttribute(.underlineStyle, value: underlineStyle, range: range)
@@ -210,6 +212,7 @@ public extension CZKit where Base: NSMutableAttributedString {
         return self
     }
     
+    /// 设置下划线颜色
     @discardableResult
     func underlineColor(_ underlineColor: UIColor, range: NSRange? = nil) -> CZKit {
         guard let range = range else {
@@ -220,6 +223,7 @@ public extension CZKit where Base: NSMutableAttributedString {
         return self
     }
     
+    /// 删除线颜色
     @discardableResult
     func strikethroughColor(_ strikethroughColor: UIColor, range: NSRange? = nil) -> CZKit {
         guard let range = range else {
@@ -230,6 +234,7 @@ public extension CZKit where Base: NSMutableAttributedString {
         return self
     }
     
+    /// 设置字体倾斜度，取值为float，正值右倾，负值左倾
     @discardableResult
     func obliqueness(_ obliqueness: CGFloat, range: NSRange? = nil) -> CZKit {
         guard let range = range else {
@@ -240,6 +245,7 @@ public extension CZKit where Base: NSMutableAttributedString {
         return self
     }
     
+    /// 设置字体的横向拉伸，取值为float，正值拉伸 ，负值压缩
     @discardableResult
     func expansion(_ expansion: CGFloat, range: NSRange? = nil) -> CZKit {
         guard let range = range else {

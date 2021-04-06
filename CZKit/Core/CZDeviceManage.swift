@@ -118,4 +118,13 @@ public struct CZDeviceManage {
         isPlaySystemSound = true
     }
     
+    /// 设备标识
+    public static var idfvUuidString: String {
+        return UIDevice.current.identifierForVendor?.uuidString ?? ""
+    }
+    
+    /// 广告标示符
+    public static var idfaUuidString: String {
+        return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+    }
 }
