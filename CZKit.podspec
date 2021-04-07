@@ -35,7 +35,7 @@ end
 #UI
 spec.subspec 'Ui' do |ui|
 ui.source_files = 'CZKit/Ui/*.swift'
-ui.dependency 'CZKit/ChainKit'
+ui.dependency 'CZKit/ChainKit+SnapKit'
 end
 
 #UIImageView+Kingfisher
