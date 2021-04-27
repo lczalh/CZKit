@@ -102,10 +102,10 @@ public struct CZStorageManage {
     /// 获取缓存大小
     public static var cacheSize: Float {
         var totalSize: Float = 0.0
-        guard isFileExist(filePath: CZDeviceManage.cachesPath) else { return totalSize }
-        guard let childrenPath = FileManager.default.subpaths(atPath: CZDeviceManage.cachesPath) else { return totalSize }
+        guard isFileExist(filePath: CZApplicationManage.cachesPath) else { return totalSize }
+        guard let childrenPath = FileManager.default.subpaths(atPath: CZApplicationManage.cachesPath) else { return totalSize }
         for path in childrenPath {
-            let childPath = CZDeviceManage.cachesPath.appending("/").appending(path)
+            let childPath = CZApplicationManage.cachesPath.appending("/").appending(path)
             if let attr: NSDictionary = try? FileManager.default.attributesOfItem(atPath: childPath) as NSDictionary {
                 let fileSize = attr["NSFileSize"] as? Float ?? 0
                 totalSize += fileSize
@@ -117,9 +117,9 @@ public struct CZStorageManage {
     /// 清除缓存
     public static func removeCache(complete: @escaping (() -> Void)) {
         DispatchQueue.global().async {
-            let files = FileManager.default.subpaths(atPath: CZDeviceManage.cachesPath) ?? []
+            let files = FileManager.default.subpaths(atPath: CZApplicationManage.cachesPath) ?? []
             for file in files {
-                let path = CZDeviceManage.cachesPath.appending("/\(file)")
+                let path = CZApplicationManage.cachesPath.appending("/\(file)")
                 if isFileExist(filePath: path) { if let _ = try? FileManager.default.removeItem(atPath: path) {} }
             }
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: { complete() })

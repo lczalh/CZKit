@@ -12,10 +12,6 @@ public protocol CZEnumValueProtocol {
     var value: String { get }
 }
 
-public enum CZSoundEnum: Int {
-    case 震动 = 0
-}
-
 /// 应用跳转枚举
 public enum CZApplicationJumpEnum: CZEnumValueProtocol {
     case 打电话(tel: String)

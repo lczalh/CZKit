@@ -106,34 +106,32 @@ public extension UIView {
         layer.masksToBounds = false
     }
     
-    /// 向视图插入阴影和任意角落圆角
+    /// 向视图插入阴影和任意角落圆角 （自动布局时需要在主线程调用)
     /// - Parameters:
-    ///   - shadowLayerName: 层名称
+    ///   - shadowLayerName: 层名称 避免重复插入
     ///   - shadowColor: 阴影颜色
-    ///   - offSet: 阴影偏移
-    ///   - opacity: 透明度
-    ///   - shadowRadius: 角度
-    ///   - cornerRadius: 角度
+    ///   - shadowOffset: 阴影偏移
+    ///   - shadowOpacity: 透明度
     ///   - corners: 角落
-    ///   - fillColor: 填充颜色
-    func cz_insertShadowAndRoundedCorners(shadowLayerName: String? = nil, shadowColor: UIColor, offSet: CGSize, opacity: Float, shadowRadius:
-        CGFloat, cornerRadius: CGFloat, corners: UIRectCorner, fillColor: UIColor = .white) {
-        if layer.sublayers?.filter({ $0.name == shadowLayerName }).first == nil {
-            let shadowLayer = CAShapeLayer()
-            let size = CGSize(width: cornerRadius, height: cornerRadius)
-            let cgPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: size).cgPath //1
-            shadowLayer.path = cgPath //2
-            shadowLayer.fillColor = fillColor.cgColor //3
-            shadowLayer.shadowColor = shadowColor.cgColor //4
-            shadowLayer.shadowPath = cgPath
-            shadowLayer.shadowOffset = offSet //5
-            shadowLayer.shadowOpacity = opacity
-            shadowLayer.shadowRadius = shadowRadius
-            shadowLayer.name = shadowLayerName
-            shadowLayer.masksToBounds = false
-            layer.masksToBounds = false
-            layer.insertSublayer(shadowLayer, at: 0)
-        }
+    ///   - radius: 角度
+    func cz_setShadowAndRoundCorner(shadowLayerName: String, shadowColor: UIColor, shadowOffset: CGSize, shadowOpacity: Float, corners: UIRectCorner, radius: CGFloat) {
+        guard let superview = superview else { return }
+        superview.layoutIfNeeded()
+        guard superview.layer.sublayers?.filter({ $0.name == shadowLayerName }).first == nil else { return }
+        let layout = CALayer()
+            .cz
+            .frame(frame)
+            .cornerRadius(radius)
+            .masksToBounds(false)
+            .shadowColor(shadowColor)
+            .shadowOffset(shadowOffset)
+            .shadowOpacity(1)
+            .shadowRadius(radius)
+            .backgroundColor(.white)
+            .name(shadowLayerName)
+            .build
+        cz_roundCorners(corners, radius: radius)
+        superview.layer.insertSublayer(layout, below: layer)
     }
     
     /// 实现以下弯曲的UIView

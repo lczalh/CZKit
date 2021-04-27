@@ -113,12 +113,17 @@ public struct CZApplicationManage {
         return nil
     }
     
-//    public static func config() {
-//        NSURLCach
-//        let cache = URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
-//       //[NSURLCache setSharedURLCache:urlCache];
-//        URLCache.shared.cachedResponse(for: URLRequest.ca)
-//    }
+    /// 获取沙盒Document路径
+    public static var documentPath: String { return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first ?? "" }
+
+    /// 获取沙盒Library路径
+    public static var libraryPath: String { return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .allDomainsMask, true).first ?? "" }
+    
+    /// 获取沙盒caches路径
+    public static var cachesPath: String { return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .allDomainsMask, true).first ?? "" }
+
+    /// 获取沙盒tmp路径
+    public static var tmpPath: String { return NSTemporaryDirectory() }
      
     
 }

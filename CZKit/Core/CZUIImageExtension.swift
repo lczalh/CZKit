@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 public extension UIImage {
-     
+    
     
     /// 将图片裁剪成指定比例（多余部分自动删除）
     /// - Parameter ratio: 比例
@@ -21,45 +21,45 @@ public extension UIImage {
         }else{
             newSize = CGSize(width: size.width, height: size.width / ratio)
         }
-     
+        
         ////图片绘制区域
         var rect = CGRect.zero
         rect.size.width  = size.width
         rect.size.height = size.height
         rect.origin.x    = (newSize.width - size.width ) / 2.0
         rect.origin.y    = (newSize.height - size.height ) / 2.0
-         
+        
         //绘制并获取最终图片
         UIGraphicsBeginImageContext(newSize)
         draw(in: rect)
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-         
+        
         return scaledImage!
     }
     
     
     /// 将图片缩放成指定尺寸（多余部分自动删除）
     /// - Parameter size: 尺寸
-    func cz_scaled(size: CGSize) -> UIImage {
+    func cz_scaled(newSize: CGSize) -> UIImage {
         //计算比例
-        let aspectWidth  = size.width/size.width
-        let aspectHeight = size.height/size.height
+        let aspectWidth  = newSize.width/size.width
+        let aspectHeight = newSize.height/size.height
         let aspectRatio = max(aspectWidth, aspectHeight)
-         
+        
         //图片绘制区域
         var scaledImageRect = CGRect.zero
         scaledImageRect.size.width  = size.width * aspectRatio
         scaledImageRect.size.height = size.height * aspectRatio
-        scaledImageRect.origin.x    = (size.width - size.width * aspectRatio) / 2.0
-        scaledImageRect.origin.y    = (size.height - size.height * aspectRatio) / 2.0
-         
+        scaledImageRect.origin.x    = (newSize.width - size.width * aspectRatio) / 2.0
+        scaledImageRect.origin.y    = (newSize.height - size.height * aspectRatio) / 2.0
+        
         //绘制并获取最终图片
-        UIGraphicsBeginImageContext(size)
+        UIGraphicsBeginImageContext(newSize)
         draw(in: scaledImageRect)
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-         
+        
         return scaledImage!
     }
     

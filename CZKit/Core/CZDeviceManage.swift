@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import AudioToolbox
+import AdSupport
+import AppTrackingTransparency
 
 public struct CZDeviceManage {
     
@@ -65,18 +67,6 @@ public struct CZDeviceManage {
     /// 获取APP名称  Xcode 11需要在info.plist里面添加 Bundle display name
     public static var appName: String { return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "" }
     
-    /// 获取沙盒Document路径
-    public static var documentPath: String { return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first ?? "" }
-
-    /// 获取沙盒Library路径
-    public static var libraryPath: String { return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .allDomainsMask, true).first ?? "" }
-    
-    /// 获取沙盒caches路径
-    public static var cachesPath: String { return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .allDomainsMask, true).first ?? "" }
-
-    /// 获取沙盒tmp路径
-    public static var tmpPath: String { return NSTemporaryDirectory() }
-    
     /// 安全区域底部高度
     public static var safeAreaBottomHeight: CGFloat {
         guard #available(iOS 11.0, *) else { return 0.0 }
@@ -123,8 +113,18 @@ public struct CZDeviceManage {
         return UIDevice.current.identifierForVendor?.uuidString ?? ""
     }
     
-    /// 广告标示符
+    /// 广告标示符 Info中添加  Privacy - Tracking Usage Description：获取设备信息用以精准推送您喜欢的内容
     public static var idfaUuidString: String {
-        return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        var advertisingId: String = ""
+        if #available(iOS 14.0, *) {
+            ATTrackingManager.requestTrackingAuthorization { (state) in
+                if state == .authorized {
+                    advertisingId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                }
+            }
+        } else {
+            advertisingId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        }
+        return advertisingId
     }
 }

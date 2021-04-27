@@ -10,15 +10,13 @@ import UIKit
 
 public extension String {
     
-    //将原始的url编码为合法的url
-    func cz_encoded() -> String {
-        let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters:
-            .urlQueryAllowed)
-        return encodeUrlString ?? ""
+    /// 将原始的url编码为合法的url
+    func cz_encode() -> String {
+        return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
-     
-    //将编码后的url转换回原始的url
-    func cz_decoded() -> String {
+    
+    /// 将编码后的url转换回原始的url
+    func cz_decode() -> String {
         return removingPercentEncoding ?? ""
     }
     
@@ -41,9 +39,9 @@ public extension String {
     
     /// 去除所有 \r \n \t
     var cz_removeEnterAll: String { return replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\t", with: "") }
-
+    
     /// 去除所有空格换行
-  //  var cz_removeSapceEnterAll: String { return cz_removeAllSapce.replacingOccurrences(of: "\n", with: "") }
+    //  var cz_removeSapceEnterAll: String { return cz_removeAllSapce.replacingOccurrences(of: "\n", with: "") }
     
     /// 通过时间字符串获取日期（Date）
     ///
@@ -72,55 +70,40 @@ public extension String {
         return timeStamp!
     }
     
-    init?(gbkData: Data) {
-        //获取GBK编码, 使用GB18030是因为它向下兼容GBK
-        let cfEncoding = CFStringEncodings.GB_18030_2000
-        let encoding = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(cfEncoding.rawValue))
-        //从GBK编码的Data里初始化NSString, 返回的NSString是UTF-16编码
-        if let str = NSString(data: gbkData, encoding: encoding) {
-            self = str as String
-        } else {
-            return nil
-        }
-    }
-    
-//    /// 中文字符串转GBK字符串
-//    var cz_chineseTurnGbkString: String {
-//        let pattern = "[^\\u4E00-\\u9FA5，。！、……《》（）【】：；“‘”’？￥]"
-//        let regex = try? NSRegularExpression(pattern: pattern, options: [])
-//        var str = ""
-//        for i in self {
-//            
-//            if regex.firstMatch(in: String(i), options: [], range: NSRange(location: 0, length: String(i).utf16.count)) .map { Match(result: $0, in: String(i)) } {
-//                str.append(i)
-//            }else{
-//                let data = String(i).data(using: .cz_gb_18030_2000)
-//                let bytes = [UInt8](data!)
-//                var string = ""
-//                for val in bytes {
-//                    string =  string + "%" + String(format: "%02X",val)
-//                }
-//                str.append(string)
-//            }
-//        }
-//        return str
-//    }
-    
-    /// 去除百分比编码
-    func cz_removingPercentEncoding(using encoding: String.Encoding) -> String? {
-        let regex = try! NSRegularExpression(pattern: "(%[0-9A-F]{2})|(.)", options: .caseInsensitive)
-        var bytes = Data()
-        let nsSelf = self as NSString
-        for match in regex.matches(in: self, range: NSRange(0..<self.utf16.count)) {
-            if match.range(at: 1).location != NSNotFound {
-                let hexString = nsSelf.substring(with: NSMakeRange(match.range(at: 1).location+1, 2))
-                bytes.append(UInt8(hexString, radix: 16)!)
+    /// 中文字符串转GBK字符串
+    var cz_utf8TurnGbkEncode: String {
+        guard let regex = try? CZRegularManage(pattern: "[^\\u4E00-\\u9FA5，。！、……《》（）【】：；“‘”’？￥]") else { return "" }
+        var gbkString = ""
+        for i in self {
+            if regex.firstMatch(in: String(i)) != nil {
+                gbkString.append(i)
             } else {
-                let singleChar = nsSelf.substring(with: match.range(at: 2))
-                bytes.append(singleChar.data(using: encoding) ?? "?".data(using: .ascii)!)
+                let data = String(i).data(using: .cz_gb_18030_2000)
+                let bytes = [UInt8](data!)
+                var string = ""
+                for val in bytes {
+                    string =  string + "%" + String(format: "%02X",val)
+                }
+                gbkString.append(string)
             }
         }
-        return String(data: bytes, encoding: encoding)
+        return gbkString
+    }
+    
+    /// 去除百分比编码
+    var cz_gbkTurnUtf8Encode: String {
+        guard let regex = try? CZRegularManage(pattern: "(%[0-9A-F]{2})|(.)", options: .caseInsensitive) else { return "" }
+        var bytes = Data()
+        for match in regex.matches(string: self) {
+            if match.range(at: 1).location != NSNotFound {
+                let hexString = cz_subString(location: match.range(at: 1).location+1, length: 2)
+                bytes.append(UInt8(hexString, radix: 16)!)
+            } else {
+                let singleChar = cz_subString(location: match.range(at: 2).location, length: match.range(at: 2).length)
+                bytes.append(singleChar.data(using: .cz_gb_18030_2000) ?? "?".data(using: .ascii)!)
+            }
+        }
+        return String(data: bytes, encoding: .cz_gb_18030_2000) ?? ""
     }
     
     /// 计算字符串宽度
@@ -170,7 +153,7 @@ public extension String {
         let paraph = NSMutableParagraphStyle()
         paraph.lineSpacing = lineSpacing
         let attributes = [NSAttributedString.Key.font: font,
-                  NSAttributedString.Key.paragraphStyle: paraph]
+                          NSAttributedString.Key.paragraphStyle: paraph]
         return NSAttributedString(string: self, attributes: attributes)
     }
 }
