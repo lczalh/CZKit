@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-extension UITabBarController {
+public extension UITabBarController {
     
     /// 是否隐藏TabBar上的分割线
     /// - Parameter isHidden: true: 隐藏 false：显示
@@ -19,7 +19,7 @@ extension UITabBarController {
                 tabBarAppearance.shadowImage = nil
                 return
             }
-            tabBarAppearance.shadowImage = UIImage(color: .clear, size: CGSize(width: CZDeviceManage.screenWidth, height: 1))
+            tabBarAppearance.shadowImage = CZCommonManage.createImage(color: .clear, size: CGSize(width: CZDeviceManage.screenWidth, height: 1))
             tabBar.standardAppearance = tabBarAppearance
         } else {
             guard isHidden else {

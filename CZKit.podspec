@@ -17,34 +17,17 @@ spec.source       = { :git => "https://github.com/lczalh/CZKit.git", :tag => spe
 # Core
 spec.subspec 'Core' do |core|
 core.source_files = 'CZKit/Core/*.swift'
+core.dependency 'SnapKit'
+core.dependency 'SwifterSwift'
 end
 
-# ChainKit
-spec.subspec 'ChainKit' do |ck|
-ck.source_files = 'CZKit/ChainKit/*.swift'
-ck.dependency 'CZKit/Core'
-end
-
-# ChainKit+SnapKit
-spec.subspec 'ChainKit+SnapKit' do |cksk|
-cksk.source_files = 'CZKit/ChainKit+SnapKit/*.swift'
-cksk.dependency 'CZKit/ChainKit'
-cksk.dependency 'SnapKit'
-end
-
-#UI
-spec.subspec 'Ui' do |ui|
-ui.source_files = 'CZKit/Ui/*.swift'
-ui.dependency 'CZKit/ChainKit+SnapKit'
-end
-
-#UIImageView+Kingfisher
+# UIImageView+Kingfisher
 spec.subspec 'UIImageView+Kingfisher' do |kf|
 kf.source_files = 'CZKit/UIImageView+Kingfisher/*.swift'
 kf.dependency 'Kingfisher'
 end
 
-#UIScrollView+MJRefresh
+# UIScrollView+MJRefresh
 spec.subspec 'UIScrollView+MJRefresh' do |mj|
 mj.source_files = 'CZKit/UIScrollView+MJRefresh/*.swift'
 mj.dependency 'MJRefresh'

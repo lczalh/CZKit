@@ -155,5 +155,19 @@ public struct CZCommonManage {
             }
         }
     }
+    
+    /// 根据颜色和大小创建UIImage
+    ///
+    /// - Parameters:
+    ///   - color: image fill color.
+    ///   - size: image size.
+    static func createImage(color: UIColor, size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1)
+        color.setFill()
+        UIRectFill(CGRect(origin: .zero, size: size))
+        guard let aCgImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else { return nil }
+        UIGraphicsEndImageContext()
+        return UIImage(cgImage: aCgImage)
+    }
 
 }

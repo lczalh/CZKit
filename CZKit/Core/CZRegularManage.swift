@@ -25,7 +25,7 @@
 
 import Foundation
 
-struct CZRegularManage {
+public struct CZRegularManage {
     
     private let regularExpression: NSRegularExpression
     

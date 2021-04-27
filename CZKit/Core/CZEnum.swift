@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwifterSwift
 
 /// 枚举协议
 public protocol CZEnumValueProtocol {

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UINavigationController {
+public extension UINavigationController {
     
     /// 是否禁用导航条侧滑返回
     /// - Parameter isEnabled: false: 禁用  true: 启用
