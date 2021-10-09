@@ -22,26 +22,27 @@ end
 # ChainKit
 spec.subspec 'ChainKit' do |ck|
 ck.source_files = 'CZKit/ChainKit/*.swift'
-ck.dependency 'Core'
+ck.dependency 'CZKit/Core'
 end
 
 # ChainKit+SnapKit
 spec.subspec 'ChainKit+SnapKit' do |cs|
 cs.source_files = 'CZKit/ChainKit+SnapKit/*.swift'
 cs.dependency 'SnapKit'
-cs.dependency 'ChainKit'
+cs.dependency 'CZKit/ChainKit'
 end
 
 # UI
 spec.subspec 'Ui' do |ui|
 ui.source_files = 'CZKit/Ui/*.swift'
-ui.dependency 'ChainKit+SnapKit'
+ui.dependency 'CZKit/ChainKit+SnapKit'
 end
 
-# UI
+# Hud
 spec.subspec 'Hud' do |hud|
 hud.source_files = 'CZKit/Hud/*.swift'
 hud.dependency 'SVProgressHUD'
+hud.dependency 'CZKit/Core'
 end
 
 # UIImageView+Kingfisher
