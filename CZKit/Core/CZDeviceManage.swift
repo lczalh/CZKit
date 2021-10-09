@@ -28,6 +28,9 @@ public struct CZDeviceManage {
     /// 获取导航条高度
     public static var navigationHeight: CGFloat { return UINavigationController().navigationBar.frame.height }
     
+    /// 屏幕中心点
+    public static var screenCenter: CGPoint { CGPoint(x: screenWidth / 2, y: screenHeight / 2)}
+    
     /// 获取状态栏高度
     public static var statusBarHeight: CGFloat {
         guard #available(iOS 13.0, *) else { return UIApplication.shared.statusBarFrame.height }
@@ -112,19 +115,15 @@ public struct CZDeviceManage {
     public static var idfvUuidString: String {
         return UIDevice.current.identifierForVendor?.uuidString ?? ""
     }
-    
+
     /// 广告标示符 Info中添加  Privacy - Tracking Usage Description：获取设备信息用以精准推送您喜欢的内容
-    public static var idfaUuidString: String {
-        var advertisingId: String = ""
+    public static func getIdfaUuid(value: @escaping ((String) -> Void)) {
         if #available(iOS 14.0, *) {
             ATTrackingManager.requestTrackingAuthorization { (state) in
-                if state == .authorized {
-                    advertisingId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-                }
+                value(ASIdentifierManager.shared().advertisingIdentifier.uuidString)
             }
         } else {
-            advertisingId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            value(ASIdentifierManager.shared().advertisingIdentifier.uuidString)
         }
-        return advertisingId
     }
 }

@@ -126,22 +126,16 @@ public extension String {
         return self.boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font : font], context: nil).size.height
     }
     
-    /// 字符串截取
-    /// - Parameters:
-    ///   - location: 起始位置
-    ///   - length: 长度
-    ///   - suffix: 后缀
-    /// - Returns: 截取后的字符串
-    func cz_subString(location: Int, length: Int, suffix: String? = nil) -> String {
-        guard length < count else {  return self }
-        let start = index(startIndex, offsetBy: location)
-        let end = index(start, offsetBy: length)
-        let result = String(self[start ..< end])
-        if let suffix = suffix {
-            return "\(result)\(suffix)"
-        } else {
-            return result
-        }
+    func cz_subString(range: NSRange, prefix: String = "", suffix: String = "") -> String {
+        guard range.length < count else {  return self }
+        let result = (self as NSString).substring(with: range)
+        return prefix + result + suffix
+    }
+    
+    func cz_subString(location: Int, length: Int, prefix: String = "", suffix: String = "") -> String {
+        guard length < length else {  return self }
+        let result = (self as NSString).substring(with: NSRange(location: location, length: length))
+        return prefix + result + suffix
     }
     
     /// 设置文字行间距
@@ -155,6 +149,14 @@ public extension String {
         let attributes = [NSAttributedString.Key.font: font,
                           NSAttributedString.Key.paragraphStyle: paraph]
         return NSAttributedString(string: self, attributes: attributes)
+    }
+    
+    /// html格式字符串转换为NSMutableAttributedString
+    func cz_attributedHtmlString() -> NSMutableAttributedString {
+        guard let data = data(using: String.Encoding.unicode, allowLossyConversion: true), let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else {
+            return NSMutableAttributedString(string: "")
+        }
+        return attributedString
     }
 }
 

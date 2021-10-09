@@ -93,4 +93,10 @@ public extension CZKit where Base: UIButton {
         base.contentEdgeInsets = contentEdgeInsets
         return self
     }
+    
+    @discardableResult
+    func semanticContentAttribute(_ semanticContentAttribute: UISemanticContentAttribute) -> CZKit {
+        base.semanticContentAttribute = semanticContentAttribute
+        return self
+    }
 }

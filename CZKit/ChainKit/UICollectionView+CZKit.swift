@@ -93,4 +93,10 @@ public extension CZKit where Base: UICollectionView {
                       withReuseIdentifier: identifier)
         return self
     }
+    
+    @discardableResult
+    func collectionViewLayout(_ collectionViewLayout: UICollectionViewLayout) -> CZKit {
+        base.collectionViewLayout = collectionViewLayout
+        return self
+    }
 }

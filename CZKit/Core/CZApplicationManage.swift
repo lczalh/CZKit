@@ -84,9 +84,13 @@ public struct CZApplicationManage {
 
     /// 获取最上层window
     public static func lastWindow() -> UIWindow? {
-        if let window = UIApplication.shared.windows.first { return window }
-        if let window = UIApplication.shared.keyWindow { return window }
-        return nil
+        if #available(iOS 13.0, *), UIApplication.shared.supportsMultipleScenes {
+            guard let window = UIApplication.shared.windows.first else { return nil }
+            return window
+        } else {
+            guard let window = UIApplication.shared.keyWindow else { return nil }
+            return window
+        }
     }
 
     /// 获取最上层的控制器
@@ -108,9 +112,13 @@ public struct CZApplicationManage {
     /// - Parameter rootControllerType: 底层控制器类型
     /// - Returns: 底层控制器对象
     public static func firstController<T: UIViewController>(rootControllerType: T.Type) -> T? {
-        if let controller = UIApplication.shared.windows.first?.rootViewController as? T { return controller }
-        if let controller = UIApplication.shared.delegate?.window?!.rootViewController as? T { return controller }
-        return nil
+        if #available(iOS 13.0, *), UIApplication.shared.supportsMultipleScenes {
+            guard let controller = UIApplication.shared.windows.first?.rootViewController as? T else { return nil }
+            return controller
+        } else {
+            guard let controller = UIApplication.shared.delegate?.window?!.rootViewController as? T else { return nil }
+            return controller
+        }
     }
     
     /// 获取沙盒Document路径

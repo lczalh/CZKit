@@ -69,6 +69,7 @@ public extension UIView {
     }
     
     /// 将当前视图转为UIImage
+    @discardableResult
     func cz_asImage() -> UIImage {
         let renderer = UIGraphicsImageRenderer(bounds: bounds)
         return renderer.image { rendererContext in
@@ -112,9 +113,10 @@ public extension UIView {
     ///   - shadowColor: 阴影颜色
     ///   - shadowOffset: 阴影偏移
     ///   - shadowOpacity: 透明度
+    ///   - vagueRadius: 模糊半径
     ///   - corners: 角落
     ///   - radius: 角度
-    func cz_setShadowAndRoundCorner(shadowLayerName: String, shadowColor: UIColor, shadowOffset: CGSize, shadowOpacity: Float, corners: UIRectCorner, radius: CGFloat) {
+    func cz_setShadowAndRoundCorner(shadowLayerName: String, shadowColor: UIColor, shadowOffset: CGSize, shadowOpacity: Float, vagueRadius: CGFloat, corners: UIRectCorner, radius: CGFloat) {
         guard let superview = superview else { return }
         superview.layoutIfNeeded()
         guard superview.layer.sublayers?.filter({ $0.name == shadowLayerName }).first == nil else { return }
@@ -126,7 +128,7 @@ public extension UIView {
             .shadowColor(shadowColor)
             .shadowOffset(shadowOffset)
             .shadowOpacity(1)
-            .shadowRadius(radius)
+            .shadowRadius(vagueRadius)
             .backgroundColor(.white)
             .name(shadowLayerName)
             .build
@@ -153,5 +155,13 @@ public extension UIView {
         
         // Set the newly created shape layer as the mask for the view's layer
         self.layer.mask = maskLayer
+    }
+    
+    /// 获取当前视图所在目标视图的位置
+    /// - targetView: 目标视图对象 默认window
+    /// - Returns: 位置大小
+    @discardableResult
+    func cz_placeRect(targetView: UIView? = CZApplicationManage.lastWindow()) -> CGRect? {
+        return superview?.convert(frame, to: targetView)
     }
 }

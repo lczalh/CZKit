@@ -15,9 +15,9 @@ public extension UIControl {
     }
     
     /// 存储事件回调
-    private var cz_actionBlock: ((UIButton) -> Void)? {
+    private var cz_actionBlock: (() -> Void)? {
         get {
-            return objc_getAssociatedObject(self, CZUIControl.cz_actionKey) as? ((UIButton) -> Void)
+            return objc_getAssociatedObject(self, CZUIControl.cz_actionKey) as? (() -> Void)
         }
         set {
             objc_setAssociatedObject(self, CZUIControl.cz_actionKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -25,14 +25,14 @@ public extension UIControl {
     }
     
     /// 添加按钮事件
-    func cz_addTarget(actionBlock: ((UIButton) -> Void)?, for controlEvents: UIControl.Event) {
+    func cz_addTarget(actionBlock: (() -> Void)?, for controlEvents: UIControl.Event) {
         cz_actionBlock = actionBlock
-        addTarget(self, action: #selector(cz_action(sender:)), for: controlEvents)
+        addTarget(self, action: #selector(cz_action), for: controlEvents)
     }
     
-    @objc private func cz_action(sender: UIButton) {
+    @objc private func cz_action() {
         if cz_actionBlock != nil {
-            cz_actionBlock!(sender)
+            cz_actionBlock!()
         }
     }
 }
@@ -41,7 +41,7 @@ public extension CZKit where Base: UIControl {
     
     /// 添加按钮事件
     @discardableResult
-    func addTarget(_ actionBlock: ((UIButton) -> Void)?, for controlEvents: UIControl.Event) -> CZKit {
+    func addTarget(_ actionBlock: (() -> Void)?, for controlEvents: UIControl.Event) -> CZKit {
         base.cz_addTarget(actionBlock: actionBlock, for: controlEvents)
         return self
     }

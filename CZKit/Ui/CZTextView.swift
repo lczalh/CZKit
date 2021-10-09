@@ -10,6 +10,7 @@ import UIKit
 
 class CZTextView: UIView {
     
+    /// 文本内容
     var text: String? {
         didSet {
             textView.text = text
@@ -100,6 +101,25 @@ class CZTextView: UIView {
         }
     }
     
+    /// 是否可编辑
+    var isEditable: Bool = true {
+        didSet {
+            textView.isEditable = isEditable
+        }
+    }
+    
+    /// 输入框默认高度
+    var defaultHeight: CGFloat = 90 {
+        didSet {
+            textView.snp.updateConstraints { make in
+                make.height.greaterThanOrEqualTo(defaultHeight)
+            }
+        }
+    }
+    
+    /// 是否自动高度
+    var isAutoHeight: Bool = false
+    
     /// 值改变回调
     var textViewDidChangeBlock: ((_ textView: UITextView) -> Void)?
     
@@ -122,10 +142,12 @@ class CZTextView: UIView {
                 make.left.equalToSuperview().offset(padding.left)
                 make.right.equalToSuperview().offset(-padding.right)
                 make.top.equalToSuperview().offset(padding.top)
+                make.height.greaterThanOrEqualTo(defaultHeight)
             })
             .delegate(self)
             .font(font)
             .textColor(textColor)
+            .backgroundColor(.clear)
             .build
         
         placeholderLabel = UILabel()
@@ -177,6 +199,7 @@ class CZTextView: UIView {
         limitedNumberLabel.textColor = limitedNumberTextColor
         limitedNumberLabel.font = limitedNumberFont
         // textView
+        let selectedRange = textView.selectedRange
         let mutableStr = NSMutableAttributedString(attributedString: textView.attributedText)
         let paraph = NSMutableParagraphStyle()
         paraph.lineSpacing = lineSpacing
@@ -185,6 +208,15 @@ class CZTextView: UIView {
                                   NSAttributedString.Key.foregroundColor: textColor],
                                  range: NSMakeRange(0,mutableStr.length))
         textView.attributedText = mutableStr
+        textView.selectedRange = selectedRange
+        if isAutoHeight {
+            layoutIfNeeded()
+            let height = defaultHeight >= textView.contentSize.height ? defaultHeight : textView.contentSize.height
+            cz_print(height)
+            textView.snp.updateConstraints { make in
+                make.height.greaterThanOrEqualTo(height)
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -200,11 +232,29 @@ extension CZTextView: UITextViewDelegate {
             textViewDidChangeBlock!(textView)
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText newText: String) -> Bool {
+        if let maxLenght = maxLenght {
+            if textView.text.count + newText.count - range.length > maxLenght {
+                return false
+            }
+        }
+        return true
+    }
+    
 }
 
 
 extension CZKit where Base: CZTextView {
     
+    /// 文本内容
+    @discardableResult
+    func text(_ text: String) -> CZKit {
+        base.text = text
+        return self
+    }
+    
+    /// 字体
     @discardableResult
     func font(_ font: UIFont) -> CZKit {
         base.font = font
@@ -247,6 +297,7 @@ extension CZKit where Base: CZTextView {
         return self
     }
     
+    /// 限制数颜色
     @discardableResult
     func limitedNumberTextColor(_ limitedNumberTextColor: UIColor) -> CZKit {
         base.limitedNumberTextColor = limitedNumberTextColor
@@ -264,4 +315,25 @@ extension CZKit where Base: CZTextView {
         base.textViewDidChangeBlock = textViewDidChangeBlock
         return self
     }
+    
+    @discardableResult
+    func isEditable(_ isEditable: Bool) -> CZKit {
+        base.isEditable = isEditable
+        return self
+    }
+    
+    /// 输入框默认高度
+    @discardableResult
+    func defaultHeight(_ defaultHeight: CGFloat) -> CZKit {
+        base.defaultHeight = defaultHeight
+        return self
+    }
+    
+    /// 是否自动高度
+    @discardableResult
+    func isAutoHeight(_ isAutoHeight: Bool) -> CZKit {
+        base.isAutoHeight = isAutoHeight
+        return self
+    }
+    
 }
