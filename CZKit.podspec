@@ -14,47 +14,13 @@ spec.ios.deployment_target = "10.0"
 spec.swift_version = ['5.0']
 spec.source       = { :git => "https://github.com/lczalh/CZKit.git", :tag => spec.version.to_s }
 
-# Core
-spec.subspec 'Core' do |core|
-core.source_files = 'CZKit/Core/*.swift'
-end
-
 # ChainKit
-spec.subspec 'ChainKit' do |ck|
-ck.source_files = 'CZKit/ChainKit/*.swift'
-ck.dependency 'CZKit/Core'
-end
-
-# ChainKit+SnapKit
-spec.subspec 'ChainKit+SnapKit' do |cs|
-cs.source_files = 'CZKit/ChainKit+SnapKit/*.swift'
-cs.dependency 'SnapKit'
-cs.dependency 'CZKit/ChainKit'
-end
-
-# UI
-spec.subspec 'Ui' do |ui|
-ui.source_files = 'CZKit/Ui/*.swift'
-ui.dependency 'CZKit/ChainKit+SnapKit'
-end
-
-# Hud
-spec.subspec 'Hud' do |hud|
-hud.source_files = 'CZKit/Hud/*.swift'
-hud.dependency 'SVProgressHUD'
-hud.dependency 'CZKit/Core'
-end
-
-# UIImageView+Kingfisher
-spec.subspec 'UIImageView+Kingfisher' do |kf|
-kf.source_files = 'CZKit/UIImageView+Kingfisher/*.swift'
-kf.dependency 'Kingfisher'
-end
-
-# UIScrollView+MJRefresh
-spec.subspec 'UIScrollView+MJRefresh' do |mj|
-mj.source_files = 'CZKit/UIScrollView+MJRefresh/*.swift'
-mj.dependency 'MJRefresh'
+spec.subspec 'CZKit' do |ck|
+ck.source_files = 'CZKit/*.swift'
+ck.dependency 'SnapKit'
+ck.dependency 'SVProgressHUD'
+ck.dependency 'Kingfisher'
+ck.dependency 'MJRefresh'
 end
 
 spec.frameworks = 'UIKit', 'Foundation', 'WebKit', 'Photos', 'AudioToolbox', 'AppTrackingTransparency', 'AdSupport'
