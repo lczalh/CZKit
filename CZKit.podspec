@@ -13,7 +13,6 @@ spec.author             = { "lczalh" => "824092805@qq.com" }
 spec.ios.deployment_target = "10.0"
 spec.swift_version = ['5.0']
 spec.source       = { :git => "https://github.com/lczalh/CZKit.git", :tag => spec.version.to_s }
-spec.pod_target_xcconfig = { 'SWIFT_VERSION' => '5.0' }
 spec.source_files = 'CZKit/ChainKit/*.swift', 'CZKit/Extension/*.swift', 'CZKit/Manage/*.swift', 'CZKit/Ui/*.swift', 'CZKit/ChainKit+SnapKit/*.swift'
 
 
