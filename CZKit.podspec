@@ -14,13 +14,13 @@ spec.ios.deployment_target = "10.0"
 spec.swift_version = ['5.0']
 spec.source       = { :git => "https://github.com/lczalh/CZKit.git", :tag => spec.version.to_s }
 
-# ChainKit
-spec.subspec 'CZKit' do |ck|
-ck.source_files = 'CZKit/*.swift'
-ck.dependency 'SnapKit'
-ck.dependency 'SVProgressHUD'
-ck.dependency 'Kingfisher'
-ck.dependency 'MJRefresh'
+# Core
+spec.subspec 'Core' do |ck|
+ck.source_files = 'CZKit/Core/*.swift'
+#ck.dependency 'SnapKit'
+#ck.dependency 'SVProgressHUD'
+#ck.dependency 'Kingfisher'
+#ck.dependency 'MJRefresh'
 end
 
 spec.frameworks = 'UIKit', 'Foundation', 'WebKit', 'Photos', 'AudioToolbox', 'AppTrackingTransparency', 'AdSupport'
