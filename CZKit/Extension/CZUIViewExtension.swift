@@ -129,7 +129,7 @@ public extension UIView {
             .shadowOffset(shadowOffset)
             .shadowOpacity(1)
             .shadowRadius(vagueRadius)
-            .backgroundColor(.white)
+            .backgroundColor(UIColor.white)
             .name(shadowLayerName)
             .build
         cz_roundCorners(corners, radius: radius)

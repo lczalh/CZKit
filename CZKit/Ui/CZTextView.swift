@@ -7,6 +7,7 @@
 //
 import Foundation
 import UIKit
+import SnapKit
 
 class CZTextView: UIView {
     
@@ -189,7 +190,7 @@ class CZTextView: UIView {
                 let targetPostion = textView.position(from: textView.endOfDocument, offset: cursorPostion)!
                 textView.selectedTextRange = textView.textRange(from: targetPostion, to: targetPostion)
             }
-            limitedNumberLabel.text = "\(textView.text.count) / \(maxLenght.string)"
+            limitedNumberLabel.text = "\(textView.text.count) / \(maxLenght.cz_string)"
         }
         // placeholderLabel
         placeholderLabel.font = font

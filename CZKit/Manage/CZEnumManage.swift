@@ -61,27 +61,27 @@ public enum CZRegularEnum: CZEnumValueProtocol {
     public var value: String {
         switch self {
         case .中文(totalLenght: let totalLenght):
-            return "^[\\u4e00-\\u9fa5]{0,\(totalLenght?.string ?? "")}$"
+            return "^[\\u4e00-\\u9fa5]{0,\(totalLenght?.cz_string ?? "")}$"
         case .英文(totalLenght: let totalLenght):
-            return "^[A-Za-z]{0,\(totalLenght?.string ?? "")}$"
+            return "^[A-Za-z]{0,\(totalLenght?.cz_string ?? "")}$"
         case .中文_英文(totalLenght: let totalLenght):
-            return "^[\\u4E00-\\u9FA5A-Za-z]{0,\(totalLenght?.string ?? "")}$"
+            return "^[\\u4E00-\\u9FA5A-Za-z]{0,\(totalLenght?.cz_string ?? "")}$"
         case .中文_数字(totalLenght: let totalLenght):
-            return "^[\\u4E00-\\u9FA50-9]{0,\(totalLenght?.string ?? "")}$"
+            return "^[\\u4E00-\\u9FA50-9]{0,\(totalLenght?.cz_string ?? "")}$"
         case .中文_英文_数字(totalLenght: let totalLenght):
-            return "^[\\u4E00-\\u9FA5A-Za-z0-9]{0,\(totalLenght?.string ?? "")}$"
+            return "^[\\u4E00-\\u9FA5A-Za-z0-9]{0,\(totalLenght?.cz_string ?? "")}$"
         case .数字(totalLenght: let totalLenght):
-            return "^[0-9]{0,\(totalLenght?.string ?? "")}$"
+            return "^[0-9]{0,\(totalLenght?.cz_string ?? "")}$"
         case .数字_小数(numberLenght: let numberLenght, decimalLenght: let decimalLenght):
-            return "^([0-9]{0,\(numberLenght?.string ?? "")})(\\.[0-9]{0,\(decimalLenght?.string ?? "")})?$"
+            return "^([0-9]{0,\(numberLenght?.cz_string ?? "")})(\\.[0-9]{0,\(decimalLenght?.cz_string ?? "")})?$"
         case .其它(regularString: let regularString):
             return regularString
         case .英文_数字(totalLenght: let totalLenght):
-            return "^[A-Za-z0-9]{0,\(totalLenght?.string ?? "")}$"
+            return "^[A-Za-z0-9]{0,\(totalLenght?.cz_string ?? "")}$"
         case .手机号码:
             return "^1[0-9]{0,10}?$"
         case .零和非零开头的数字_小数(numberLenght: let numberLenght, decimalLenght: let decimalLenght, specifyValue: let specifyValue):
-            return "^(((0|[1-9][0-9]{0,\(numberLenght?.string ?? "")})((\\.)[0-9]{0,\(decimalLenght?.string ?? "")})?)|\(specifyValue?.string ?? ""))?$"
+            return "^(((0|[1-9][0-9]{0,\(numberLenght?.cz_string ?? "")})((\\.)[0-9]{0,\(decimalLenght?.cz_string ?? "")})?)|\(specifyValue?.cz_string ?? ""))?$"
         }
     }
     
