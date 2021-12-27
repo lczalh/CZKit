@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  UICollectionView+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -29,68 +29,68 @@ public extension CZKit where Base: UICollectionView {
     }
     
     @discardableResult
-    func register(_ cellClass: Swift.AnyClass?, forCellWithReuseIdentifier identifier: String) -> CZKit {
-        base.register(cellClass, forCellWithReuseIdentifier: identifier)
+    func register(_ cellClass: Swift.AnyClass?, forCellWithReuseIdentifier: String) -> CZKit {
+        base.register(cellClass, forCellWithReuseIdentifier: forCellWithReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ nib: UINib?, forCellWithReuseIdentifier identifier: String) -> CZKit {
-        base.register(nib, forCellWithReuseIdentifier: identifier)
+    func register(_ cellNib: UINib?, forCellWithReuseIdentifier: String) -> CZKit {
+        base.register(cellNib, forCellWithReuseIdentifier: forCellWithReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ viewClass: Swift.AnyClass?,
-                  forSupplementaryViewOfKind elementKind: String,
-                  withReuseIdentifier identifier: String) -> CZKit {
-        base.register(viewClass,
-                      forSupplementaryViewOfKind: elementKind,
-                      withReuseIdentifier: identifier)
+    func register(_ headerFooterClass: Swift.AnyClass?,
+                  forSupplementaryViewOfKind: String,
+                  withReuseIdentifier: String) -> CZKit {
+        base.register(headerFooterClass,
+                      forSupplementaryViewOfKind: forSupplementaryViewOfKind,
+                      withReuseIdentifier: withReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ viewClass: Swift.AnyClass?,
-                  forSectionHeaderWithReuseIdentifier identifier: String) -> CZKit {
-        base.register(viewClass,
+    func register(_ headerClass: Swift.AnyClass?,
+                  forHeaderWithReuseIdentifier: String) -> CZKit {
+        base.register(headerClass,
                       forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                      withReuseIdentifier: identifier)
+                      withReuseIdentifier: forHeaderWithReuseIdentifier)
         return self
     }
-    
+
     @discardableResult
-    func register(_ viewClass: Swift.AnyClass?,
-                  forSectionFooterWithReuseIdentifier identifier: String) -> CZKit {
-        base.register(viewClass,
+    func register(_ footerClass: Swift.AnyClass?,
+                  forFooterWithReuseIdentifier: String) -> CZKit {
+        base.register(footerClass,
                       forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                      withReuseIdentifier: identifier)
+                      withReuseIdentifier: forFooterWithReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ nib: UINib?,
-                  forSupplementaryViewOfKind kind: String,
-                  withReuseIdentifier identifier: String) -> CZKit {
-        base.register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
+    func register(_ headerFooterNib: UINib?,
+                  forSupplementaryViewOfKind: String,
+                  withReuseIdentifier: String) -> CZKit {
+        base.register(headerFooterNib, forSupplementaryViewOfKind: forSupplementaryViewOfKind, withReuseIdentifier: withReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ nib: UINib?,
-                  forSectionHeaderWithReuseIdentifier identifier: String) -> CZKit {
-        base.register(nib,
+    func register(_ headerNib: UINib?,
+                  forHeaderWithReuseIdentifier: String) -> CZKit {
+        base.register(headerNib,
                       forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                      withReuseIdentifier: identifier)
+                      withReuseIdentifier: forHeaderWithReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ nib: UINib?,
-                  forSectionFooterWithReuseIdentifier identifier: String) -> CZKit {
-        base.register(nib,
+    func register(_ footerNib: UINib?,
+                  forFooterWithReuseIdentifier: String) -> CZKit {
+        base.register(footerNib,
                       forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                      withReuseIdentifier: identifier)
+                      withReuseIdentifier: forFooterWithReuseIdentifier)
         return self
     }
     

@@ -1,10 +1,10 @@
 //
 //  CZFontExtension.swift
-//  Random
+//  letaoshijie
 //
-//  Created by yu mingming on 2019/11/28.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/11/28.
 //
+
 import Foundation
 import UIKit
 

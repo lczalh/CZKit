@@ -1,15 +1,15 @@
 //
 //  CZTextView.swift
-//  UdreamPlus
+//  letaoshijie
 //
-//  Created by udream3 on 2021/3/31.
-//  Copyright © 2021 chaozheng. All rights reserved.
+//  Created by chaozheng on 2021/3/31.
 //
+
 import Foundation
 import UIKit
 import SnapKit
 
-class CZTextView: UIView {
+public class CZTextView: UIView {
     
     /// 文本内容
     var text: String? {
@@ -41,7 +41,7 @@ class CZTextView: UIView {
     }
     
     /// 占位文本颜色
-    var placeholderTextColor: UIColor = .cz_hexColor("#333333", 0.6) {
+    var placeholderTextColor: UIColor = .cz_hexColor("#333333", alpha: 0.6) {
         didSet {
             updateTextStyle()
         }
@@ -227,14 +227,14 @@ class CZTextView: UIView {
 }
 
 extension CZTextView: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
+    public func textViewDidChange(_ textView: UITextView) {
         updateTextStyle()
         if textViewDidChangeBlock != nil {
             textViewDidChangeBlock!(textView)
         }
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText newText: String) -> Bool {
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText newText: String) -> Bool {
         if let maxLenght = maxLenght {
             if textView.text.count + newText.count - range.length > maxLenght {
                 return false
@@ -246,7 +246,7 @@ extension CZTextView: UITextViewDelegate {
 }
 
 
-extension CZKit where Base: CZTextView {
+public extension CZKit where Base: CZTextView {
     
     /// 文本内容
     @discardableResult

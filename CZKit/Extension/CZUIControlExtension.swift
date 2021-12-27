@@ -1,9 +1,8 @@
 //
 //  CZUIControlExtension.swift
-//  UdreamPlus
+//  letaoshijie
 //
-//  Created by udream3 on 2021/3/30.
-//  Copyright © 2021 chaozheng. All rights reserved.
+//  Created by chaozheng on 2021/3/30.
 //
 
 import Foundation
@@ -14,36 +13,14 @@ public extension UIControl {
         static let cz_actionKey : UnsafeRawPointer! = UnsafeRawPointer.init(bitPattern: "cz_actionKey".hashValue)
     }
     
-    /// 存储事件回调
-    private var cz_actionBlock: (() -> Void)? {
-        get {
-            return objc_getAssociatedObject(self, CZUIControl.cz_actionKey) as? (() -> Void)
-        }
-        set {
-            objc_setAssociatedObject(self, CZUIControl.cz_actionKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-    }
-    
     /// 添加按钮事件
     func cz_addTarget(actionBlock: (() -> Void)?, for controlEvents: UIControl.Event) {
-        cz_actionBlock = actionBlock
+        objc_setAssociatedObject(self, CZUIControl.cz_actionKey, actionBlock, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         addTarget(self, action: #selector(cz_action), for: controlEvents)
     }
     
     @objc private func cz_action() {
-        if cz_actionBlock != nil {
-            cz_actionBlock!()
-        }
+        let block = objc_getAssociatedObject(self, CZUIControl.cz_actionKey) as? (() -> Void)
+        block?()
     }
-}
-
-public extension CZKit where Base: UIControl {
-    
-    /// 添加按钮事件
-    @discardableResult
-    func addTarget(_ actionBlock: (() -> Void)?, for controlEvents: UIControl.Event) -> CZKit {
-        base.cz_addTarget(actionBlock: actionBlock, for: controlEvents)
-        return self
-    }
-    
 }

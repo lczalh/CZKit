@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  UITableView+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -125,26 +125,26 @@ public extension CZKit where Base: UITableView {
     }
     
     @discardableResult
-    func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) -> CZKit {
-        base.register(nib, forCellReuseIdentifier: identifier)
+    func register(_ cellNib: UINib?, forCellReuseIdentifier: String) -> CZKit {
+        base.register(cellNib, forCellReuseIdentifier: forCellReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String) -> CZKit {
-        base.register(cellClass, forCellReuseIdentifier: identifier)
+    func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier: String) -> CZKit {
+        base.register(cellClass, forCellReuseIdentifier: forCellReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ nib: UINib?, forHeaderFooterViewReuseIdentifier identifier: String) -> CZKit {
-        base.register(nib, forHeaderFooterViewReuseIdentifier: identifier)
+    func register(_ headerFooterNib: UINib?, forHeaderFooterViewReuseIdentifier: String) -> CZKit {
+        base.register(headerFooterNib, forHeaderFooterViewReuseIdentifier: forHeaderFooterViewReuseIdentifier)
         return self
     }
     
     @discardableResult
-    func register(_ aClass: Swift.AnyClass?, forHeaderFooterViewReuseIdentifier identifier: String) -> CZKit {
-        base.register(aClass, forHeaderFooterViewReuseIdentifier: identifier)
+    func register(_ headerFooterClass: Swift.AnyClass?, forHeaderFooterViewReuseIdentifier: String) -> CZKit {
+        base.register(headerFooterClass, forHeaderFooterViewReuseIdentifier: forHeaderFooterViewReuseIdentifier)
         return self
     }
     
@@ -155,7 +155,7 @@ public extension CZKit where Base: UITableView {
     }
     
     @discardableResult
-    func setEditing(_ editing: Bool, animated: Bool) -> CZKit {
+    func editing(_ editing: Bool, animated: Bool) -> CZKit {
         base.setEditing(editing, animated: animated)
         return self
     }

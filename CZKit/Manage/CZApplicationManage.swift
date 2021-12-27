@@ -4,6 +4,7 @@
 //
 //  Created by chaozheng on 2021/4/1.
 //
+
 import Foundation
 import UIKit
 
@@ -14,13 +15,13 @@ public struct CZApplicationManage {
     /// - Parameters:
     ///   - type: 跳转类型
     ///   - completion: 完成回调
-    public static func push(type: CZApplicationJumpEnum, completion: ((Bool) -> Void)?) {
+    public static func push(_ type: CZApplicationJumpEnum, _ completion: ((Bool) -> Void)?) {
         guard let url = URL(string: type.value) else {
-            completion != nil ? completion!(false) : nil
+            completion?(false)
             return
         }
         guard UIApplication.shared.canOpenURL(url) else {
-            completion != nil ? completion!(false) : nil
+            completion?(false) 
             return
         }
         if Thread.current.isMainThread {
@@ -39,7 +40,12 @@ public struct CZApplicationManage {
     ///   - excludedActivityTypes: 过滤调的类型
     ///   - animated: animated description
     ///   - completion: 完成回调
-    public static func systemShare(controller: UIViewController = lastController(), activityItems: [Any], applicationActivities: [UIActivity]? = nil, excludedActivityTypes: [UIActivity.ActivityType]? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+    public static func systemShare(controller: UIViewController = lastController(),
+                                   activityItems: [Any],
+                                   applicationActivities: [UIActivity]? = nil,
+                                   excludedActivityTypes: [UIActivity.ActivityType]? = nil,
+                                   animated: Bool = true,
+                                   completion: (() -> Void)? = nil) {
         if Thread.current.isMainThread {
             let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             activityViewController.excludedActivityTypes = excludedActivityTypes

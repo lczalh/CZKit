@@ -2,12 +2,12 @@
 //  CZCoreTextManage.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2021/5/11.
+//  Created by chaozheng on 2021/5/11.
 //
 
 import Foundation
 
-struct CZCoreTextManage {
+public struct CZCoreTextManage {
     
     /// 通过富文本以及显示范围获取CTFrame
     ///
@@ -15,7 +15,8 @@ struct CZCoreTextManage {
     ///   - attrString: 富文本
     ///   - rect: 显示范围
     /// - Returns: CTFrame
-    static func getCtFrame(attributedString: NSAttributedString, rect: CGRect) -> CTFrame {
+    public static func getCtFrame(attributedString: NSAttributedString,
+                                  rect: CGRect) -> CTFrame {
         let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
         let path = CGPath(rect: rect, transform: nil)
         let frameRef = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
@@ -28,7 +29,8 @@ struct CZCoreTextManage {
     ///   - point: 触摸位置
     ///   - ctFrame: CTFrame
     /// - Returns: CTLine
-    static func getTouchLineRange(point:CGPoint, ctFrame: CTFrame) -> NSRange {
+    public static func getTouchLineRange(point:CGPoint,
+                                         ctFrame: CTFrame) -> NSRange {
         var range: NSRange = NSMakeRange(NSNotFound, 0)
         let line = getTouchLine(point: point, ctFrame: ctFrame)
         if line != nil {
@@ -44,7 +46,8 @@ struct CZCoreTextManage {
     ///   - point: 触摸位置
     ///   - ctFrame: CTFrame
     /// - Returns: CTLine
-    static func getTouchLine(point: CGPoint, ctFrame: CTFrame) -> CTLine? {
+    public static func getTouchLine(point: CGPoint,
+                                    ctFrame: CTFrame) -> CTLine? {
         var line: CTLine? = nil
         let path: CGPath = CTFrameGetPath(ctFrame)
         let bounds: CGRect = path.boundingBox
@@ -79,7 +82,9 @@ struct CZCoreTextManage {
     /// - Parameter ctFrame: CTFrame
     /// - Parameter content: 内容字符串(有值则可以去除选中每一行区域内的 开头空格 - 尾部换行符 - 所占用的区域,不传默认返回每一行实际占用区域)
     /// - Returns: 覆盖位置
-    static func getRangeRects(range: NSRange, ctFrame: CTFrame, content: String) -> [CGRect] {
+    public static func getRangeRects(range: NSRange,
+                                     ctFrame: CTFrame,
+                                     content: String) -> [CGRect] {
         var rects: [CGRect] = []
         if range.length == 0 || range.location == NSNotFound { return rects }
         let lines: [CTLine] = CTFrameGetLines(ctFrame) as! [CTLine]

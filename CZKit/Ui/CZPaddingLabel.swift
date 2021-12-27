@@ -2,7 +2,7 @@
 //  CZPaddingLabel.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2020/12/22.
+//  Created by chaozheng on 2020/12/22.
 //
 
 import Foundation
@@ -79,7 +79,7 @@ public extension CZKit where Base: CZPaddingLabel {
     }
     
     /// 设置文本内边距
-    func contentEdgeInsets(_ top: CGFloat, _ left: CGFloat, _ bottom: CGFloat, _ right: CGFloat) -> CZKit {
+    func contentEdgeInsets(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) -> CZKit {
         base.contentEdgeInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }

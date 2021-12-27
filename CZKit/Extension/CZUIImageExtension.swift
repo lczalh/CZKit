@@ -1,67 +1,67 @@
 //
 //  CZImageExtension.swift
-//  Random
+//  letaoshijie
 //
-//  Created by yu mingming on 2019/11/29.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/11/29.
 //
+
 import Foundation
 import UIKit
 
 public extension UIImage {
     
     
-    /// 将图片裁剪成指定比例（多余部分自动删除）
-    /// - Parameter ratio: 比例
-    func cz_crop(ratio: CGFloat) -> UIImage {
-        //计算最终尺寸
-        var newSize:CGSize!
-        if size.width/size.height > ratio {
-            newSize = CGSize(width: size.height * ratio, height: size.height)
-        }else{
-            newSize = CGSize(width: size.width, height: size.width / ratio)
-        }
-        
-        ////图片绘制区域
-        var rect = CGRect.zero
-        rect.size.width  = size.width
-        rect.size.height = size.height
-        rect.origin.x    = (newSize.width - size.width ) / 2.0
-        rect.origin.y    = (newSize.height - size.height ) / 2.0
-        
-        //绘制并获取最终图片
-        UIGraphicsBeginImageContext(newSize)
-        draw(in: rect)
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return scaledImage!
-    }
-    
-    
-    /// 将图片缩放成指定尺寸（多余部分自动删除）
-    /// - Parameter size: 尺寸
-    func cz_scaled(newSize: CGSize) -> UIImage {
-        //计算比例
-        let aspectWidth  = newSize.width/size.width
-        let aspectHeight = newSize.height/size.height
-        let aspectRatio = max(aspectWidth, aspectHeight)
-        
-        //图片绘制区域
-        var scaledImageRect = CGRect.zero
-        scaledImageRect.size.width  = size.width * aspectRatio
-        scaledImageRect.size.height = size.height * aspectRatio
-        scaledImageRect.origin.x    = (newSize.width - size.width * aspectRatio) / 2.0
-        scaledImageRect.origin.y    = (newSize.height - size.height * aspectRatio) / 2.0
-        
-        //绘制并获取最终图片
-        UIGraphicsBeginImageContext(newSize)
-        draw(in: scaledImageRect)
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return scaledImage!
-    }
+//    /// 将图片裁剪成指定比例（多余部分自动删除）
+//    /// - Parameter ratio: 比例
+//    func cz_crop(ratio: CGFloat) -> UIImage {
+//        //计算最终尺寸
+//        var newSize:CGSize!
+//        if size.width/size.height > ratio {
+//            newSize = CGSize(width: size.height * ratio, height: size.height)
+//        }else{
+//            newSize = CGSize(width: size.width, height: size.width / ratio)
+//        }
+//
+//        ////图片绘制区域
+//        var rect = CGRect.zero
+//        rect.size.width  = size.width
+//        rect.size.height = size.height
+//        rect.origin.x    = (newSize.width - size.width ) / 2.0
+//        rect.origin.y    = (newSize.height - size.height ) / 2.0
+//
+//        //绘制并获取最终图片
+//        UIGraphicsBeginImageContext(newSize)
+//        draw(in: rect)
+//        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return scaledImage!
+//    }
+//
+//
+//    /// 将图片缩放成指定尺寸（多余部分自动删除）
+//    /// - Parameter size: 尺寸
+//    func cz_scaled(newSize: CGSize) -> UIImage {
+//        //计算比例
+//        let aspectWidth  = newSize.width/size.width
+//        let aspectHeight = newSize.height/size.height
+//        let aspectRatio = max(aspectWidth, aspectHeight)
+//
+//        //图片绘制区域
+//        var scaledImageRect = CGRect.zero
+//        scaledImageRect.size.width  = size.width * aspectRatio
+//        scaledImageRect.size.height = size.height * aspectRatio
+//        scaledImageRect.origin.x    = (newSize.width - size.width * aspectRatio) / 2.0
+//        scaledImageRect.origin.y    = (newSize.height - size.height * aspectRatio) / 2.0
+//
+//        //绘制并获取最终图片
+//        UIGraphicsBeginImageContext(newSize)
+//        draw(in: scaledImageRect)
+//        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return scaledImage!
+//    }
     
     /// 修改图片颜色
     /// - Parameter color: 颜色
@@ -96,5 +96,174 @@ public extension UIImage {
         let context = CIContext(options: [.workingColorSpace: kCFNull!])
         context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
         return UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
+    }
+    
+    /// 修复转向
+    func cz_fixOrientation() -> UIImage {
+        if self.imageOrientation == .up { return self }
+        var transform = CGAffineTransform.identity
+        switch self.imageOrientation {
+        case .down, .downMirrored:
+            transform = CGAffineTransform(translationX: self.size.width, y: self.size.height)
+            transform = transform.rotated(by: .pi)
+        case .left, .leftMirrored:
+            transform = CGAffineTransform(translationX: self.size.width, y: 0)
+            transform = transform.rotated(by: CGFloat.pi / 2)
+        case .right, .rightMirrored:
+            transform = CGAffineTransform(translationX: 0, y: self.size.height)
+            transform = transform.rotated(by: -CGFloat.pi / 2)
+        default:
+            break
+        }
+        switch self.imageOrientation {
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: self.size.width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: self.size.height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        default:
+            break
+        }
+        guard let ci = self.cgImage, let colorSpace = ci.colorSpace else {
+            return self
+        }
+        let context = CGContext(data: nil, width: Int(self.size.width), height: Int(self.size.height), bitsPerComponent: ci.bitsPerComponent, bytesPerRow: 0, space: colorSpace, bitmapInfo: ci.bitmapInfo.rawValue)
+        context?.concatenate(transform)
+        switch self.imageOrientation {
+        case .left, .leftMirrored, .right, .rightMirrored:
+            context?.draw(ci, in: CGRect(x: 0, y: 0, width: self.size.height, height: self.size.width))
+        default:
+            context?.draw(ci, in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        }
+        guard let newCgimg = context?.makeImage() else { return self }
+        return UIImage(cgImage: newCgimg)
+    }
+    
+    /// 获取范围内的图片等比大小
+    /// - Parameters:
+    ///   - maxHeight: 限制最大高度，默认最大图片的高度
+    ///   - maxWidth: 现在最大宽度，默认最大图片的宽度
+    /// - Returns: 范围内的等比大小
+    func cz_getWithinScopeEqualRatioSize(maxHeight: CGFloat? = nil, maxWidth: CGFloat? = nil) -> CGSize {
+        var imageHeight: CGFloat = 0
+        var imageWidth: CGFloat = 0
+        let maxHeight = maxHeight ?? size.height
+        let maxWidth = maxWidth ?? size.width
+        let widthRatio = size.width / maxWidth
+        let heightRatio = size.height / maxHeight
+        if widthRatio >= heightRatio {
+            imageWidth = maxWidth
+            imageHeight = size.height / widthRatio
+        } else {
+            imageWidth = size.width / heightRatio
+            imageHeight = maxHeight
+        }
+        return CGSize(width: imageWidth, height: imageHeight)
+    }
+    
+    
+    /// 裁剪图片
+    /// - Parameters:
+    ///   - angle: 角度
+    ///   - editRect: 裁剪范围
+    ///   - isCircle: 是否裁剪为圆
+    /// - Returns: 裁剪后的图片
+    func cz_clipImage(angle: CGFloat, editRect: CGRect, isCircle: Bool) -> UIImage? {
+        let a = ((Int(angle) % 360) - 360) % 360
+        var newImage = self
+        if a == -90 {
+            newImage = self.cz_rotate(orientation: .left)
+        } else if a == -180 {
+            newImage = self.cz_rotate(orientation: .down)
+        } else if a == -270 {
+            newImage = self.cz_rotate(orientation: .right)
+        }
+        guard editRect.size != newImage.size else { return newImage }
+        let origin = CGPoint(x: -editRect.minX, y: -editRect.minY)
+        UIGraphicsBeginImageContextWithOptions(editRect.size, false, newImage.scale)
+        let context = UIGraphicsGetCurrentContext()
+        if isCircle {
+            context?.addEllipse(in: CGRect(origin: .zero, size: editRect.size))
+            context?.clip()
+        }
+        newImage.draw(at: origin)
+        let temp = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        guard let cgi = temp?.cgImage else {
+            return temp
+        }
+        let clipImage = UIImage(cgImage: cgi, scale: newImage.scale, orientation: .up)
+        return clipImage
+    }
+    
+    /// 旋转方向
+    func cz_rotate(orientation: UIImage.Orientation) -> UIImage {
+        guard let imagRef = self.cgImage else {
+            return self
+        }
+        let rect = CGRect(origin: .zero, size: CGSize(width: CGFloat(imagRef.width), height: CGFloat(imagRef.height)))
+        
+        var bnds = rect
+        
+        var transform = CGAffineTransform.identity
+        
+        switch orientation {
+        case .up:
+            return self
+        case .upMirrored:
+            transform = transform.translatedBy(x: rect.width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        case .down:
+            transform = transform.translatedBy(x: rect.width, y: rect.height)
+            transform = transform.rotated(by: .pi)
+        case .downMirrored:
+            transform = transform.translatedBy(x: 0, y: rect.height)
+            transform = transform.scaledBy(x: 1, y: -1)
+        case .left:
+            bnds = cz_swapRectWidthAndHeight(bnds)
+            transform = transform.translatedBy(x: 0, y: rect.width)
+            transform = transform.rotated(by: CGFloat.pi * 3 / 2)
+        case .leftMirrored:
+            bnds = cz_swapRectWidthAndHeight(bnds)
+            transform = transform.translatedBy(x: rect.height, y: rect.width)
+            transform = transform.scaledBy(x: -1, y: 1)
+            transform = transform.rotated(by: CGFloat.pi * 3 / 2)
+        case .right:
+            bnds = cz_swapRectWidthAndHeight(bnds)
+            transform = transform.translatedBy(x: rect.height, y: 0)
+            transform = transform.rotated(by: CGFloat.pi / 2)
+        case .rightMirrored:
+            bnds = cz_swapRectWidthAndHeight(bnds)
+            transform = transform.scaledBy(x: -1, y: 1)
+            transform = transform.rotated(by: CGFloat.pi / 2)
+        @unknown default:
+            return self
+        }
+        
+        UIGraphicsBeginImageContext(bnds.size)
+        let context = UIGraphicsGetCurrentContext()
+        switch orientation {
+        case .left, .leftMirrored, .right, .rightMirrored:
+            context?.scaleBy(x: -1, y: 1)
+            context?.translateBy(x: -rect.height, y: 0)
+        default:
+            context?.scaleBy(x: 1, y: -1)
+            context?.translateBy(x: 0, y: -rect.height)
+        }
+        context?.concatenate(transform)
+        context?.draw(imagRef, in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage ?? self
+    }
+    
+    /// 交换宽高
+    private func cz_swapRectWidthAndHeight(_ rect: CGRect) -> CGRect {
+        var r = rect
+        r.size.width = rect.height
+        r.size.height = rect.width
+        return r
     }
 }

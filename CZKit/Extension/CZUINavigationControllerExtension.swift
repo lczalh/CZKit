@@ -1,10 +1,10 @@
 //
 //  CZNavigationControllerExtension.swift
-//  Random
+//  letaoshijie
 //
-//  Created by yu mingming on 2020/5/7.
-//  Copyright © 2020 刘超正. All rights reserved.
+//  Created by chaozheng on 2020/5/7.
 //
+
 import Foundation
 import UIKit
 
@@ -43,7 +43,7 @@ public extension UINavigationController {
     /// - Parameters:
     ///   - animated: 是否动画
     ///   - completion: 完成回调
-    func cz_popViewController(animated: Bool = true, _ completion: (() -> Void)? = nil) {
+    func cz_popViewController(animated: Bool = true, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         popViewController(animated: animated)

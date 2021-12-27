@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  NotificationCenter+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -12,10 +12,10 @@ public extension CZKit where Base: NotificationCenter {
     
     @discardableResult
     func addObserver(_ observer: Any,
-                     selector aSelector: Selector,
-                     name aName: NSNotification.Name?,
-                     object anObject: Any? = nil) -> CZKit {
-        base.addObserver(observer, selector: aSelector, name: aName, object: anObject)
+                     selector: Selector,
+                     name: NSNotification.Name?,
+                     object: Any? = nil) -> CZKit {
+        base.addObserver(observer, selector: selector, name: name, object: object)
         return self
     }
     
@@ -26,18 +26,18 @@ public extension CZKit where Base: NotificationCenter {
     }
     
     @discardableResult
-    func post(name aName: NSNotification.Name,
-              object anObject: Any? = nil,
-              userInfo aUserInfo: [AnyHashable : Any]? = nil) -> CZKit {
-        base.post(name: aName, object: anObject, userInfo: aUserInfo)
+    func post(_ name: NSNotification.Name,
+              object: Any? = nil,
+              userInfo: [AnyHashable : Any]? = nil) -> CZKit {
+        base.post(name: name, object: object, userInfo: userInfo)
         return self
     }
     
     @discardableResult
     func removeObserver(_ observer: Any,
-                        name aName: NSNotification.Name?,
-                        object anObject: Any?) -> CZKit {
-        base.removeObserver(observer, name: aName, object: anObject)
+                        name: NSNotification.Name?,
+                        object: Any?) -> CZKit {
+        base.removeObserver(observer, name: name, object: object)
         return self
     }
 }

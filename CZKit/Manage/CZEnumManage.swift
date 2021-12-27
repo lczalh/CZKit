@@ -2,7 +2,7 @@
 //  CZEnum.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2021/4/1.
+//  Created by chaozheng on 2021/4/1.
 //
 
 import Foundation
@@ -24,17 +24,17 @@ public enum CZApplicationJumpEnum: CZEnumValueProtocol {
     
     public var value: String {
         switch self {
-        case .打电话(tel: let tel):
+        case .打电话(let tel):
             return "tel://\(tel)"
-        case .商店首页(appId: let appId):
+        case .商店首页(let appId):
             return "https://itunes.apple.com/us/app/itunes-u/id\(appId)?mt=8"
-        case .商店评分(appId: let appId):
+        case .商店评分(let appId):
             return "https://itunes.apple.com/us/app/itunes-u/id\(appId)?action=write-review&mt=8"
         case .设置:
             return UIApplication.openSettingsURLString
-        case .发短信(tel: let tel):
+        case .发短信(let tel):
             return "sms://\(tel)"
-        case .其它(path: let path):
+        case .其它(let path):
             return path
         case .发邮件:
             return "mailto://"
@@ -60,27 +60,27 @@ public enum CZRegularEnum: CZEnumValueProtocol {
     
     public var value: String {
         switch self {
-        case .中文(totalLenght: let totalLenght):
+        case .中文(let totalLenght):
             return "^[\\u4e00-\\u9fa5]{0,\(totalLenght?.cz_string ?? "")}$"
-        case .英文(totalLenght: let totalLenght):
+        case .英文(let totalLenght):
             return "^[A-Za-z]{0,\(totalLenght?.cz_string ?? "")}$"
-        case .中文_英文(totalLenght: let totalLenght):
+        case .中文_英文(let totalLenght):
             return "^[\\u4E00-\\u9FA5A-Za-z]{0,\(totalLenght?.cz_string ?? "")}$"
-        case .中文_数字(totalLenght: let totalLenght):
+        case .中文_数字(let totalLenght):
             return "^[\\u4E00-\\u9FA50-9]{0,\(totalLenght?.cz_string ?? "")}$"
-        case .中文_英文_数字(totalLenght: let totalLenght):
+        case .中文_英文_数字(let totalLenght):
             return "^[\\u4E00-\\u9FA5A-Za-z0-9]{0,\(totalLenght?.cz_string ?? "")}$"
-        case .数字(totalLenght: let totalLenght):
+        case .数字(let totalLenght):
             return "^[0-9]{0,\(totalLenght?.cz_string ?? "")}$"
-        case .数字_小数(numberLenght: let numberLenght, decimalLenght: let decimalLenght):
+        case .数字_小数(let numberLenght, let decimalLenght):
             return "^([0-9]{0,\(numberLenght?.cz_string ?? "")})(\\.[0-9]{0,\(decimalLenght?.cz_string ?? "")})?$"
-        case .其它(regularString: let regularString):
+        case .其它(let regularString):
             return regularString
-        case .英文_数字(totalLenght: let totalLenght):
+        case .英文_数字(let totalLenght):
             return "^[A-Za-z0-9]{0,\(totalLenght?.cz_string ?? "")}$"
         case .手机号码:
             return "^1[0-9]{0,10}?$"
-        case .零和非零开头的数字_小数(numberLenght: let numberLenght, decimalLenght: let decimalLenght, specifyValue: let specifyValue):
+        case .零和非零开头的数字_小数(let numberLenght, let decimalLenght, let specifyValue):
             return "^(((0|[1-9][0-9]{0,\(numberLenght?.cz_string ?? "")})((\\.)[0-9]{0,\(decimalLenght?.cz_string ?? "")})?)|\(specifyValue?.cz_string ?? ""))?$"
         }
     }

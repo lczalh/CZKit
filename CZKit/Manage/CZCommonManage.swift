@@ -1,12 +1,13 @@
 //
-//  CZKitCommon.swift
-//  Random
+//  CZCommonManage.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/21.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/21.
 //
+
 import Foundation
 import UIKit
+
 /// 调试输出
 ///
 /// - Parameters:
@@ -14,23 +15,50 @@ import UIKit
 ///   - file: 文件名
 ///   - method: 方法名
 ///   - line: 行数
-public func cz_print(_ items: Any..., file: String = #file, method: String = #function, line: Int = #line) {
+public func cz_print(_ message: Any..., file: String = #file, method: String = #function, line: Int = #line) {
     #if DEBUG
-    print("\n********** CZKit debug **********\n类名名称     :     \((file as NSString).lastPathComponent)\n内存地址     :     \(String(format: "%p", items))\n方法名称     :     \(method)\n打印位置     :     第\(line)行\n打印内容     :     \(items)\n")
+    print("\n********** CZKit debug **********\n类名名称     :     \((file as NSString).lastPathComponent)\n内存地址     :     \(String(format: "%p", message))\n方法名称     :     \(method)\n打印位置     :     第\(line)行\n打印内容     :     \(message)\n")
     #endif
 }
 
 
+/// 主线程队列回调
+public func cz_mainAsync(after: TimeInterval = 0, handler: @escaping (() -> Void)) {
+    if after > 0 {
+        DispatchQueue.main.asyncAfter(deadline: .now() + after) {
+            handler()
+        }
+    } else {
+        DispatchQueue.main.async {
+            handler()
+        }
+    }
+}
+
+/// 全局异步队列
+public func cz_globalAsync(after: TimeInterval = 0, handler: @escaping (() -> Void)) {
+    if after > 0 {
+        DispatchQueue.global().asyncAfter(deadline: .now() + after) {
+            handler()
+        }
+    } else {
+        DispatchQueue.global().async {
+            handler()
+        }
+    }
+}
+
 public struct CZCommonManage {
     
     /// 动态适应宽度
-    public static func dynamicFitWidth(_ size: CGFloat) -> CGFloat { return size * CZDeviceManage.screenWidthScale }
+    public static func dynamicFitWidth(_ width: CGFloat) -> CGFloat { return width * CZDeviceManage.screenWidthScale }
     
     /// 动态适应高度
-    public static func dynamicFitHeight(_ size: CGFloat) -> CGFloat { return size * CZDeviceManage.screenHeightScale }
+    public static func dynamicFitHeight(_ height: CGFloat) -> CGFloat { return height * CZDeviceManage.screenHeightScale }
     
     /// 获取指定年月开始日期
-    public static func specifiedYearStartDate(year: Int, month: Int) -> Date {
+    public static func specifiedYearStartDate(year: Int,
+                                              month: Int) -> Date {
         let calendar = NSCalendar.current
         var startComps = DateComponents()
         startComps.day = 1
@@ -41,7 +69,9 @@ public struct CZCommonManage {
     }
     
     /// 获取指定年月结束日期 returnEndTime：true 则为23:59:59 false： 00:00:00
-    public static  func specifiedYearEndDate(year: Int, month: Int, returnEndTime:Bool = false) -> Date {
+    public static  func specifiedYearEndDate(year: Int,
+                                             month: Int,
+                                             returnEndTime: Bool = false) -> Date {
         let calendar = NSCalendar.current
         var components = DateComponents()
         components.month = 1
@@ -50,7 +80,7 @@ public struct CZCommonManage {
         } else {
             components.day = -1
         }
-        let endOfYear = calendar.date(byAdding: components, to: CZCommonManage.specifiedYearStartDate(year: year, month:month))!
+        let endOfYear = calendar.date(byAdding: components, to: CZCommonManage.specifiedYearStartDate(year: year, month: month)) ?? Date()
         return endOfYear
     }
     
@@ -68,7 +98,8 @@ public struct CZCommonManage {
     /// - Parameters:
     ///   - className: 字符串类名
     ///   - classType: 类型
-    public static func classFromString<T>(className: String, classType: T.Type) -> T.Type? {
+    public static func classFromString<T>(className: String,
+                                          classType: T.Type) -> T.Type? {
         guard let appName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String else { return nil }
         let classStringName = appName + "." + className
         guard let className = NSClassFromString(classStringName) as? T.Type else { return nil }
@@ -83,7 +114,11 @@ public struct CZCommonManage {
     }
     
     /// 获取渐变颜色
-    public static func gradientColor(bounds: CGRect, colors: [CGColor], locations: [NSNumber]? = nil, startPoint: CGPoint = CGPoint(x: 0, y: 0), endPoint: CGPoint = CGPoint(x: 1, y: 0)) -> UIColor? {
+    public static func gradientColor(bounds: CGRect,
+                                     colors: [CGColor],
+                                     locations: [NSNumber]? = nil,
+                                     startPoint: CGPoint = CGPoint(x: 0, y: 0),
+                                     endPoint: CGPoint = CGPoint(x: 1, y: 0)) -> UIColor? {
         UIGraphicsBeginImageContext(bounds.size)
         let gradientLayer = CAGradientLayer()
         gradientLayer.locations = locations
@@ -105,12 +140,12 @@ public struct CZCommonManage {
     ///   - logoImage: logo
     ///   - color: 二维码颜色
     ///   - completion: 创建完成回调
-    public static func createQrCode(content: String?,
-                                       defaultImage: UIImage? = nil,
-                                       logoImage: UIImage? = nil,
-                                       color: UIColor = .cz_hexColor("#333333"),
-                                       transformScale: CGFloat = 10,
-                                       completion: ((_ image: UIImage?) -> Void)?) {
+    public static func createQrCode(_ content: String?,
+                                    _ defaultImage: UIImage? = nil,
+                                    _ logoImage: UIImage? = nil,
+                                    _ color: UIColor = .cz_hexColor("#333333"),
+                                    _ transformScale: CGFloat = 10,
+                                    _ completion: ((_ image: UIImage?) -> Void)?) {
         guard let content = content, content.isEmpty == false else {
             completion!(defaultImage)
             return
@@ -161,7 +196,8 @@ public struct CZCommonManage {
     /// - Parameters:
     ///   - color: image fill color.
     ///   - size: image size.
-    static func createImage(color: UIColor, size: CGSize) -> UIImage? {
+    static func createImage(color: UIColor,
+                            size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1)
         color.setFill()
         UIRectFill(CGRect(origin: .zero, size: size))

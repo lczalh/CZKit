@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  UIButton+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -97,6 +97,30 @@ public extension CZKit where Base: UIButton {
     @discardableResult
     func semanticContentAttribute(_ semanticContentAttribute: UISemanticContentAttribute) -> CZKit {
         base.semanticContentAttribute = semanticContentAttribute
+        return self
+    }
+    
+    @discardableResult
+    func font(_ font: UIFont) -> CZKit {
+        base.titleLabel?.font = font
+        return self
+    }
+    
+    @discardableResult
+    func systemFont(ofSize: CGFloat) -> CZKit {
+        base.titleLabel?.font = .systemFont(ofSize: ofSize)
+        return self
+    }
+    
+    @discardableResult
+    func boldSystemFont(ofSize: CGFloat) -> CZKit {
+        base.titleLabel?.font = .boldSystemFont(ofSize: ofSize)
+        return self
+    }
+    
+    @discardableResult
+    func systemFont(ofSize: CGFloat, weight: UIFont.Weight) -> CZKit {
+        base.titleLabel?.font = .systemFont(ofSize: ofSize, weight: weight)
         return self
     }
 }

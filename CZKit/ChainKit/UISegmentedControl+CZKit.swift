@@ -1,42 +1,42 @@
 //
-//  ViewController.swift
-//  Random
+//  UISegmentedControl+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
 public extension CZKit where Base: UISegmentedControl {
     
     @discardableResult
-    func title(_ title: String?, forSegmentAt segment: Int) -> CZKit {
-        base.setTitle(title, forSegmentAt: segment)
+    func title(_ title: String?, forSegmentAt: Int) -> CZKit {
+        base.setTitle(title, forSegmentAt: forSegmentAt)
         return self
     }
     
     @discardableResult
-    func image(_ image: UIImage?, forSegmentAt segment: Int) -> CZKit {
-        base.setImage(image, forSegmentAt: segment)
+    func image(_ image: UIImage?, forSegmentAt: Int) -> CZKit {
+        base.setImage(image, forSegmentAt: forSegmentAt)
         return self
     }
     
     @discardableResult
-    func width(_ width: CGFloat, forSegmentAt segment: Int) -> CZKit {
-        base.setWidth(width, forSegmentAt: segment)
+    func width(_ width: CGFloat, forSegmentAt: Int) -> CZKit {
+        base.setWidth(width, forSegmentAt: forSegmentAt)
         return self
     }
     
     @discardableResult
-    func contentOffset(_ offset: CGSize, forSegmentAt segment: Int) -> CZKit {
-        base.setContentOffset(offset, forSegmentAt: segment)
+    func contentOffset(_ offset: CGSize, forSegmentAt: Int) -> CZKit {
+        base.setContentOffset(offset, forSegmentAt: forSegmentAt)
         return self
     }
     
     @discardableResult
-    func enabled(_ enabled: Bool, forSegmentAt segment: Int) -> CZKit {
-        base.setEnabled(enabled, forSegmentAt: segment)
+    func enabled(_ enabled: Bool, forSegmentAt: Int) -> CZKit {
+        base.setEnabled(enabled, forSegmentAt: forSegmentAt)
         return self
     }
     
@@ -54,10 +54,10 @@ public extension CZKit where Base: UISegmentedControl {
     
     @discardableResult
     func dividerImage(_ dividerImage: UIImage?,
-                      forLeftSegmentState leftState: UIControl.State,
-                      rightSegmentState rightState: UIControl.State,
+                      forLeftSegmentState: UIControl.State,
+                      rightSegmentState: UIControl.State,
                       barMetrics: UIBarMetrics) -> CZKit {
-        base.setDividerImage(dividerImage, forLeftSegmentState: leftState, rightSegmentState: rightState, barMetrics: barMetrics)
+        base.setDividerImage(dividerImage, forLeftSegmentState: forLeftSegmentState, rightSegmentState: rightSegmentState, barMetrics: barMetrics)
         return self
     }
     
@@ -69,9 +69,9 @@ public extension CZKit where Base: UISegmentedControl {
     
     @discardableResult
     func contentPositionAdjustment(_ adjustment: UIOffset,
-                                   forSegmentType leftCenterRightOrAlone: UISegmentedControl.Segment,
+                                   forSegmentType: UISegmentedControl.Segment,
                                    barMetrics: UIBarMetrics) -> CZKit {
-        base.setContentPositionAdjustment(adjustment, forSegmentType: leftCenterRightOrAlone, barMetrics: barMetrics)
+        base.setContentPositionAdjustment(adjustment, forSegmentType: forSegmentType, barMetrics: barMetrics)
         return self
     }
 }

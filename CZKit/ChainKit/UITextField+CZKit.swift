@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  UITextField+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -29,8 +29,8 @@ public extension CZKit where Base: UITextField {
     }
     
     @discardableResult
-    func attributedPlaceholder(_ string: String, _ color: UIColor) -> CZKit {
-        base.attributedPlaceholder = NSMutableAttributedString.init(string: string, attributes: [NSAttributedString.Key.foregroundColor : color])
+    func attributedPlaceholder(string: String, foregroundColor: UIColor) -> CZKit {
+        base.attributedPlaceholder = NSMutableAttributedString.init(string: string, attributes: [NSAttributedString.Key.foregroundColor : foregroundColor])
         return self
     }
     
@@ -154,6 +154,53 @@ public extension CZKit where Base: UITextField {
         return self
     }
     
+    @discardableResult
+    func text(_ text: String?) -> CZKit {
+        base.text = text
+        return self
+    }
+    
+    @discardableResult
+    func attributedText(_ attributedText: NSAttributedString?) -> CZKit {
+        base.attributedText = attributedText
+        return self
+    }
+    
+    @discardableResult
+    func textColor(_ color: UIColor) -> CZKit {
+        base.textColor = color
+        return self
+    }
+    
+    @discardableResult
+    func textAlignment(_ alignment: NSTextAlignment) -> CZKit {
+        base.textAlignment = alignment
+        return self
+    }
+    
+    @discardableResult
+    func font(_ font: UIFont) -> CZKit {
+        base.font = font
+        return self
+    }
+    
+    @discardableResult
+    func systemFont(ofSize: CGFloat) -> CZKit {
+        base.font = .systemFont(ofSize: ofSize)
+        return self
+    }
+    
+    @discardableResult
+    func boldSystemFont(ofSize: CGFloat) -> CZKit {
+        base.font = .boldSystemFont(ofSize: ofSize)
+        return self
+    }
+    
+    @discardableResult
+    func systemFont(ofSize: CGFloat, weight: UIFont.Weight) -> CZKit {
+        base.font = .systemFont(ofSize: ofSize, weight: weight)
+        return self
+    }
     
 }
 

@@ -2,7 +2,7 @@
 //  CZCollectionGridViewLayout.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2021/7/15.
+//  Created by chaozheng on 2021/7/15.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ public class CZCollectionGridViewLayout: UICollectionViewLayout {
     
     /// 水平间距
     var horizontalSpacing: CGFloat = 10
-    
+
     /// 垂直间距
     var verticalSpacing: CGFloat = 10
     
@@ -39,69 +39,80 @@ public class CZCollectionGridViewLayout: UICollectionViewLayout {
     public override func prepare() {
         computedContentSize = .zero
         cellAttributes = [IndexPath: UICollectionViewLayoutAttributes]()
-        var xOffset: CGFloat = 0
-        var yOffset: CGFloat = 0
+        var x: CGFloat = 0
+        var y: CGFloat = 0
         var contentWidth: CGFloat = 0
         var contentHeight: CGFloat = 0
         
         for section in 0 ..< (collectionView?.numberOfSections ?? 0) {
             for item in 0 ..< (collectionView?.numberOfItems(inSection: section) ?? 0) {
-                let itemFrame = CGRect(x: xOffset, y: yOffset, width: itemSize.width, height: itemSize.height).integral
                 let indexPath = IndexPath(item: item, section: section)
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-                attributes.frame = itemFrame
-                
+                //除第一列，其它列位置都左移一个像素，防止左右单元格间显示两条边框线
+                attributes.frame = CGRect(x: x,
+                                          y: y,
+                                          width: itemSize.width,
+                                          height: itemSize.height).integral
                 //将表头、首列单元格置为最顶层
                 if section == 0 && item == 0 {
                     attributes.zIndex = 1024
                 } else if section == 0 || item == 0 {
                     attributes.zIndex = 1023
                 }
-                
                 /// 设置固定首行
                 if isFixedFirstRow {
                     if section == 0 {
                         var frame = attributes.frame
-                        frame.origin.y = (collectionView?.contentOffset.y ?? 0)
+                        switch direction {
+                        case .水平:
+                            frame.origin.y = (collectionView?.contentOffset.y ?? 0)
+                        case .垂直:
+                            frame.origin.x = (collectionView?.contentOffset.x ?? 0)
+                                + (collectionView?.contentInset.left ?? 0)
+                        }
                         attributes.frame = frame
                     }
                 }
-                
                 // 设置固定首列
                 if isFixedFirstColumn {
                     if item == 0 {
                         var frame = attributes.frame
-                        frame.origin.x = (collectionView?.contentOffset.x ?? 0)
-                            + (collectionView?.contentInset.left ?? 0)
+                        switch direction {
+                        case .水平:
+                            frame.origin.x = (collectionView?.contentOffset.x ?? 0)
+                                + (collectionView?.contentInset.left ?? 0)
+                        case .垂直:
+                            frame.origin.y = (collectionView?.contentOffset.y ?? 0)
+                        }
                         attributes.frame = frame
                     }
                 }
                 cellAttributes[indexPath] = attributes
                 switch direction {
                 case .水平:
-                    xOffset += itemSize.width + horizontalSpacing
+                    x += itemSize.width + horizontalSpacing
                 case .垂直:
-                    yOffset += itemSize.width + horizontalSpacing
+                    y += itemSize.height + verticalSpacing
                 }
             }
             switch direction {
             case .水平:
                 // 计算最大宽度
-                contentWidth = max(contentWidth, xOffset)
-                xOffset = 0
-                yOffset += itemSize.height + verticalSpacing
+                contentWidth = max(contentWidth, x)
+                x = 0
+                y += itemSize.height + verticalSpacing
                 // 获取最大高度
-                contentHeight = max(contentHeight, yOffset)
+                contentHeight = max(contentHeight, y)
             case .垂直:
                 // 计算最大高度
-                contentHeight = max(contentHeight, yOffset)
-                yOffset = 0
-                xOffset += itemSize.height + verticalSpacing
+                contentHeight = max(contentHeight, y)
+                y = 0
+                x += itemSize.width + horizontalSpacing
                 // 获取最大宽度
-                contentWidth = max(contentWidth, xOffset)
+                contentWidth = max(contentWidth, x)
             }
         }
-        computedContentSize = CGSize(width: contentWidth, height: contentHeight)
+        computedContentSize = CGSize(width: contentWidth - horizontalSpacing, height: contentHeight - verticalSpacing)
     }
     
     /// 返回内容区域总大小，不是可见区域
@@ -130,6 +141,7 @@ public class CZCollectionGridViewLayout: UICollectionViewLayout {
         return true
     }
 }
+
 
 public extension CZKit where Base: CZCollectionGridViewLayout {
     

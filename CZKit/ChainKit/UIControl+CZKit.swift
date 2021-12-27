@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  UIControl+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -34,4 +34,10 @@ public extension CZKit where Base: UIControl {
         return self
     }
     
+    /// 添加事件
+    @discardableResult
+    func addTarget(_ actionBlock: (() -> Void)?, for controlEvents: UIControl.Event) -> CZKit {
+        base.cz_addTarget(actionBlock: actionBlock, for: controlEvents)
+        return self
+    }
 }

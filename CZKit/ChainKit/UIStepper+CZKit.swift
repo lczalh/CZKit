@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  UIStepper+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -60,9 +60,9 @@ public extension CZKit where Base: UIStepper {
     
     @discardableResult
     func dividerImage(_ image: UIImage?,
-                      forLeftSegmentState leftState: UIControl.State,
-                      rightSegmentState rightState: UIControl.State) -> CZKit {
-        base.setDividerImage(image, forLeftSegmentState: leftState, rightSegmentState: rightState)
+                      forLeftSegmentState: UIControl.State,
+                      rightSegmentState: UIControl.State) -> CZKit {
+        base.setDividerImage(image, forLeftSegmentState: forLeftSegmentState, rightSegmentState: rightSegmentState)
         return self
     }
     

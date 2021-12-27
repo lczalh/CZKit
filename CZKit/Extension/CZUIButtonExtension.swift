@@ -1,10 +1,10 @@
 //
 //  CZButtonExtension.swift
-//  Random
+//  letaoshijie
 //
-//  Created by yu mingming on 2019/11/28.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/11/28.
 //
+
 import Foundation
 import UIKit
 
@@ -19,10 +19,10 @@ public extension UIButton {
     ///   - additionalSpacing: 间距
     ///   - state: 按钮状态
     func cz_titleImageDirection(image: UIImage?,
-                             title: String,
-                             titlePosition: UIView.ContentMode,
-                             additionalSpacing: CGFloat,
-                             state: UIControl.State){
+                                title: String,
+                                titlePosition: UIView.ContentMode,
+                                additionalSpacing: CGFloat,
+                                state: UIControl.State){
         self.imageView?.contentMode = .center
         self.setImage(image, for: state)
         self.titleLabel?.contentMode = .center
@@ -63,6 +63,10 @@ public extension UIButton {
         self.imageEdgeInsets = imageInsets
     }
     
+    /// 设置按钮背景颜色
+    /// - Parameters:
+    ///   - color: color description
+    ///   - state: state description
     func cz_setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         self.setBackgroundImage(color.cz_drawImage(), for: state)
     }

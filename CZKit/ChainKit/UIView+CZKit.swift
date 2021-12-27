@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  UIView+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -185,7 +185,7 @@ public extension CZKit where Base: UIView {
     }
     
     @discardableResult
-    func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) -> CZKit {
+    func addShadow(_ color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), _ radius: CGFloat = 3, _ offset: CGSize = .zero, _ opacity: Float = 0.5) -> CZKit {
         base.layer.shadowColor = color.cgColor
         base.layer.shadowOffset = offset
         base.layer.shadowRadius = radius
@@ -201,11 +201,25 @@ public extension CZKit where Base: UIView {
     }
     
     @discardableResult
-    func autoresizingMask(autoresizingMask: UIView.AutoresizingMask) -> CZKit {
+    func autoresizingMask(_ autoresizingMask: UIView.AutoresizingMask) -> CZKit {
         base.autoresizingMask = autoresizingMask
         return self
     }
     
+    
+    /// 内容抗拉伸优先级 默认250
+    @discardableResult
+    func setContentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> CZKit {
+        base.setContentHuggingPriority(priority, for: axis)
+        return self
+    }
+    
+    /// 内容抗压缩优先级 默认750
+    @discardableResult
+    func setContentCompressionResistancePriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> CZKit {
+        base.setContentCompressionResistancePriority(priority, for: axis)
+        return self
+    }
 }
 
 

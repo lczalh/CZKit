@@ -1,59 +1,54 @@
 //
-//  ViewController.swift
-//  Random
+//  UserDefaults+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
 public extension CZKit where Base: UserDefaults {
     
     @discardableResult
-    func removeObject(forKey defaultName: String) -> CZKit {
-        base.removeObject(forKey: defaultName)
+    func removeObject(forKey: String) -> CZKit {
+        base.removeObject(forKey: forKey)
         return self
     }
     
     @discardableResult
-    func set(_ value: Any?, forKey defaultName: String) -> CZKit {
-        base.set(value, forKey: defaultName)
+    func set(_ value: Any?, forKey: String) -> CZKit {
+        base.set(value, forKey: forKey)
         return self
     }
     
     @discardableResult
-    func set(_ value: Bool, forKey defaultName: String) -> CZKit {
-        base.set(value, forKey: defaultName)
+    func set(_ value: Bool, forKey: String) -> CZKit {
+        base.set(value, forKey: forKey)
         return self
     }
     
     @discardableResult
-    func set(_ value: Int, forKey defaultName: String) -> CZKit {
-        base.set(value, forKey: defaultName)
+    func set(_ value: Int, forKey: String) -> CZKit {
+        base.set(value, forKey: forKey)
         return self
     }
     
     @discardableResult
-    func set(_ value: Double, forKey defaultName: String) -> CZKit {
-        base.set(value, forKey: defaultName)
+    func set(_ value: Double, forKey: String) -> CZKit {
+        base.set(value, forKey: forKey)
         return self
     }
     
     @discardableResult
-    func set(_ value: Float, forKey defaultName: String) -> CZKit {
-        base.set(value, forKey: defaultName)
+    func set(_ value: Float, forKey: String) -> CZKit {
+        base.set(value, forKey: forKey)
         return self
     }
     
     @discardableResult
-    func set(_ url: URL?, forKey defaultName: String) -> CZKit {
-        base.set(url, forKey: defaultName)
+    func set(_ url: URL?, forKey: String) -> CZKit {
+        base.set(url, forKey: forKey)
         return self
-    }
-    
-    @discardableResult
-    func synchronize() -> Bool {
-        return base.synchronize()
     }
 }

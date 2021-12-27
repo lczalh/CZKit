@@ -2,12 +2,12 @@
 //  CZArithmeticManage.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2021/5/7.
+//  Created by chaozheng on 2021/5/7.
 //
 
 import Foundation
 
-struct CZArithmeticManage {
+public struct CZArithmeticManage {
     
     
     /// 将一维数组，分割为二维数组
@@ -15,7 +15,7 @@ struct CZArithmeticManage {
     ///   - array: 一维数组
     ///   - eachNumber: 每几个分割为一组
     /// - Returns: 分割后的二维数组
-    static func oneDimensionalArraySplit<T>(array: [T], eachNumber: Int) -> [[T]] {
+    public static func oneDimensionalArraySplit<T>(array: [T], eachNumber: Int) -> [[T]] {
         // 求余
         let remainder = array.count % eachNumber
         // 求商

@@ -1,9 +1,8 @@
 //
 //  CZPhotoManager.swift
-//  UdreamPlus
+//  letaoshijie
 //
-//  Created by udream3 on 2021/3/26.
-//  Copyright © 2021 chaozheng. All rights reserved.
+//  Created by chaozheng on 2021/3/26.
 //
 
 import Foundation
@@ -13,7 +12,8 @@ import Photos
 public struct CZPhotoManager {
     
     /// 保存图片到相册
-    public static func saveImageToAlbum(image: UIImage, completion: ( (Bool, PHAsset?) -> Void )? ) {
+    public static func saveImageToAlbum(image: UIImage,
+                                        completion: ( (Bool, PHAsset?) -> Void )? ) {
         let status = PHPhotoLibrary.authorizationStatus()
         
         if status == .denied || status == .restricted {
@@ -27,7 +27,7 @@ public struct CZPhotoManager {
         }) { (suc, error) in
             DispatchQueue.main.async {
                 if suc {
-                    let asset = getAsset(from: placeholderAsset?.localIdentifier)
+                    let asset = getAsset(localIdentifier: placeholderAsset?.localIdentifier)
                     completion?(suc, asset)
                 } else {
                     completion?(false, nil)
@@ -37,7 +37,8 @@ public struct CZPhotoManager {
     }
     
     /// 保存视频到相册
-    public static func saveVideoToAlbum(url: URL, completion: ( (Bool, PHAsset?) -> Void )? ) {
+    public static func saveVideoToAlbum(url: URL,
+                                        completion: ( (Bool, PHAsset?) -> Void )? ) {
         let status = PHPhotoLibrary.authorizationStatus()
         if status == .denied || status == .restricted {
             completion?(false, nil)
@@ -50,7 +51,7 @@ public struct CZPhotoManager {
         }) { (suc, error) in
             DispatchQueue.main.async {
                 if suc {
-                    let asset = getAsset(from: placeholderAsset?.localIdentifier)
+                    let asset = getAsset(localIdentifier: placeholderAsset?.localIdentifier)
                     completion?(suc, asset)
                 } else {
                     completion?(false, nil)
@@ -59,7 +60,7 @@ public struct CZPhotoManager {
         }
     }
     
-    private static func getAsset(from localIdentifier: String?) -> PHAsset? {
+    private static func getAsset(localIdentifier: String?) -> PHAsset? {
         guard let id = localIdentifier else { return nil }
         let result = PHAsset.fetchAssets(withLocalIdentifiers: [id], options: nil)
         return result.firstObject
@@ -80,7 +81,11 @@ public struct CZPhotoManager {
     ///   7、AVAssetExportPresetMediumQuality：中等质量
     ///   8、AVAssetExportPresetHighestQuality：高质量
     ///   - completion: 转换完成回调
-    public static func localVideoTranscode(asset: AVAsset, storagePath: String, outputFileType: AVFileType = .mp4, presetName: String = AVAssetExportPresetMediumQuality, completion: @escaping (_ filePath: String) -> Void) {
+    public static func localVideoTranscode(asset: AVAsset,
+                                           storagePath: String,
+                                           outputFileType: AVFileType = .mp4,
+                                           presetName: String = AVAssetExportPresetMediumQuality,
+                                           completion: @escaping (_ filePath: String) -> Void) {
         let newVideoPath = URL(fileURLWithPath: storagePath)
         let exporter = AVAssetExportSession(asset: asset, presetName: presetName)!
         exporter.outputURL = newVideoPath
@@ -101,5 +106,46 @@ public struct CZPhotoManager {
         var actualTime:CMTime = CMTimeMake(value: 0,timescale: 0)
         guard let imageRef:CGImage = try? generator.copyCGImage(at: time, actualTime: &actualTime) else { return nil }
         return UIImage(cgImage: imageRef)
+    }
+    
+    /// 请求相机 / 音频等权限
+    ///
+    /// - Parameters:
+    ///   - mediaType: 指定的媒体类型（即AVMedia类型视频、AVMedia类型音频等）
+    ///   - completionHandler: 使用响应的访问请求结果调用的块
+    public static func requestCameraAuthorization(mediaType: AVMediaType,
+                                                  handler: @escaping ((AVMediaType, Bool) -> Void) ) {
+        AVCaptureDevice.requestAccess(for: mediaType) { (granted: Bool) in
+            // According to documentation, requestAccess runs on an arbitary queue
+            DispatchQueue.main.async {
+                handler(mediaType, granted)
+            }
+        }
+    }
+    
+    /// 获取相机 / 音频等权限
+    ///
+    /// - Parameter mediaType: 指定的媒体类型（即AVMedia类型视频、AVMedia类型音频等）
+    /// - Returns: 当前相机权限状态
+    public static func cameraAuthorizationStatus(mediaType: AVMediaType) -> AVAuthorizationStatus {
+        return AVCaptureDevice.authorizationStatus(for: mediaType)
+    }
+    
+    
+    /// 请求相册权限
+    /// - Parameter handler: 使用响应的访问请求结果调用的块
+    public static func requestPhotoAuthorization(_ handler: @escaping (PHAuthorizationStatus) -> Void) {
+        PHPhotoLibrary.requestAuthorization { status in
+            DispatchQueue.main.async {
+                handler(status)
+            }
+        }
+    }
+    
+    
+    /// 获取相册权限状态
+    /// - Returns: 当前相册权限状态
+    public static func photoAuthorizationStatus() -> PHAuthorizationStatus {
+        return PHPhotoLibrary.authorizationStatus()
     }
 }

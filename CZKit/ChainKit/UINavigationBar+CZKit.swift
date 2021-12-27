@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  UINavigationBar+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -29,7 +29,9 @@ public extension CZKit where Base: UINavigationBar {
     }
     
     @discardableResult
-    func backgroundImage(_ backgroundImage: UIImage?, for barPosition: UIBarPosition = .any, barMetrics: UIBarMetrics = .default) -> CZKit {
+    func backgroundImage(_ backgroundImage: UIImage?,
+                         for barPosition: UIBarPosition = .any,
+                         barMetrics: UIBarMetrics = .default) -> CZKit {
         base.setBackgroundImage(backgroundImage, for: barPosition, barMetrics: barMetrics)
         return self
     }
@@ -46,19 +48,17 @@ public extension CZKit where Base: UINavigationBar {
         return self
     }
     
+    @available(iOS 11.0, *)
     @discardableResult
     func prefersLargeTitles(_ prefersLargeTitles: Bool) -> CZKit {
-        if #available(iOS 11.0, *) {
-            base.prefersLargeTitles = prefersLargeTitles
-        }
+        base.prefersLargeTitles = prefersLargeTitles
         return self
     }
     
+    @available(iOS 11.0, *)
     @discardableResult
     func largeTitleTextAttributes(_ largeTitleTextAttributes: [NSAttributedString.Key : Any]?) -> CZKit {
-        if #available(iOS 11.0, *) {
-            base.largeTitleTextAttributes = largeTitleTextAttributes
-        }
+        base.largeTitleTextAttributes = largeTitleTextAttributes
         return self
     }
 }

@@ -1,24 +1,24 @@
 //
 //  CZAlertController.swift
-//  Random
+//  letaoshijie
 //
-//  Created by yu mingming on 2019/11/28.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/11/28.
 //
+
 import Foundation
 import UIKit
 
 public extension UIAlertController {
     
     /// 快速创建只带取消和确定的提示框
-    class func cz_showAlertController(_ title: String?,
-                                             _ message: String?,
-                                             _ preferredStyle: UIAlertController.Style,
-                                             _ viewController: UIViewController!,
-                                             _ confirmTitle: String?,
-                                             _ confirmHandler: ((UIAlertAction) -> Void)?,
-                                             _ cancelTitle: String?,
-                                             _ cancelHandler: ((UIAlertAction) -> Void)?) {
+    class func cz_showAlertController(title: String?,
+                                      message: String?,
+                                      preferredStyle: UIAlertController.Style,
+                                      viewController: UIViewController,
+                                      confirmTitle: String?,
+                                      confirmHandler: ((UIAlertAction) -> Void)?,
+                                      cancelTitle: String?,
+                                      cancelHandler: ((UIAlertAction) -> Void)?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         let confirmAction = UIAlertAction(title: confirmTitle, style: .default, handler: confirmHandler)
         let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: cancelHandler)
@@ -28,12 +28,12 @@ public extension UIAlertController {
     }
     
     /// 快速创建只带确定的提示框
-    class func cz_showAlertController(_ title: String?,
-                                      _ message: String?,
-                                      _ preferredStyle: UIAlertController.Style,
-                                      _ viewController: UIViewController!,
-                                      _ confirmTitle: String?,
-                                      _ confirmHandler: ((UIAlertAction) -> Void)?) {
+    class func cz_showAlertController(title: String?,
+                                      message: String?,
+                                      preferredStyle: UIAlertController.Style,
+                                      viewController: UIViewController,
+                                      confirmTitle: String?,
+                                      confirmHandler: ((UIAlertAction) -> Void)?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         let confirmAction = UIAlertAction(title: confirmTitle, style: .default, handler: confirmHandler)
         alertController.addAction(confirmAction)

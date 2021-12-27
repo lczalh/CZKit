@@ -1,20 +1,23 @@
 //
 //  CZViewExtension.swift
-//  Random
+//  letaoshijie
 //
-//  Created by yu mingming on 2019/11/28.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/11/28.
 //
+
 import Foundation
 import UIKit
 
 public extension UIView {
     
+    struct CZViewKey {
+        static let tapViewKey: UnsafeRawPointer! = UnsafeRawPointer.init(bitPattern: "tapViewKey".hashValue)
+    }
+    
     /// 通过视图获取指定父控制器
     ///
     /// - Parameter seekViewController: 查找的父控制器类型
     /// - Returns: 父控制器
-    @discardableResult
     func cz_superController<T: UIViewController>(seekViewController: T.Type) -> T? {
         var view: UIView? = self.superview
         while view?.next?.isKind(of: T.self) != true {
@@ -30,7 +33,6 @@ public extension UIView {
     ///
     /// - Parameter seekSuperView: 查找的父视图类型
     /// - Returns: 父视图
-    @discardableResult
     func cz_superView<T: UIView>(seekSuperView: T.Type) -> T? {
         var view: UIView? = self.superview
         while view?.isKind(of: T.self) != true {
@@ -46,12 +48,10 @@ public extension UIView {
     ///
     /// - Parameter subView: 查找的子视图类型
     /// - Returns: 子视图
-    @discardableResult
     func cz_subView<T: UIView>(seekSubView: T.Type) -> T? {
         return cz_selectSubView(currenView: self, superView: T.self)
     }
     
-    @discardableResult
     private func cz_selectSubView<T: UIView>(currenView: UIView, superView: T.Type) -> T? {
         // 遍历子视图
         for view in currenView.subviews {
@@ -69,7 +69,6 @@ public extension UIView {
     }
     
     /// 将当前视图转为UIImage
-    @discardableResult
     func cz_asImage() -> UIImage {
         let renderer = UIGraphicsImageRenderer(bounds: bounds)
         return renderer.image { rendererContext in
@@ -95,15 +94,18 @@ public extension UIView {
     /// 添加阴影到视图
     ///
     /// - Parameters:
-    ///   - color: shadow color (default is #137992).
-    ///   - radius: shadow radius (default is 3).
-    ///   - offset: shadow offset (default is .zero).
-    ///   - opacity: shadow opacity (default is 0.5).
-    func cz_addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
-        layer.shadowColor = color.cgColor
-        layer.shadowOffset = offset
-        layer.shadowRadius = radius
-        layer.shadowOpacity = opacity
+    ///   - shadowColor: shadow color (default is #137992).
+    ///   - shadowRadius: shadow radius (default is 3).
+    ///   - shadowOffset: shadow offset (default is .zero).
+    ///   - shadowOpacity: shadow opacity (default is 0.5).
+    func cz_addShadow(shadowColor: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0),
+                      shadowRadius: CGFloat = 3,
+                      shadowOffset: CGSize = .zero,
+                      shadowOpacity: Float = 0.5) {
+        layer.shadowColor = shadowColor.cgColor
+        layer.shadowOffset = shadowOffset
+        layer.shadowRadius = shadowRadius
+        layer.shadowOpacity = shadowOpacity
         layer.masksToBounds = false
     }
     
@@ -116,7 +118,13 @@ public extension UIView {
     ///   - vagueRadius: 模糊半径
     ///   - corners: 角落
     ///   - radius: 角度
-    func cz_setShadowAndRoundCorner(shadowLayerName: String, shadowColor: UIColor, shadowOffset: CGSize, shadowOpacity: Float, vagueRadius: CGFloat, corners: UIRectCorner, radius: CGFloat) {
+    func cz_setShadowAndRoundCorner(shadowLayerName: String,
+                                    shadowColor: UIColor,
+                                    shadowOffset: CGSize,
+                                    shadowOpacity: Float,
+                                    vagueRadius: CGFloat,
+                                    corners: UIRectCorner,
+                                    radius: CGFloat) {
         guard let superview = superview else { return }
         superview.layoutIfNeeded()
         guard superview.layer.sublayers?.filter({ $0.name == shadowLayerName }).first == nil else { return }
@@ -160,8 +168,22 @@ public extension UIView {
     /// 获取当前视图所在目标视图的位置
     /// - targetView: 目标视图对象 默认window
     /// - Returns: 位置大小
-    @discardableResult
     func cz_placeRect(targetView: UIView? = CZApplicationManage.lastWindow()) -> CGRect? {
         return superview?.convert(frame, to: targetView)
+    }
+    
+    /// 给视图添加点击手势并回调
+    /// - Parameter handler: 点击后回调
+    func cz_tapBlock(handler : @escaping () -> Void) {
+        objc_setAssociatedObject(self, CZViewKey.tapViewKey, handler, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        isUserInteractionEnabled = true
+        let tapGest = UITapGestureRecognizer(target: self, action: #selector(cz_tapAction))
+        tapGest.numberOfTapsRequired = 1
+        tapGest.numberOfTouchesRequired = 1
+        addGestureRecognizer(tapGest)
+    }
+    @objc private func cz_tapAction() {
+        let handler = objc_getAssociatedObject(self, CZViewKey.tapViewKey) as? () -> Void
+        handler?()
     }
 }

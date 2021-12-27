@@ -1,10 +1,10 @@
 //
 //  CZStringExtension.swift
-//  Random
+//  letaoshijie
 //
-//  Created by yu mingming on 2019/11/28.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/11/28.
 //
+
 import Foundation
 import UIKit
 
@@ -48,7 +48,7 @@ public extension String {
     /// - Parameters:
     ///   - dateFormat: 日期格式
     /// - Returns: 日期
-    func cz_conversionDate(dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> Date {
+    func cz_conversionDate(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date {
         let formatter = DateFormatter()
         formatter.locale = Locale.init(identifier: "zh_CN")
         formatter.dateFormat = dateFormat
@@ -62,7 +62,7 @@ public extension String {
     ///   - time: 时间字符串
     ///   - dateFormat: 时间格式
     /// - Returns: 时间戳
-    func cz_toTimeStamp(dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> Double {
+    func cz_toTimeStamp(dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Double {
         let dfmatter = DateFormatter()
         dfmatter.dateFormat = dateFormat
         let last = dfmatter.date(from: self)

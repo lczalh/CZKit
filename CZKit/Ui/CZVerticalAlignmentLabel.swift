@@ -2,7 +2,7 @@
 //  CZVerticalAlignmentLabel.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2020/12/24.
+//  Created by chaozheng on 2020/12/24.
 //
 
 import Foundation

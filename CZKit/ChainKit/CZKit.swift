@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 
 public struct CZKit<Base> {

@@ -1,10 +1,10 @@
 //
 //  UIStackView+CZKit.swift
-//  XinmeiMerchant
+//  letaoshijie
 //
-//  Created by udream3 on 2020/11/25.
-//  Copyright © 2020 Udream. All rights reserved.
+//  Created by chaozheng on 2020/11/25.
 //
+
 import Foundation
 import UIKit
 
@@ -53,7 +53,7 @@ public extension CZKit where Base: UIStackView {
     }
     
     @discardableResult
-    func insertArrangedSubview(_ view: UIView, _ stackIndex: Int) -> CZKit {
+    func insertArrangedSubview(_ view: UIView, at stackIndex: Int) -> CZKit {
         base.insertArrangedSubview(view, at: stackIndex)
         return self
     }
@@ -72,7 +72,7 @@ public extension CZKit where Base: UIStackView {
     
     @discardableResult
     @available(iOS 11.0, *)
-    func setCustomSpacing(_ spacing: CGFloat, _ arrangedSubview: UIView) -> CZKit {
+    func setCustomSpacing(_ spacing: CGFloat, after arrangedSubview: UIView) -> CZKit {
         base.setCustomSpacing(spacing, after: arrangedSubview)
         return self
     }
@@ -83,7 +83,5 @@ public extension CZKit where Base: UIStackView {
         base.customSpacing(after: arrangedSubview)
         return self
     }
-    
-    
     
 }

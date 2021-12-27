@@ -2,12 +2,12 @@
 //  CZCountingLabel.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2021/9/10.
+//  Created by chaozheng on 2021/9/10.
 //  数值滚动Label
 
 import UIKit
 
-class CZCountingLabel: UILabel {
+public class CZCountingLabel: UILabel {
     
     /// 动画时长
     private var animationDuration = 2.0
@@ -40,17 +40,23 @@ class CZCountingLabel: UILabel {
     
     /// 添加计时器
     private func addDisplayLink() {
-        timer = CADisplayLink(target: self, selector: #selector(updateValue(timer:)))
+        timer = CADisplayLink(target: self, selector: #selector(displayLinkAction(timer:)))
         timer?.add(to: .main, forMode: .common)
     }
     
-    @objc private func updateValue(timer: Timer) {
+    /// 移除定时器
+    private func removeDisplayLink() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    /// 定时器事件
+    @objc private func displayLinkAction(timer: CADisplayLink) {
         let now: TimeInterval = Date.timeIntervalSinceReferenceDate
         progress += now - lastUpdateTime
         lastUpdateTime = now
         if progress >= totalTime {
-            self.timer?.invalidate()
-            self.timer = nil
+            removeDisplayLink()
             progress = totalTime
         }
         setTextValue(value: currentValue)
@@ -76,8 +82,7 @@ class CZCountingLabel: UILabel {
         self.format = format
         startingValue = from
         destinationValue = to
-        timer?.invalidate()
-        timer = nil
+        removeDisplayLink()
         if (duration == 0.0) { // 无动画
             setTextValue(value: to)
             return
@@ -95,5 +100,9 @@ class CZCountingLabel: UILabel {
     ///   - duration: 时长
     func countFromCurrent(to: Float, format: String = "%.1f", duration: TimeInterval? = nil) {
         count(from: currentValue, to: to, format: format, duration: duration ?? nil)
+    }
+    
+    deinit {
+        removeDisplayLink()
     }
 }

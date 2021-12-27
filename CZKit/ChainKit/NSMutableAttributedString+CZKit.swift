@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
-//  Random
+//  NSMutableAttributedString+CZKit.swift
+//  letaoshijie
 //
-//  Created by 刘超正 on 2019/9/20.
-//  Copyright © 2019 刘超正. All rights reserved.
+//  Created by chaozheng on 2019/9/20.
 //
+
 import Foundation
 import UIKit
 
@@ -41,7 +41,7 @@ public extension CZKit where Base: NSMutableAttributedString {
     }
     
     @discardableResult
-    func font(_ font: UIFont, range: NSRange? = nil) -> CZKit {
+    func font(font: UIFont, range: NSRange? = nil) -> CZKit {
         guard let range = range else {
             base.addAttribute(.font, value: font, range: NSMakeRange(0, base.length))
             return self
@@ -51,7 +51,7 @@ public extension CZKit where Base: NSMutableAttributedString {
     }
     
     @discardableResult
-    func systemFont(ofSize fontSize: CGFloat, range: NSRange? = nil) -> CZKit {
+    func systemFont(fontSize: CGFloat, range: NSRange? = nil) -> CZKit {
         guard let range = range else {
             base.addAttribute(.font, value: UIFont.systemFont(ofSize: fontSize), range: NSMakeRange(0, base.length))
             return self
@@ -61,7 +61,7 @@ public extension CZKit where Base: NSMutableAttributedString {
     }
     
     @discardableResult
-    func boldSystemFont(ofSize fontSize: CGFloat, range: NSRange? = nil) -> CZKit {
+    func boldSystemFont(fontSize: CGFloat, range: NSRange? = nil) -> CZKit {
         guard let range = range else {
             base.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: fontSize), range: NSMakeRange(0, base.length))
             return self

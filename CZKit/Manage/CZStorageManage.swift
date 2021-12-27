@@ -2,8 +2,9 @@
 //  CZStorageManage.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2021/3/31.
+//  Created by chaozheng on 2021/3/31.
 //
+
 import Foundation
 import UIKit
 import WebKit
@@ -116,14 +117,14 @@ public struct CZStorageManage {
     }
     
     /// 清除缓存
-    public static func removeCache(complete: @escaping (() -> Void)) {
+    public static func removeCache(completion: @escaping (() -> Void)) {
         DispatchQueue.global().async {
             let files = FileManager.default.subpaths(atPath: CZApplicationManage.cachesPath) ?? []
             for file in files {
                 let path = CZApplicationManage.cachesPath.appending("/\(file)")
                 if isFileExist(filePath: path) { if let _ = try? FileManager.default.removeItem(atPath: path) {} }
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: { complete() })
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: { completion() })
         }
     }
     

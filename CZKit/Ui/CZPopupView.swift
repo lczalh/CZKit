@@ -2,13 +2,13 @@
 //  CZPopupView.swift
 //  letaoshijie
 //
-//  Created by udream3 on 2021/7/29.
+//  Created by chaozheng on 2021/7/29.
 //
 
 import UIKit
 
-class CZPopupView: UIView {
-
+public class CZPopupView: UIView {
+    
     /// 弹出方向
     enum PopUpDirectionEnum {
         case 上
@@ -23,7 +23,7 @@ class CZPopupView: UIView {
         case 边缘
         case 自定义
     }
-
+    
     /// 背景视图
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -80,7 +80,7 @@ class CZPopupView: UIView {
     ///   - contentView: 内容视图
     ///   - location: 自定义显示的位置
     init(direction: PopUpDirectionEnum = .下,
-         backgroundColor: UIColor = .cz_rgbColor(0, 0, 0, 0.5),
+         backgroundColor: UIColor = .cz_rgbColor(0, 0, 0, alpha: 0.5),
          popUpLocation: PopUpLocationEnum = .居中,
          isTapBackground: Bool = true,
          location: CGPoint = CGPoint(x: 0, y: 0),
@@ -120,10 +120,11 @@ class CZPopupView: UIView {
     func show() {
         superView?.addSubview(self)
         superView?.layoutIfNeeded()
+        if contentView.frame == .zero {
+            let size = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            contentView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        }
         contentView.cz_roundCorners(corners, radius: radius)
-//        if contentView.frame.size.width <= 0 || contentView.frame.size.height <= 0 {
-//            contentView.frame.size = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-//        }
         // 计算中心点
         let centerPoint = CGPoint(x: CZDeviceManage.screenCenter.x - contentView.frame.size.width / 2, y: CZDeviceManage.screenCenter.y - contentView.frame.size.height / 2)
         // 计算边缘点
@@ -176,30 +177,34 @@ class CZPopupView: UIView {
             }
         }
         contentView.frame.origin = hiddenLocation
-        UIView.animate(withDuration: 0.5, animations: { () -> Void in
-            self.backgroundView.alpha = 1
-            self.contentView.frame.origin = self.showLocation
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                self.backgroundView.alpha = 1
+                self.contentView.frame.origin = self.showLocation
+            })
+        }
     }
     
     /// 隐藏
     func dismiss() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.backgroundView.alpha = 0
-            self.contentView.frame.origin = self.hiddenLocation
-        }, completion: { state in
-            self.removeFromSuperview()
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.backgroundView.alpha = 0
+                self.contentView.frame.origin = self.hiddenLocation
+            }, completion: { state in
+                self.removeFromSuperview()
+            })
+        }
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 // MARK: - UIGestureRecognizerDelegate
 extension CZPopupView: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if touch.view == backgroundView {
             return true
         }
