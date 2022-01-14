@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 spec.name         = "CZKit"
-spec.version      = "1.1.0"
+spec.version      = "0.0.1"
 spec.summary      = "Swift 工具箱"
 spec.description  = <<-DESC
 TODO: Swift 工具箱.
