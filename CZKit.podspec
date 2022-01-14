@@ -10,11 +10,34 @@ spec.homepage     = "https://github.com/lczalh/CZKit"
 spec.license      = "MIT"
 spec.author             = { "lczalh" => "824092805@qq.com" }
 
-spec.ios.deployment_target = "10.0"
+spec.ios.deployment_target = "12.0"
 spec.swift_version = ['5.0']
 spec.source       = { :git => "https://github.com/lczalh/CZKit.git", :tag => spec.version.to_s }
-spec.source_files = 'CZKit/ChainKit/*.swift', 'CZKit/Extension/*.swift', 'CZKit/Manage/*.swift', 'CZKit/Ui/*.swift', 'CZKit/ChainKit+SnapKit/*.swift'
 
+spec.subspec 'CZCore' do |cz|
+    cz.source_files = 'CZKit/ChainKit', 'CZKit/Manage', 'CZKit/Extension'
+end
+
+spec.subspec 'CZUi' do |cz|
+    cz.source_files = 'CZKit/ChainKit+SnapKit', 'CZKit/Ui'
+    cz.dependency 'SnapKit', '~> 5.0.1'
+    cz.dependency 'CZKit/CZCore'
+end
+
+spec.subspec 'CZMJRefreshExtension' do |cz|
+    cz.source_files = 'CZKit/MJRefresh'
+    cz.dependency 'MJRefresh', '~> 3.6.1'
+end
+
+spec.subspec 'CZKingfisherExtension' do |cz|
+    cz.source_files = 'CZKit/Kingfisher'
+    cz.dependency 'Kingfisher', '~> 7.0.0'
+end
+
+spec.subspec 'CZHud' do |cz|
+    cz.source_files = 'CZKit/Hud'
+    cz.dependency 'SVProgressHUD', '~> 2.2.5'
+end
 
 spec.frameworks = 'UIKit', 'Foundation', 'WebKit', 'Photos', 'AudioToolbox', 'AppTrackingTransparency', 'AdSupport'
 

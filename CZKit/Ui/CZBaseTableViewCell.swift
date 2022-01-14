@@ -23,6 +23,7 @@ public class CZBaseTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         backgroundColor = .clear
+        contentView.backgroundColor = .white
         contentView.cz.remakeConstraints({ make in
             make.edges.equalToSuperview()
         }).backgroundColor(.white)

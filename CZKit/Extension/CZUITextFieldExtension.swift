@@ -74,24 +74,21 @@ public extension UITextField {
     /// 值改变事件
     @objc private func cz_textEditingChanged(textField: UITextField) {
         guard var value = textField.text, textField.markedTextRange == nil else { return }
-        let cursorPostion = offset(from: endOfDocument, to: selectedTextRange!.end)
+        let cursorPostion: Int? = selectedTextRange == nil ? nil : offset(from: endOfDocument, to: selectedTextRange!.end)
         if let regular = cz_regular {
             guard let regex = try? NSRegularExpression(pattern: regular.value, options: []) else { return }
             let resultCount = regex.numberOfMatches(in: value, options: [], range: NSRange(location: 0, length: value.count))
             if resultCount == 0 {
-                if cz_regularMatchingFailureBlock == nil {
-                    value = cz_oldTextValue ?? ""
-                } else {
-                    value = cz_regularMatchingFailureBlock?(value) ?? cz_oldTextValue ?? ""
-                }
+                value = cz_regularMatchingFailureBlock?(value) ?? cz_oldTextValue ?? ""
             }
         }
         if let maxLenght = cz_maxLenght { value = String(value.prefix(maxLenght)) }
         textField.text = value
         cz_oldTextValue = value
-        let targetPostion = position(from: endOfDocument, offset: cursorPostion)!
-        selectedTextRange = textRange(from: targetPostion, to: targetPostion)
-        if cz_textEditingChangedBlock != nil { cz_textEditingChangedBlock!(textField) }
+        if let cursorPostion = cursorPostion, let targetPostion = position(from: endOfDocument, offset: cursorPostion) {
+            selectedTextRange = textRange(from: targetPostion, to: targetPostion)
+        }
+        cz_textEditingChangedBlock?(textField)
     }
     
 }

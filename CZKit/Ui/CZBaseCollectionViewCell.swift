@@ -22,7 +22,7 @@ public class CZBaseCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
-        contentView.backgroundColor = .clear
+        contentView.backgroundColor = .white
         contentView
             .cz
             .remakeConstraints({ make in

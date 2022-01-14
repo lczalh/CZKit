@@ -64,7 +64,7 @@ public struct CZCommonManage {
         startComps.day = 1
         startComps.month = month
         startComps.year = year
-        let startDate = calendar.date(from: startComps)!
+        let startDate = calendar.date(from: startComps) ?? Date()
         return startDate
     }
     
@@ -88,8 +88,8 @@ public struct CZCommonManage {
     /// 检测是否开启了网络代理
     /// - Parameter complete: false: 开启了代理  true：未开启代理
     public static func isProxyDetection() -> Bool {
-        let proxySettings = CFNetworkCopySystemProxySettings()!.takeUnretainedValue()
-        let arr = CFNetworkCopyProxiesForURL(URL(string: "https://www.baidu.com")! as CFURL, proxySettings).takeUnretainedValue()
+        guard let proxySettings = CFNetworkCopySystemProxySettings()?.takeUnretainedValue(), let url = URL(string: "https://www.baidu.com") else { return false }
+        let arr = CFNetworkCopyProxiesForURL(url as CFURL, proxySettings).takeUnretainedValue()
         let obj = (arr as [AnyObject]).first
         return obj?.object(forKey: kCFProxyTypeKey) == kCFProxyTypeNone
     }
@@ -147,32 +147,48 @@ public struct CZCommonManage {
                                     _ transformScale: CGFloat = 10,
                                     _ completion: ((_ image: UIImage?) -> Void)?) {
         guard let content = content, content.isEmpty == false else {
-            completion!(defaultImage)
+            completion?(defaultImage)
             return
         }
         DispatchQueue.global().async {
             let stringData = content.data(using: .utf8, allowLossyConversion: false)
             // 创建一个二维码的滤镜
-            let qrFilter = CIFilter(name: "CIQRCodeGenerator")!
+            guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else {
+                completion?(defaultImage)
+                return
+            }
             qrFilter.setValue(stringData, forKey: "inputMessage")
             // 设置二维码颜色
             // 反转颜色
-            guard let invertedColorFilter = CIFilter(name: "CIColorInvert") else { return completion!(defaultImage) }
+            guard let invertedColorFilter = CIFilter(name: "CIColorInvert") else {
+                completion?(defaultImage)
+                return
+            }
             invertedColorFilter.setValue(qrFilter.outputImage, forKey: "inputImage")
             // 将所有黑色转换为透明
-            guard let blackTransparentFilter = CIFilter(name: "CIMaskToAlpha") else { return completion!(defaultImage)  }
+            guard let blackTransparentFilter = CIFilter(name: "CIMaskToAlpha") else {
+                completion?(defaultImage)
+                return
+            }
             blackTransparentFilter.setValue(invertedColorFilter.outputImage, forKey: "inputImage")
             // 应用给定的颜色作为色调颜色
             guard  let transparentQRImage = blackTransparentFilter.outputImage,
                    let filter = CIFilter(name: "CIMultiplyCompositing"),
-                   let colorFilter = CIFilter(name: "CIConstantColorGenerator") else { return completion!(defaultImage) }
+                   let colorFilter = CIFilter(name: "CIConstantColorGenerator") else {
+                       completion?(defaultImage)
+                       return
+                   }
             let ciColor = CIColor(color: color)
             colorFilter.setValue(ciColor, forKey: kCIInputColorKey)
             let colorImage = colorFilter.outputImage
             filter.setValue(colorImage, forKey: kCIInputImageKey)
             filter.setValue(transparentQRImage, forKey: kCIInputBackgroundImageKey)
             // 返回二维码image
-            let codeImage = UIImage(ciImage: filter.outputImage!.transformed(by: CGAffineTransform(scaleX: transformScale, y: transformScale)))
+            guard let outputImage = filter.outputImage else {
+                completion?(defaultImage)
+                return
+            }
+            let codeImage = UIImage(ciImage: outputImage.transformed(by: CGAffineTransform(scaleX: transformScale, y: transformScale)))
             // 通常,二维码都是定制的,中间都会放想要表达意思的图片
             if let iconImage = logoImage {
                 let rect = CGRect(x:0, y:0, width:codeImage.size.width, height:codeImage.size.height)
@@ -184,9 +200,9 @@ public struct CZCommonManage {
                 iconImage.draw(in: CGRect(x:x, y:y, width:avatarSize.width, height:avatarSize.height))
                 let resultImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
-                completion!(resultImage!)
+                completion?(resultImage ?? defaultImage)
             } else {
-                completion!(codeImage)
+                completion?(codeImage)
             }
         }
     }

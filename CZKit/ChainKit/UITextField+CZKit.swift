@@ -29,8 +29,8 @@ public extension CZKit where Base: UITextField {
     }
     
     @discardableResult
-    func attributedPlaceholder(string: String, foregroundColor: UIColor) -> CZKit {
-        base.attributedPlaceholder = NSMutableAttributedString.init(string: string, attributes: [NSAttributedString.Key.foregroundColor : foregroundColor])
+    func attributedPlaceholder(string: String, foregroundColor: UIColor, font: UIFont) -> CZKit {
+        base.attributedPlaceholder = NSMutableAttributedString.init(string: string, attributes: [NSAttributedString.Key.foregroundColor : foregroundColor, NSAttributedString.Key.font: font])
         return self
     }
     

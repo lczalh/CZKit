@@ -1,5 +1,5 @@
 //
-//  CZHUD.swift
+//  CZHud.swift
 //  letaoshijie
 //
 //  Created by chaozheng on 2019/3/20.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SVProgressHUD
 
-struct CZHUD {
+public struct CZHud {
     
     /// 记录当前网络请求数
     static var currentNetworkRequestCount: Int = 0
@@ -25,29 +25,28 @@ struct CZHUD {
                             foregroundColor: UIColor = UIColor.white,
                             defaultMaskType: SVProgressHUDMaskType = .clear,
                             defaultAnimationType: SVProgressHUDAnimationType = .flat,
-                            font: UIFont = .cz_systemFont(14),
-                            cornerRadius: CGFloat = CZCommonManage.dynamicFitWidth(14),
-                            imageViewSize: CGSize = CGSize(width: CZCommonManage.dynamicFitWidth(28), height: CZCommonManage.dynamicFitWidth(28)),
+                            font: UIFont = .systemFont(ofSize: 14, weight: .regular),
+                            cornerRadius: CGFloat = 14,
+                            imageViewSize: CGSize = CGSize(width: 28, height: 28),
                             errorImage: UIImage? = nil,
                             successImage: UIImage? = nil,
                             infoImage: UIImage? = nil
     ) {
-        CZHUD.backgroundColor = backgroundColor
-        CZHUD.foregroundColor = foregroundColor
+        CZHud.backgroundColor = backgroundColor
+        CZHud.foregroundColor = foregroundColor
         setupHUD()
         SVProgressHUD.setDefaultMaskType(defaultMaskType)
         SVProgressHUD.setDefaultAnimationType(defaultAnimationType)
         SVProgressHUD.setFont(font)
         SVProgressHUD.setCornerRadius(cornerRadius)
         SVProgressHUD.setImageViewSize(imageViewSize)
-        if errorImage != nil { SVProgressHUD.setErrorImage(errorImage!) }
-        if successImage != nil { SVProgressHUD.setSuccessImage(successImage!) }
-        if infoImage != nil { SVProgressHUD.setInfoImage(infoImage!) }
+        if let errorImage = errorImage { SVProgressHUD.setErrorImage(errorImage) }
+        if let successImage = successImage { SVProgressHUD.setSuccessImage(successImage) }
+        if let infoImage = infoImage { SVProgressHUD.setInfoImage(infoImage) }
     }
     
     /// 设置hud是否可见
     private static func setupHUD(isVisible: Bool = true) {
-        SVProgressHUD.setImageViewSize(CGSize(width: 28, height: 28))
         if isVisible {
             SVProgressHUD.setBackgroundColor(backgroundColor)
             SVProgressHUD.setForegroundColor(foregroundColor)
@@ -55,12 +54,6 @@ struct CZHUD {
             SVProgressHUD.setBackgroundColor(.clear)
             SVProgressHUD.setForegroundColor(.clear)
         }
-    }
-    
-    /// 循环小圈圈
-    static func show(isVisible: Bool = true) {
-        setupHUD(isVisible: isVisible)
-        SVProgressHUD.show()
     }
     
     /// 循环小圈圈 + 文字
@@ -97,13 +90,14 @@ struct CZHUD {
     static func showMessage(text: String?, delay: TimeInterval = delay, isVisible: Bool = true) {
         guard currentNetworkRequestCount == 0 else { return }
         setupHUD(isVisible: isVisible)
-        SVProgressHUD.setImageViewSize(CGSize(width: 0, height: -28))
+        (SVProgressHUD.value(forKey: "sharedView") as? UIView)?.setValue(nil, forKey: "infoImage")
         SVProgressHUD.showInfo(withStatus: text)
         SVProgressHUD.dismiss(withDelay: delay)
     }
     
     /// 显示信息的提示框 默认两秒消失
     static func showInfo(text: String?, delay: TimeInterval = delay, isVisible: Bool = true) {
+        guard currentNetworkRequestCount == 0 else { return }
         setupHUD(isVisible: isVisible)
         SVProgressHUD.showInfo(withStatus: text)
         SVProgressHUD.dismiss(withDelay: delay)

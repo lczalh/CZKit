@@ -40,7 +40,7 @@ public struct CZApplicationManage {
     ///   - excludedActivityTypes: 过滤调的类型
     ///   - animated: animated description
     ///   - completion: 完成回调
-    public static func systemShare(controller: UIViewController = lastController(),
+    public static func systemShare(controller: UIViewController? = lastController(),
                                    activityItems: [Any],
                                    applicationActivities: [UIActivity]? = nil,
                                    excludedActivityTypes: [UIActivity.ActivityType]? = nil,
@@ -49,12 +49,12 @@ public struct CZApplicationManage {
         if Thread.current.isMainThread {
             let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
             activityViewController.excludedActivityTypes = excludedActivityTypes
-            controller.present(activityViewController, animated: animated, completion: completion)
+            controller?.present(activityViewController, animated: animated, completion: completion)
         } else {
             DispatchQueue.main.async {
                 let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
                 activityViewController.excludedActivityTypes = excludedActivityTypes
-                controller.present(activityViewController, animated: animated, completion: completion)
+                controller?.present(activityViewController, animated: animated, completion: completion)
             }
         }
     }
@@ -94,23 +94,22 @@ public struct CZApplicationManage {
             guard let window = UIApplication.shared.windows.first else { return nil }
             return window
         } else {
-            guard let window = UIApplication.shared.keyWindow else { return nil }
+            guard let window = UIApplication.shared.delegate?.window else { return nil }
             return window
         }
     }
 
     /// 获取最上层的控制器
-    public static func lastController(_ viewController: UIViewController = firstController(rootControllerType: UIViewController.self)!) -> UIViewController {
-        if viewController.isKind(of: UINavigationController.self) {
-            return lastController((viewController as! UINavigationController).visibleViewController!)
-        } else if viewController.isKind(of: UITabBarController.self) {
-            return lastController((viewController as! UITabBarController).selectedViewController!)
+    public static func lastController(_ currentController: UIViewController? = firstController(rootControllerType: UIViewController.self)) -> UIViewController? {
+        if let navigationController = currentController as? UINavigationController {
+            guard let visibleViewController = navigationController.visibleViewController else { return navigationController }
+            return lastController(visibleViewController)
+        } else if let tabBarController = currentController as? UITabBarController {
+            guard let selectedViewController = tabBarController.selectedViewController else { return tabBarController }
+            return lastController(selectedViewController)
         } else {
-            if (viewController.presentedViewController != nil) {
-                return lastController(viewController.presentedViewController!)
-            } else {
-                return viewController
-            }
+            guard let presentedViewController = currentController?.presentedViewController else { return currentController }
+            return lastController(presentedViewController)
         }
     }
     
@@ -122,7 +121,7 @@ public struct CZApplicationManage {
             guard let controller = UIApplication.shared.windows.first?.rootViewController as? T else { return nil }
             return controller
         } else {
-            guard let controller = UIApplication.shared.delegate?.window?!.rootViewController as? T else { return nil }
+            guard let controller = UIApplication.shared.delegate?.window??.rootViewController as? T else { return nil }
             return controller
         }
     }
@@ -139,5 +138,4 @@ public struct CZApplicationManage {
     /// 获取沙盒tmp路径
     public static var tmpPath: String { return NSTemporaryDirectory() }
      
-    
 }
