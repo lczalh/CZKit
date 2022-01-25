@@ -97,7 +97,7 @@ public extension CZKit where Base: UITextField {
     
     /// 正则条件 nil：不限制
     @discardableResult
-    func regular(_ regular: CZRegularEnum) -> CZKit {
+    func regular(_ regular: CZRegularEnum?) -> CZKit {
         base.cz_regular = regular
         return self
     }

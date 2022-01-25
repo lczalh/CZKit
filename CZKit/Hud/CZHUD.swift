@@ -17,8 +17,10 @@ public struct CZHud {
     /// 默认隐藏时长
     private static let delay: TimeInterval = 2
     
+    /// 背景颜色
     private static var backgroundColor: UIColor = .black
     
+    /// 前景颜色
     private static var foregroundColor: UIColor = .white
     
     static func configStyle(backgroundColor: UIColor = UIColor.black,

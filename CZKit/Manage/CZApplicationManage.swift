@@ -10,6 +10,25 @@ import UIKit
 
 public struct CZApplicationManage {
     
+    /// 获取当前APP版本号
+    public static var version: String { return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "" }
+    
+    /// 获取当前APP构建号
+    public static var buildVersion: String { return Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "" }
+
+    /// 获取APP名称  Xcode 11需要在info.plist里面添加 Bundle display name
+    public static var appName: String { return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "" }
+    
+    /// 获取构建时间
+    public static var buildDate: Date {
+        if let infoPath = Bundle.main.path(forResource: "Info", ofType: "plist"),
+            let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
+            let infoDate = infoAttr[.modificationDate] as? Date {
+            return infoDate
+        }
+        return Date()
+    }
+    
     /// 应用内跳转
     /// 例：CZApplicationJumpManage.push(type: .应用设置, completion: nil)
     /// - Parameters:
@@ -137,5 +156,48 @@ public struct CZApplicationManage {
 
     /// 获取沙盒tmp路径
     public static var tmpPath: String { return NSTemporaryDirectory() }
+    
+    /// 检查版本更新
+    /// - Parameters:
+    ///   - newVersion: 新版本号
+    ///   - newBuild: 新构建号
+    /// - Returns: 是否更新类型
+    public static func examineVersionUpdate(newVersion: String, newBuild: String) -> CZApplyUpdateTypeEnum {
+        let versionType = compareVersion(newVersion: newVersion, oldVersion: version)
+        let buildType = compareVersion(newVersion: newBuild, oldVersion: buildVersion)
+        if versionType == .大于 && buildType == .大于 {
+            return .强制更新
+        } else if versionType == .大于 || buildType == .大于 {
+            return .提示更新
+        } else {
+            return .无须更新
+        }
+    }
+    
+    /// 版本比较
+    /// - Parameters:
+    ///   - newVersion: 新版本
+    ///   - oldVersion: 旧版本
+    /// - Returns: 新版本 是否大于等于小于 旧版本
+    public static func compareVersion(newVersion: String, oldVersion: String) -> CZCompareTypeEnum {
+        let oldVersionArray = oldVersion.components(separatedBy: ".")
+        let newVersionArray = newVersion.components(separatedBy: ".")
+        for i in 0 ..< oldVersionArray.count where i < newVersionArray.count {
+            let oldVersion = oldVersionArray[i].int ?? 0
+            let newVersion = newVersionArray[i].int ?? 0
+            if oldVersion > newVersion {
+                return .小于
+            } else if oldVersion < newVersion {
+                return .大于
+            }
+        }
+        if oldVersionArray.count > newVersionArray.count {
+            return .小于
+        } else if oldVersionArray.count < newVersionArray.count {
+            return .大于
+        } else {
+            return .等于
+        }
+    }
      
 }

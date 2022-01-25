@@ -79,10 +79,24 @@ public enum CZRegularEnum: CZEnumValueProtocol {
         case .英文_数字(let totalLenght):
             return "^[A-Za-z0-9]{0,\(totalLenght?.cz_string ?? "")}$"
         case .手机号码:
-            return "^1[0-9]{0,10}?$"
+            return "^(1[0-9]{0,10})?$"
         case .零和非零开头的数字_小数(let numberLenght, let decimalLenght, let specifyValue):
             return "^(((0|[1-9][0-9]{0,\(numberLenght?.cz_string ?? "")})((\\.)[0-9]{0,\(decimalLenght?.cz_string ?? "")})?)|\(specifyValue?.cz_string ?? ""))?$"
         }
     }
     
+}
+
+/// 比较类型枚举
+public enum CZCompareTypeEnum: Int {
+    case 等于 = 0
+    case 小于 = 1
+    case 大于 = 2
+}
+
+/// 应用更新类型枚举
+public enum CZApplyUpdateTypeEnum: Int {
+    case 无须更新 = 0
+    case 提示更新 = 1
+    case 强制更新 = 2
 }

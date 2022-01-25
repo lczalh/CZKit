@@ -61,29 +61,11 @@ public struct CZDeviceManage {
     /// 判断是否是iPhone
     public static var isIphone: Bool { return UIDevice.current.model == "iPhone" }
     
-    /// 获取当前APP版本号
-    public static var version: String { return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "" }
-    
-    /// 获取当前APP构建号
-    public static var buildVersion: String { return Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "" }
-
-    /// 获取APP名称  Xcode 11需要在info.plist里面添加 Bundle display name
-    public static var appName: String { return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "" }
     
     /// 安全区域底部高度
     public static var safeAreaBottomHeight: CGFloat {
         guard #available(iOS 11.0, *) else { return 0.0 }
         return CZApplicationManage.lastWindow()?.safeAreaInsets.bottom ?? 0.0
-    }
-    
-    /// 获取构建时间
-    public static var buildDate: Date {
-        if let infoPath = Bundle.main.path(forResource: "Info", ofType: "plist"),
-            let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
-            let infoDate = infoAttr[.modificationDate] as? Date {
-            return infoDate
-        }
-        return Date()
     }
     
     /// 记录是否在播放系统音效
