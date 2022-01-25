@@ -40,6 +40,4 @@ spec.subspec 'CZHud' do |cz|
 end
 
 spec.frameworks = 'UIKit', 'Foundation', 'WebKit', 'Photos', 'AudioToolbox', 'AppTrackingTransparency', 'AdSupport'
-
-spec.dependency 'SnapKit'
 end
