@@ -183,8 +183,8 @@ public struct CZApplicationManage {
         let oldVersionArray = oldVersion.components(separatedBy: ".")
         let newVersionArray = newVersion.components(separatedBy: ".")
         for i in 0 ..< oldVersionArray.count where i < newVersionArray.count {
-            let oldVersion = oldVersionArray[i].int ?? 0
-            let newVersion = newVersionArray[i].int ?? 0
+            let oldVersion = Int(oldVersionArray[i]) ?? 0
+            let newVersion = Int(newVersionArray[i]) ?? 0
             if oldVersion > newVersion {
                 return .小于
             } else if oldVersion < newVersion {
